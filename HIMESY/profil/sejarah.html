@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Sejarah Perjalanan HIMESY KHAS STIES KHAS Al-Jaelani Kempek Cirebon.">
+    <meta name="keywords" content="Sejarah HIMESY, STIES KHAS, Kempek, Ekonomi Syariah, Organisasi Mahasiswa">
+
+    <title>Sejarah & Profil | HIMESY KHAS AL-JAELANI</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================================
+           [ I. COPY PASTE FULL CSS DARI INDEX.HTML ]
+           ================================================================ */
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-gold-glow: #f1c40f;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --himesy-light-slate: #ccd6f6;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fcfcfc;
+            color: var(--himesy-navy-main);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        ::selection { background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); }
+
+        /* Scrollbar Custom */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--himesy-navy-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--himesy-gold-prime); border-radius: 5px; }
+
+        /* PRELOADER */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--himesy-navy-deep); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 99999;
+        }
+        .preloader-wrap { position: relative; display: flex; align-items: center; justify-content: center; gap: 20px; }
+        .pre-text {
+            font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; color: var(--himesy-gold-prime);
+            letter-spacing: 10px; opacity: 0; text-transform: uppercase; position: relative; z-index: 2;
+            text-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        .pre-left { animation: slideInLeft 0.8s forwards; }
+        .pre-right { animation: slideInRight 0.8s forwards; }
+        .pre-logo-center {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            max-width: 350px; opacity: 0; animation: centerZoom 0.5s forwards 0.3s;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); z-index: 1;
+        }
+        @keyframes slideInLeft { from { transform: translateX(-150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes centerZoom { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        /* NAVBAR */
+        .navbar { padding: 0px 0; transition: var(--transition-smooth); z-index: 10000; }
+        .navbar.scrolled {
+            background: rgba(5, 12, 24, 0.98) !important; padding: 15px 0;
+            backdrop-filter: blur(15px); border-bottom: 2px solid var(--himesy-gold-prime);
+        }
+        .navbar-brand img { height: 70px; transition: var(--transition-smooth); }
+        .navbar.scrolled .navbar-brand img { height: 50px; }
+        .nav-link {
+            color: var(--himesy-white) !important; font-weight: 600; font-size: 11px;
+            letter-spacing: 1px; text-transform: uppercase; margin-left: 15px; position: relative;
+            padding: 5px 0 !important; transform: translateY(-4px); transition: var(--transition-smooth);
+        }
+        .nav-link::before {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background: var(--himesy-gold-prime); transition: var(--transition-smooth);
+        }
+        .nav-link:hover::before, .nav-link.active::before { width: 100%; }
+        
+        /* DROPDOWN */
+        .dropdown-menu {
+            background: var(--himesy-navy-light); border: none; border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 0 0 10px 10px; box-shadow: var(--shadow-premium); padding: 15px; margin-top: 15px;
+        }
+        .dropdown-item {
+            color: var(--himesy-light-slate); font-weight: 500; font-size: 14px;
+            padding: 10px 20px; border-radius: 5px; transition: 0.3s;
+        }
+        .dropdown-item:hover {
+            background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); transform: translateX(5px);
+        }
+        .navbar .dropdown-toggle::after { content: none !important; }
+        .dropdown-toggle i { margin-left: 5px; font-size: 10px; transition: 0.3s; }
+
+        /* Animasi Putar Icon Panah */
+        .dropdown-toggle[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 70vh; /* Sedikit lebih pendek dari index biar konten sejarah naik */
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--himesy-white); position: relative;
+            background: linear-gradient(rgba(5, 12, 24, 0.9), rgba(5, 12, 24, 0.8)),
+            url('https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1480&auto=format&fit=crop');
+            background-attachment: fixed; background-size: cover; background-position: center;
+        }
+        .hero-h1 {
+            font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; line-height: 1.1;
+            margin-top: 50px; text-transform: uppercase; text-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        /* CONTENT STYLES (ADAPTASI DARI IDENTITY SECTION) */
+        .history-section { padding: 100px 0; background: #fff; }
+        .history-text { font-size: 1.1rem; color: #555; line-height: 1.9; text-align: justify; }
+        .drop-cap {
+            float: left; font-family: 'Playfair Display', serif; font-size: 4.5rem;
+            line-height: 0.8; margin-right: 20px; color: var(--himesy-gold-prime); font-weight: 700;
+        }
+        .quote-box {
+            background: #f8f9fa; border-left: 5px solid var(--himesy-gold-prime);
+            padding: 30px; margin: 40px 0; font-style: normal; font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; color: var(--himesy-navy-main); border-radius: 0 20px 20px 0;
+        }
+
+        /* TIMELINE STYLES (FITUR BARU TAPI STYLE SAMA) */
+        .timeline-section { padding: 100px 0; background: var(--himesy-navy-deep); color: #fff; }
+        .timeline-item {
+            position: relative; padding-left: 50px; padding-bottom: 50px;
+            border-left: 2px dashed rgba(212, 175, 55, 0.3);
+        }
+        .timeline-item:last-child { border-left: none; }
+        .timeline-marker {
+            position: absolute; left: -11px; top: 0; width: 24px; height: 24px;
+            background: var(--himesy-gold-prime); border: 4px solid var(--himesy-navy-deep);
+            border-radius: 50%; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+        .timeline-year {
+            font-size: 2rem; font-weight: 800; color: var(--himesy-gold-prime); margin-bottom: 10px;
+        }
+
+        /* COUNTER SECTION (DARI INDEX) */
+        .stats-section { padding: 100px 0; background: #f8f9fa; }
+        .stat-circle {
+            width: 250px; height: 250px; margin: 0 auto; background: #fff; border-radius: 50%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            box-shadow: var(--shadow-premium); border-bottom: 10px solid var(--himesy-gold-prime);
+        }
+        .count-val { font-size: 4rem; font-weight: 900; color: var(--himesy-navy-deep); }
+
+        /* FOOTER (SAMA PERSIS) */
+        footer {
+            background: var(--himesy-navy-deep); color: var(--himesy-slate);
+            padding: 120px 0 40px; border-top: 5px solid var(--himesy-gold-prime);
+        }
+        .f-title { color: #fff; margin-bottom: 35px; font-size: 1.5rem; }
+        .f-link { color: var(--himesy-slate); text-decoration: none; display: block; margin-bottom: 15px; transition: 0.3s; }
+        .f-link:hover { color: var(--himesy-gold-prime); transform: translateX(10px); }
+        .footer-logo { width: 150px; height: auto; display: block; margin-bottom: 20px; object-fit: contain; }
+        .text-gold { color: var(--himesy-gold-prime); }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: var(--himesy-navy-deep); margin-top: 15px; padding: 20px;
+                border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.2);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+            }
+            .nav-link { margin-left: 0 !important; padding: 10px 15px !important; transform: translateY(0) !important; }
+            .pre-logo-center { max-width: 200px; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <div id="preloader">
+        <div class="preloader-wrap">
+            <span class="pre-text pre-left">HIMESY</span>
+            <span class="pre-text pre-right">KHAS</span>
+            <img src="../images/logo.png" alt="Official Logo" class="pre-logo-center">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../images/logo.png" alt="Logo HIMESY KHAS" class="me-3">
+                <span class="fw-bold fs-4">HIMESY KHAS</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#himesyNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="himesyNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Beranda</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Profil Kami<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sejarah.html">Sejarah Singkat</a></li>
+                            <li><a class="dropdown-item" href="visi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="pimpinan.html">Pimpinan Kami</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Struktur<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><span class="dropdown-header text-warning fw-bold small">PIMPINAN</span></li>
+                            <li><a class="dropdown-item" href="../divisi/bph.html">BPH (Badan Pengurus Harian)</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><span class="dropdown-header text-warning fw-bold small">DAFTAR DIVISI</span></li>
+                            <li><a class="dropdown-item" href="../divisi/pti.html">Divisi PTI</a></li>
+                            <li><a class="dropdown-item" href="../divisi/psdm.html">Divisi PSDM</a></li>
+                            <li><a class="dropdown-item" href="../divisi/kominfo.html">Divisi KOMINFO</a></li>
+                            <li><a class="dropdown-item" href="../divisi/external.html">Divisi EXTERNAL</a></li>
+                            <li><a class="dropdown-item" href="../divisi/ekraf.html">Divisi EKRAF</a></li>
+                            <li><a class="dropdown-item" href="../divisi/kajian.html">Divisi KAJIAN</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><a class="dropdown-item" href="../divisi/database.html">Database Anggota</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../jurnal.html">Jurnal Digital</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../galeri.html">Galeri Foto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container z-index-3">
+            <p class="hero-h5 animate__animated animate__fadeInDown">PROFIL ORGANISASI</p>
+            <h1 class=>SEJARAH & PERJALANAN</h1>
+            <div style="width: 100px; height: 5px; background: var(--himesy-gold-prime); margin: 30px auto;" class="animate__animated animate__fadeInUp"></div>
+            <p class="lead text-white-50 fs-5 animate__animated animate__fadeInUp animate__delay-1s">
+                "Dari Bumi Kempek untuk Peradaban Ekonomi Rabbani."
+            </p>
+        </div>
+    </header>
+
+    <section class="history-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="position-relative">
+                        <img src="../images/coso.jpg" class="img-fluid rounded-4 shadow-lg w-100" alt="Kampus STIES KHAS">
+                        <div class="bg-navy text-white p-4 rounded-4 position-absolute bottom-0 start-0 m-4 shadow-lg" style="background: var(--himesy-navy-main); max-width: 250px;">
+                            <h5 class="text-gold mb-1">LOKASI KAMPUS</h5>
+                            <p class="small mb-0">STIES KHAS Al-Jaelani, Kempek, Gempol, Cirebon.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 ps-lg-5">
+                    <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill fw-bold">ESTABLISHED IN KEMPEK</span>
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--himesy-navy-deep);">Akar Perjuangan di Tanah Wali</h2>
+                    
+                    <div class="history-text">
+                        <p>
+                            <span class="drop-cap">B</span>erdiri kokoh di bumi <strong>Kempek, Cirebon</strong>, sebuah wilayah yang dikenal sebagai salah satu pusat pendidikan Islam tertua dan berpengaruh di Nusantara, HIMESY KHAS (Himpunan Mahasiswa Ekonomi Syari'ah) tidak lahir begitu saja. Organisasi ini merupakan kristalisasi dari semangat para mahasiswa di <strong>Sekolah Tinggi Ekonomi Syariah (STIES) KHAS Al-Jaelani</strong>.
+                        </p>
+                        <p>
+                            Sebagai kampus yang berada di bawah naungan <strong>Pondok Pesantren KHAS Kempek</strong>, kami membawa misi besar untuk menyelaraskan nilai-nilai luhur pesantren dengan kemajuan ekonomi modern. Kami percaya bahwa ekonomi bukan hanya soal angka, tapi soal keberkahan dan kemaslahatan umat.
+                        </p>
+
+                        <div class="quote-box">
+                            "Nama 'KHAS' (Kyai Haji Aqiel Siroj) bukan sekadar identitas, melainkan ruh perjuangan yang menghubungkan setiap gerak organisasi dengan keberkahan para masyayikh Kempek."
+                        </div>
+
+                        <p>
+                            Di era disrupsi ini, HIMESY KHAS STIES Al-Jaelani bertransformasi dengan semangat <strong>STIES</strong> (Innovation & Integrity). Kami berkomitmen mencetak kader ekonom Rabbani yang tidak hanya mahir membaca Kitab Kuning, tetapi juga menguasai instrumen Fintech dan Ekonomi Digital Global.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-white">MILESTONE PERJALANAN</h2>
+                <p class="opacity-50">Langkah demi langkah membangun kejayaan Ekonomi Syari'ah di Cirebon.</p>
+            </div>
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-8">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <h3 class="timeline-year">Inisiasi</h3>
+                        <h5 class="fw-bold mb-2">Pondasi Awal di STIES KHAS</h5>
+                        <p class="opacity-75">Pembentukan struktur awal organisasi di lingkungan kampus STIES KHAS Al-Jaelani. Fokus pada penanaman nilai-nilai "KHAS" dan integritas santri dalam berorganisasi.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <h3 class="timeline-year">Ekspansi</h3>
+                        <h5 class="fw-bold mb-2">Kolaborasi Regional Cirebon</h5>
+                        <p class="opacity-75">Membangun jaringan dengan Forum Silaturahmi Studi Ekonomi Islam (Fossei) dan himpunan mahasiswa se-Wilayah 3 Cirebon. Meluncurkan program desa binaan pertama.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <h3 class="timeline-year">Digitalisasi</h3>
+                        <h5 class="fw-bold mb-2">Era STIES</h5>
+                        <p class="opacity-75">Transformasi digital besar-besaran. Peluncuran website resmi, pengelolaan media sosial profesional, dan fokus pada literasi ekonomi digital syariah.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <h3 class="timeline-year">Masa Depan</h3>
+                        <h5 class="fw-bold mb-2">Menuju Rujukan Nasional</h5>
+                        <p class="opacity-75">Menargetkan HIMESY KHAS sebagai pusat kajian ekonomi syariah berbasis pesantren yang menjadi rujukan intelektual di tingkat nasional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="counter-section" class="stats-section">
+        <div class="container">
+            <div class="row g-5 text-center">
+                <div class="col-md-4">
+                    <div class="stat-circle">
+                        <span class="count-val" data-target="2018">0</span>
+                        <p class="counter-label fw-bold mt-2">Tahun Berdiri</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-circle">
+                        <span class="count-val" data-target="10" data-suffix="+">0</span>
+                        <p class="counter-label fw-bold mt-2">Mitra Strategis</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-circle">
+                        <span class="count-val" data-target="5" data-suffix="th">0</span>
+                        <p class="counter-label fw-bold mt-2">Generasi Kepengurusan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <img src="../images/logo.png" alt="Footer Logo" class="footer-logo">
+                    <p class="fs-6 mt-3 pe-lg-5">
+                        HIMESY STIES KHAS AL JAELANI adalah rumah kolaborasi bagi mahasiswa ekonomi syariah untuk bertumbuh menjadi pemimpin masa depan.
+                    </p>
+                    <div class="d-flex mt-4">
+                        <a href="https://www.instagram.com/himesy_stieskhasaljaelani" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@himesy_stieskhas" class="text-white me-3 fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-2">
+                    <h5 class="f-title">NAVIGASI</h5>
+                    <a href="index.html" class="f-link">Beranda</a>
+                    <a href="sejarah.html" class="f-link">Profil Organisasi</a>
+                    <a href="../divisi/bph.html" class="f-link">Struktur</a>
+                    <a href="../jurnal.html" class="f-link">Jurnal Digital</a>
+                    <a href="../galeri.html" class="f-link">Galeri</a>
+                    <a href="../kontak.html" class="f-link">Kontak</a>
+                </div>
+    
+                <div class="col-lg-2">
+                    <h5 class="f-title">RESOURCES</h5>
+                    <a href="#" class="f-link">Jurnal Ilmiah</a>
+                    <a href="#" class="f-link">Warta Berita</a>
+                    <a href="#" class="f-link">Dokumen</a>
+                </div>
+    
+                <div class="col-lg-4">
+                    <h5 class="f-title">SEKRETARIAT</h5>
+                    <p class="small text-white-50 mb-3">
+                        <i class="fas fa-map-marker-alt me-2 text-gold"></i> 
+                        Jl. Tunggal Pegagan-Kempek, Kempek, Gempol, Cirebon 45161.
+                    </p>
+                    <p class="small text-white-50">
+                        <i class="fas fa-envelope me-2 text-gold"></i> 
+                        himesyaljaelani@gmail.com
+                    </p>
+                </div>
+            </div>
+    
+            <hr class="mt-5 border-secondary opacity-25">
+            
+            <div class="row py-3">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">© 2026 HIMESY KHAS. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0 text-white-50">Developed with <i class="fas fa-heart text-danger"></i> by PTI Division</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /** 1. PRELOADER */
+        window.addEventListener('load', () => {
+            const pre = document.getElementById('preloader');
+            setTimeout(() => {
+                pre.style.transition = 'all 1s cubic-bezier(0.7, 0, 0.3, 1)';
+                pre.style.transform = 'translateY(-100vh)';
+                pre.style.opacity = '0';
+                setTimeout(() => { pre.style.display = 'none'; }, 1000);
+            }, 1000);
+        });
+
+        /** 2. NAVBAR SCROLL */
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) { navbar.classList.add('scrolled'); } 
+            else { navbar.classList.remove('scrolled'); }
+        });
+
+        /** 3. COUNTER ANIMATION */
+        const counterSection = document.getElementById('counter-section');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.6 });
+        statsObserver.observe(counterSection);
+
+        function initCounters() {
+            const counterElements = document.querySelectorAll('.count-val');
+            counterElements.forEach(el => {
+                const targetValue = +el.getAttribute('data-target');
+                const suffix = el.getAttribute('data-suffix') || "";
+                let currentValue = 0;
+                const duration = 2500; 
+                const increment = targetValue / (duration / 30);
+                const countUpdate = () => {
+                    if (currentValue < targetValue) {
+                        currentValue += increment;
+                        el.innerText = Math.ceil(currentValue) + suffix;
+                        setTimeout(countUpdate, 30);
+                    } else {
+                        el.innerText = targetValue + suffix;
+                    }
+                };
+                countUpdate();
+            });
+        }
+
+        /** 4. SCROLL ANCHORING */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /** 5. SCROLL REVEAL ANIMATION */
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.hero-h1, .history-text, .timeline-item, .stat-circle').forEach(el => {
+            el.style.opacity = "0"; 
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

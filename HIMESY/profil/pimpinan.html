@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Struktur Pimpinan HIMESY KHAS STIES KHAS Al-Jaelani Kempek Cirebon.">
+    
+    <title>Pimpinan Kami | HIMESY KHAS AL-JAELANI</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================================
+           [ I. CSS CORE - IDENTIK DENGAN VISI.HTML ]
+           ================================================================ */
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-gold-glow: #f1c40f;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fcfcfc;
+            color: var(--himesy-navy-main);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        ::selection { background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--himesy-navy-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--himesy-gold-prime); border-radius: 5px; }
+
+        /* PRELOADER */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--himesy-navy-deep); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 99999;
+        }
+        .preloader-wrap { position: relative; display: flex; align-items: center; justify-content: center; gap: 20px; }
+        .pre-text {
+            font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; color: var(--himesy-gold-prime);
+            letter-spacing: 10px; opacity: 0; text-transform: uppercase; position: relative; z-index: 2;
+            text-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        .pre-left { animation: slideInLeft 0.8s forwards; }
+        .pre-right { animation: slideInRight 0.8s forwards; }
+        .pre-logo-center {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            max-width: 350px; opacity: 0; animation: centerZoom 0.5s forwards 0.3s;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); z-index: 1;
+        }
+        @keyframes slideInLeft { from { transform: translateX(-150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes centerZoom { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        /* NAVBAR */
+        .navbar { padding: 0px 0; transition: var(--transition-smooth); z-index: 10000; }
+        .navbar.scrolled {
+            background: rgba(5, 12, 24, 0.98) !important; padding: 15px 0;
+            backdrop-filter: blur(15px); border-bottom: 2px solid var(--himesy-gold-prime);
+        }
+        .navbar-brand img { height: 70px; transition: var(--transition-smooth); }
+        .navbar.scrolled .navbar-brand img { height: 50px; }
+        .nav-link {
+            color: var(--himesy-white) !important; font-weight: 600; font-size: 11px;
+            letter-spacing: 1px; text-transform: uppercase; margin-left: 15px; position: relative;
+            padding: 5px 0 !important; transform: translateY(-4px); transition: var(--transition-smooth);
+        }
+        .nav-link::before {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background: var(--himesy-gold-prime); transition: var(--transition-smooth);
+        }
+        .nav-link:hover::before, .nav-link.active::before { width: 100%; }
+
+        /* DROPDOWN FIX (Biar gak gelap) */
+        .dropdown-menu {
+            background: var(--himesy-navy-light); border: none; border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 0 0 10px 10px; box-shadow: var(--shadow-premium); padding: 15px; margin-top: 15px;
+        }
+        .dropdown-item {
+            color: #ffffff !important; font-weight: 500; font-size: 14px;
+            padding: 10px 20px; border-radius: 5px; transition: 0.3s;
+        }
+        .dropdown-item:hover {
+            background: var(--himesy-gold-prime); color: var(--himesy-navy-deep) !important; transform: translateX(5px);
+        }
+        .navbar .dropdown-toggle::after { content: none !important; }
+        .dropdown-toggle i { margin-left: 5px; font-size: 10px; transition: 0.3s; }
+
+        /* Animasi Putar Icon Panah */
+        .dropdown-toggle[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        /* HERO HEADER */
+        .hero {
+            height: 60vh;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--himesy-white); position: relative;
+            background: linear-gradient(rgba(5, 12, 24, 0.9), rgba(5, 12, 24, 0.8)),
+            url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1471&auto=format&fit=crop');
+            background-attachment: fixed; background-size: cover; background-position: center;
+        }
+        .hero-h1 {
+            font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; line-height: 1.1;
+            margin-top: 30px; text-transform: uppercase; text-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        /* SECTION PIMPINAN UTAMA (MENGGUNAKAN STYLE VISION-BOX) */
+        .vision-section { padding: 100px 0; background: #fff; }
+        .vision-box {
+            background: linear-gradient(135deg, var(--himesy-navy-main), var(--himesy-navy-deep));
+            color: #fff; padding: 60px; border-radius: 30px; position: relative; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(5, 12, 24, 0.3); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .vision-text {
+            font-size: 1.8rem; font-family: 'Playfair Display', serif; font-style: italic;
+            line-height: 1.6; text-align: center; position: relative; z-index: 2;
+        }
+
+        /* SECTION BPH (MENGGUNAKAN STYLE MISSION-BOX) */
+        .mission-section { padding: 100px 0; background: #f8f9fa; }
+        .mission-box {
+            background: #fff; padding: 40px; border-radius: 20px; border: 1px solid #eee;
+            transition: var(--transition-smooth); height: 100%; position: relative; overflow: hidden;
+            text-align: center;
+        }
+        .mission-box:hover {
+            transform: translateY(-10px); box-shadow: 0 20px 40px rgba(77, 90, 240, 0.1);
+            border-color: var(--himesy-gold-prime);
+        }
+        /* Style untuk foto di dalam box pimpinan */
+        .leader-img {
+            width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+            margin-bottom: 20px; border: 4px solid var(--himesy-gold-prime);
+        }
+        .mission-num {
+            font-size: 3rem; font-weight: 900; color: rgba(212, 175, 55, 0.1);
+            position: absolute; top: 10px; right: 20px;
+        }
+
+        
+        /* FOOTER */
+        footer { background: var(--himesy-navy-deep); color: var(--himesy-slate); padding: 120px 0 40px; border-top: 5px solid var(--himesy-gold-prime); }
+        .f-title { color: #fff; margin-bottom: 35px; font-size: 1.5rem; }
+        .f-link { color: var(--himesy-slate); text-decoration: none; display: block; margin-bottom: 15px; transition: 0.3s; }
+        .f-link:hover { color: var(--himesy-gold-prime); transform: translateX(10px); }
+        .footer-logo { width: 150px; height: auto; display: block; margin-bottom: 20px; object-fit: contain; }
+        .text-gold { color: var(--himesy-gold-prime); }
+
+        @media (max-width: 991px) {
+            .navbar-collapse { background: var(--himesy-navy-deep); margin-top: 15px; padding: 20px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.2); }
+            .nav-link { margin-left: 0 !important; padding: 10px 15px !important; transform: translateY(0) !important; }
+            .vision-text { font-size: 1.2rem; }
+        }
+
+            /* ================================================================
+        BARU: ANIMASI TEKS JALAN (MARQUEE) 3D DENGAN TEKSTUR FOTO
+        ================================================================ */
+        .photo-text-section {
+            padding: 80px 0;
+            background: var(--himesy-navy-deep);
+            overflow: hidden; /* Sembunyikan teks yang keluar layar */
+            position: relative;
+        }
+
+        /* Container utama untuk mengatur kecepatan & arah */
+        .marquee-container {
+            display: flex;
+            width: fit-content;
+            animation: scrollText 20s linear infinite; /* Gerak jalan tanpa henti */
+        }
+
+        /* Style Huruf 3D-nya */
+        .moving-3d-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 1500;
+            font-size: clamp(4rem, 15vw, 10rem);
+            text-transform: uppercase;
+            white-space: nowrap;
+            padding-right: 50px; /* Jarak antar tulisan agar tidak rapat */
+            
+            /* Efek 3D Tebal */
+            text-shadow: 
+                1px 1px 0px #d4af37, 2px 2px 0px #d4af37, 
+                3px 3px 0px #d4af37, 4px 4px 0px #d4af37,
+                5px 5px 0px #d4af37, 10px 10px 30px rgba(0,0,0,0.8);
+
+            /* Efek Masking Foto ke dalam Tulisan */
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent; 
+        }
+
+        /* ANIMASI JALAN DARI KANAN KE KIRI */
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Geser separuh untuk looping sempurna */
+        }
+
+        /* Efek Hover: Berhenti saat disentuh mouse */
+        .photo-text-section:hover .marquee-container {
+            animation-play-state: paused;
+        }
+            </style>
+</head>
+<body id="top">
+
+    <div id="preloader">
+        <div class="preloader-wrap">
+            <span class="pre-text pre-left">PIMPINAN</span>
+            <span class="pre-text pre-right">KAMI</span>
+            <img src="../images/logo.png" alt="Official Logo" class="pre-logo-center">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="../images/logo.png" alt="Logo HIMESY KHAS" class="me-3">
+                <span class="fw-bold fs-4">HIMESY KHAS</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#himesyNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="himesyNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Profil Kami<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sejarah.html">Sejarah Singkat</a></li>
+                            <li><a class="dropdown-item" href="visi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="pimpinan.html">Pimpinan Kami</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Struktur<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><span class="dropdown-header text-warning fw-bold small">PIMPINAN</span></li>
+                            <li><a class="dropdown-item" href="../divisi/bph.html">BPH (Badan Pengurus Harian)</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><span class="dropdown-header text-warning fw-bold small">DAFTAR DIVISI</span></li>
+                            <li><a class="dropdown-item" href="../divisi/pti.html">Divisi PTI</a></li>
+                            <li><a class="dropdown-item" href="../divisi/psdm.html">Divisi PSDM</a></li>
+                            <li><a class="dropdown-item" href="../divisi/kominfo.html">Divisi KOMINFO</a></li>
+                            <li><a class="dropdown-item" href="../divisi/external.html">Divisi EXTERNAL</a></li>
+                            <li><a class="dropdown-item" href="../divisi/ekraf.html">Divisi EKRAF</a></li>
+                            <li><a class="dropdown-item" href="../divisi/kajian.html">Divisi KAJIAN</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><a class="dropdown-item" href="../divisi/database.html">Database Anggota</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../jurnal.html">Jurnal Digital</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../galeri.html">Galeri Foto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container z-index-3">
+            <p class="hero-h5 animate__animated animate__fadeInDown">NAMA-NAMA TERBAIK</p>
+            <h1 class="hero-h1 animate__animated animate__zoomIn">PIMPINAN HIMESY</h1>
+            <div style="width: 100px; height: 5px; background: var(--himesy-gold-prime); margin: 30px auto;" class="animate__animated animate__fadeInUp"></div>
+        </div>
+    </header>
+
+    <section class="vision-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-gold fw-bold letter-spacing-5">THE LEADER</h6>
+                <h2 class="display-5 fw-bold" style="color: var(--himesy-navy-deep);">KETUA UMUM</h2>
+            </div>
+
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10">
+                    <div class="vision-box animate__animated animate__fadeInUp">
+                        <img src="../images/ketu.jpg" class="leader-img" alt="Ketua Umum">
+                        <h3 class="fw-bold text-white mb-2">Ali khusni Fuadi</h3>
+                        <p class="vision-text">
+                            "Kepemimpinan bukanlah tentang jabatan, melainkan tentang tanggung jawab untuk membawa perubahan nyata dalam ekosistem ekonomi syariah."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-gold fw-bold letter-spacing-5">BPH CORE TEAM</h6>
+                <h2 class="display-5 fw-bold" style="color: var(--himesy-navy-deep);">PENGURUS HARIAN</h2>
+                <p class="opacity-75">Sinergi pengurus inti dalam menjalankan roda organisasi.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="mission-box">
+                        <span class="mission-num">01</span>
+                        <img src="../images/waketu.jpg" class="leader-img" alt="Wakil">
+                        <h4 class="fw-bold">Salsa Lathifatul Qolbiyah</h4>
+                        <p class="text-gold fw-bold mb-2">WAKIL KETUA UMUM</p>
+                        <p class="text-muted small">Membantu koordinasi internal dan memastikan seluruh program kerja berjalan sesuai visi organisasi.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mission-box">
+                        <span class="mission-num">02</span>
+                        <img src="https://ui-avatars.com/api/?name=Sekretaris&background=0a192f&color=d4af37" class="leader-img" alt="Sekretaris">
+                        <h4 class="fw-bold">Nama Sekretaris</h4>
+                        <p class="text-gold fw-bold mb-2">SEKRETARIS UMUM</p>
+                        <p class="text-muted small">Mengelola sistem administrasi, pengarsipan, dan korespondensi resmi organisasi secara profesional.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mission-box">
+                        <span class="mission-num">03</span>
+                        <img src="https://ui-avatars.com/api/?name=Bendahara&background=0a192f&color=d4af37" class="leader-img" alt="Bendahara">
+                        <h4 class="fw-bold">Nama Bendahara</h4>
+                        <p class="text-gold fw-bold mb-2">BENDAHARA UMUM</p>
+                        <p class="text-muted small">Bertanggung jawab atas manajemen keuangan, transparansi anggaran, dan dana abadi organisasi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <section class="photo-text-section">
+    <div class="text-center mb-4">
+        <h6 class="text-gold fw-bold letter-spacing-5" style="color:var(--himesy-gold-prime); letter-spacing:5px;">HIMESY KHAS</h6>
+    </div>
+
+    <div class="marquee-container">
+        <h1 class="moving-3d-text">HIMESY KHAS</h1>
+        <h1 class="moving-3d-text">HIMESY KHAS</h1>
+    </div>
+
+    <div class="container text-center mt-5">
+        <div style="width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--himesy-gold-prime), transparent); margin: 0 auto;"></div>
+        <p class="text-white opacity-50 mt-3">Sentuh tulisan untuk menghentikan sejenak.</p>
+    </div>
+</section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <img src="../images/logo.png" alt="Footer Logo" class="footer-logo">
+                    <p class="fs-6 mt-3 pe-lg-5">
+                        HIMESY STIES KHAS AL JAELANI adalah rumah kolaborasi bagi mahasiswa ekonomi syariah untuk bertumbuh menjadi pemimpin masa depan.
+                    </p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-2">
+                    <h5 class="f-title">NAVIGASI</h5>
+                    <a href="../index.html" class="f-link">Beranda</a>
+                    <a href="pimpinan.html" class="f-link">Profil Kami</a>
+                    <a href="../struktur.html" class="f-link">Struktur</a>
+                    <a href="../jurnal.html" class="f-link">Jurnal Digital</a>
+                    <a href="../galeri.html" class="f-link">Galeri</a>
+                    <a href="../kontak.html" class="f-link">Kontak</a>
+                </div>
+    
+                <div class="col-lg-2">
+                    <h5 class="f-title">RESOURCES</h5>
+                    <a class="f-link">Jurnal Ilmiah</a>
+                    <a class="f-link">Warta Berita</a>
+                    <a class="f-link">Dokumen</a>
+                </div>
+    
+                <div class="col-lg-4">
+                    <h5 class="f-title">SEKRETARIAT</h5>
+                    <p class="small text-white-50 mb-3">
+                        <i class="fas fa-map-marker-alt me-2 text-gold"></i> 
+                        Jl. Tunggal Pegagan-Kempek, Kempek, Gempol, Cirebon 45161
+                    </p>
+                    <p class="small text-white-50">
+                        <i class="fas fa-envelope me-2 text-gold"></i> 
+                        himesyaljaelani@gmail.com
+                    </p>
+                    </div>
+            </div>
+    
+            <hr class="mt-5 border-secondary opacity-25">
+            
+            <div class="row py-3">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">© 2026 HIMESY KHAS. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0 text-white-50">Developed with <i class="fas fa-heart text-danger"></i> by PTI Division</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const pre = document.getElementById('preloader');
+            setTimeout(() => {
+                pre.style.transition = 'all 1s cubic-bezier(0.7, 0, 0.3, 1)';
+                pre.style.transform = 'translateY(-100vh)';
+                pre.style.opacity = '0';
+                setTimeout(() => { pre.style.display = 'none'; }, 1000);
+            }, 1000);
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) { navbar.classList.add('scrolled'); } 
+            else { navbar.classList.remove('scrolled'); }
+        });
+
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.vision-box, .mission-box, .value-item').forEach(el => {
+            el.style.opacity = "0"; 
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
