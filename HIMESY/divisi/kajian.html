@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Divisi Kajian HIMESY KHAS STIES KHAS Al-Jaelani Kempek Cirebon - Fokus pada kajian dan penelitian ekonomi syariah.">
+
+    <title>Divisi Kajian | HIMESY KHAS AL-JAELANI</title>
+
+    <!-- External CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-gold-glow: #f1c40f;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--himesy-navy-main);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        ::selection {
+            background: var(--himesy-gold-prime);
+            color: var(--himesy-navy-deep);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--himesy-navy-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--himesy-gold-prime);
+            border-radius: 5px;
+        }
+
+        /* PRELOADER */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--himesy-navy-deep);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--himesy-slate);
+            border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--himesy-gold-prime) !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand:hover {
+            color: var(--himesy-gold-glow) !important;
+        }
+
+        .nav-link {
+            color: var(--himesy-white) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--himesy-gold-prime) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--himesy-gold-prime);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            background: linear-gradient(135deg, var(--himesy-navy-deep) 0%, var(--himesy-navy-main) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="research" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="20" height="20" fill="none"/><circle cx="10" cy="10" r="1" fill="rgba(212,175,55,0.1)"/><line x1="10" y1="6" x2="10" y2="14" stroke="rgba(212,175,55,0.1)" stroke-width="0.5"/><line x1="6" y1="10" x2="14" y2="10" stroke="rgba(212,175,55,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23research)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--himesy-gold-prime), var(--himesy-gold-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--himesy-slate);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--himesy-gold-prime);
+        }
+
+        .stat-card-icon {
+            font-size: 2.5rem;
+            color: var(--himesy-gold-prime);
+            margin-bottom: 15px;
+        }
+
+        .stat-card-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--himesy-white);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-card-label {
+            font-size: 0.9rem;
+            color: var(--himesy-slate);
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .about-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--himesy-navy-main);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .about-title::after {
+            content: '📚';
+            position: absolute;
+            top: -15px;
+            right: -60px;
+            font-size: 2rem;
+        }
+
+        .about-subtitle {
+            font-size: 1.2rem;
+            color: var(--himesy-slate);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-premium);
+            text-align: center;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .about-icon {
+            font-size: 3rem;
+            color: var(--himesy-gold-prime);
+            margin-bottom: 20px;
+        }
+
+        .about-card-title {
+            font-size: 1.5rem;
+            color: var(--himesy-navy-main);
+            margin-bottom: 15px;
+        }
+
+        .about-card-text {
+            color: var(--himesy-slate);
+            line-height: 1.7;
+        }
+
+        /* PROGRAMS SECTION */
+        .programs-section {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .programs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .programs-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .programs-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--himesy-navy-main);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .programs-title::after {
+            content: '🔬';
+            position: absolute;
+            top: -15px;
+            right: -60px;
+            font-size: 2rem;
+        }
+
+        .programs-subtitle {
+            font-size: 1.2rem;
+            color: var(--himesy-slate);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-premium);
+            transition: var(--transition-smooth);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .program-header {
+            background: linear-gradient(135deg, var(--himesy-navy-main), var(--himesy-navy-light));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .program-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .program-body {
+            padding: 30px;
+        }
+
+        .program-description {
+            color: var(--himesy-slate);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .program-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .program-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .program-features li::before {
+            content: '✓';
+            color: var(--himesy-gold-prime);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* PUBLICATIONS SECTION */
+        .publications-section {
+            padding: 100px 0;
+            background: var(--himesy-navy-deep);
+            color: white;
+        }
+
+        .publications-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .publications-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .publications-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .publications-title::after {
+            content: '📖';
+            position: absolute;
+            top: -15px;
+            right: -60px;
+            font-size: 2rem;
+        }
+
+        .publications-subtitle {
+            font-size: 1.2rem;
+            color: var(--himesy-slate);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .publication-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            transition: var(--transition-smooth);
+        }
+
+        .publication-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--himesy-gold-prime);
+        }
+
+        .publication-icon {
+            font-size: 2.5rem;
+            color: var(--himesy-gold-prime);
+            margin-bottom: 20px;
+        }
+
+        .publication-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .publication-meta {
+            font-size: 0.9rem;
+            color: var(--himesy-slate);
+            margin-bottom: 15px;
+        }
+
+        .publication-description {
+            color: var(--himesy-slate);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .publication-link {
+            color: var(--himesy-gold-prime);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        .publication-link:hover {
+            color: var(--himesy-gold-glow);
+        }
+
+        /* TEAM SECTION */
+        .team-section {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .team-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--himesy-navy-main);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .team-title::after {
+            content: '👥';
+            position: absolute;
+            top: -15px;
+            right: -60px;
+            font-size: 2rem;
+        }
+
+        .team-subtitle {
+            font-size: 1.2rem;
+            color: var(--himesy-slate);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-premium);
+            transition: var(--transition-smooth);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-avatar {
+            height: 200px;
+            background: linear-gradient(135deg, var(--himesy-navy-light), var(--himesy-navy-main));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .team-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            color: var(--himesy-navy-main);
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            font-size: 1rem;
+            color: var(--himesy-gold-prime);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-desc {
+            font-size: 0.9rem;
+            color: var(--himesy-slate);
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--himesy-navy-deep);
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 30px;
+        }
+
+        .footer h3 {
+            color: var(--himesy-gold-prime);
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            color: var(--himesy-slate);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+        }
+
+        .footer-link {
+            color: var(--himesy-slate);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-link:hover {
+            color: var(--himesy-gold-prime);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 120px 20px 60px;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .nav-link {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .about-title,
+            .programs-title,
+            .publications-title,
+            .team-title {
+                font-size: 2rem;
+            }
+
+            .about-title::after,
+            .programs-title::after,
+            .publications-title::after,
+            .team-title::after {
+                display: none;
+            }
+
+            .about-card,
+            .program-card,
+            .publication-card {
+                padding: 20px;
+            }
+
+            .team-card {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-book"></i> Divisi Kajian
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tentang">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#program">Program</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#publikasi">Publikasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tim">Tim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Kembali</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="hero-content">
+                        <h1 class="hero-title animate__animated animate__fadeInUp">
+                            Divisi Kajian HIMESY
+                        </h1>
+                        <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                            Wadah pengembangan kajian dan penelitian di bidang ekonomi syariah
+                            untuk menghasilkan karya-karya ilmiah yang berkualitas dan bermanfaat.
+                        </p>
+
+                        <div class="hero-stats">
+                            <div class="stat-card animate__animated animate__fadeInUp animate__delay-2s">
+                                <i class="stat-card-icon fas fa-book-open"></i>
+                                <div class="stat-card-number">25+</div>
+                                <div class="stat-card-label">Kajian Selesai</div>
+                            </div>
+
+                            <div class="stat-card animate__animated animate__fadeInUp animate__delay-3s">
+                                <i class="stat-card-icon fas fa-users"></i>
+                                <div class="stat-card-number">15</div>
+                                <div class="stat-card-label">Peneliti Aktif</div>
+                            </div>
+
+                            <div class="stat-card animate__animated animate__fadeInUp animate__delay-4s">
+                                <i class="stat-card-icon fas fa-award"></i>
+                                <div class="stat-card-number">8</div>
+                                <div class="stat-card-label">Penghargaan</div>
+                            </div>
+
+                            <div class="stat-card animate__animated animate__fadeInUp animate__delay-5s">
+                                <i class="stat-card-icon fas fa-calendar-alt"></i>
+                                <div class="stat-card-number">2024</div>
+                                <div class="stat-card-label">Periode Kajian</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="tentang" class="about-section">
+        <div class="about-container">
+            <div class="about-header">
+                <h2 class="about-title">Tentang Divisi Kajian</h2>
+                <p class="about-subtitle">
+                    Divisi Kajian HIMESY KHAS Al-Jaelani berkomitmen untuk mengembangkan
+                    kajian dan penelitian di bidang ekonomi syariah melalui pendekatan ilmiah.
+                </p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-card animate__animated animate__fadeInLeft">
+                    <div class="about-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="about-card-title">Penelitian Ilmiah</h3>
+                    <p class="about-card-text">
+                        Melakukan penelitian mendalam tentang ekonomi syariah dengan metodologi
+                        yang valid dan menghasilkan temuan-temuan baru untuk kemajuan ilmu.
+                    </p>
+                </div>
+
+                <div class="about-card animate__animated animate__fadeInUp">
+                    <div class="about-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="about-card-title">Inovasi Kajian</h3>
+                    <p class="about-card-text">
+                        Mengembangkan kajian-kajian inovatif yang dapat memberikan solusi
+                        terhadap permasalahan ekonomi syariah di masyarakat modern.
+                    </p>
+                </div>
+
+                <div class="about-card animate__animated animate__fadeInRight">
+                    <div class="about-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 class="about-card-title">Kolaborasi</h3>
+                    <p class="about-card-text">
+                        Mendorong kolaborasi antar peneliti, akademisi, dan praktisi untuk
+                        menghasilkan kajian yang komprehensif dan aplikatif.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS SECTION -->
+    <section id="program" class="programs-section">
+        <div class="programs-container">
+            <div class="programs-header">
+                <h2 class="programs-title">Program Kajian</h2>
+                <p class="programs-subtitle">
+                    Berbagai program kajian yang kami kembangkan untuk mendukung
+                    pengembangan ilmu ekonomi syariah.
+                </p>
+            </div>
+
+            <div class="programs-grid">
+                <div class="program-card animate__animated animate__fadeInLeft">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="program-title">Research Center</h3>
+                    </div>
+                    <div class="program-body">
+                        <p class="program-description">
+                            Pusat penelitian yang fokus pada pengembangan metodologi penelitian
+                            ekonomi syariah dan kajian-kajian kontemporer.
+                        </p>
+                        <ul class="program-features">
+                            <li>Metodologi penelitian modern</li>
+                            <li>Kajian literatur sistematis</li>
+                            <li>Analisis data kuantitatif</li>
+                            <li>Publikasi jurnal ilmiah</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="program-card animate__animated animate__fadeInUp">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="program-title">Islamic Economics Forum</h3>
+                    </div>
+                    <div class="program-body">
+                        <p class="program-description">
+                            Forum diskusi rutin untuk sharing pengetahuan dan pengembangan
+                            wawasan tentang ekonomi syariah.
+                        </p>
+                        <ul class="program-features">
+                            <li>Seminar bulanan</li>
+                            <li>Workshop metodologi</li>
+                            <li>Guest speaker ahli</li>
+                            <li>Diskusi panel</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="program-card animate__animated animate__fadeInRight">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="program-title">Journal Publication</h3>
+                    </div>
+                    <div class="program-body">
+                        <p class="program-description">
+                            Program publikasi jurnal yang membantu anggota mempublikasikan
+                            hasil kajian mereka di jurnal bereputasi.
+                        </p>
+                        <ul class="program-features">
+                            <li>Review artikel</li>
+                            <li>Editing akademik</li>
+                            <li>Indexing jurnal</li>
+                            <li>Disseminasi hasil</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUBLICATIONS SECTION -->
+    <section id="publikasi" class="publications-section">
+        <div class="publications-container">
+            <div class="publications-header">
+                <h2 class="publications-title">Publikasi Terbaru</h2>
+                <p class="publications-subtitle">
+                    Hasil-hasil kajian dan penelitian terbaru dari Divisi Kajian HIMESY
+                    yang telah dipublikasikan dan mendapatkan pengakuan.
+                </p>
+            </div>
+
+            <div class="publications-grid">
+                <div class="publication-card animate__animated animate__fadeInLeft">
+                    <div class="publication-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="publication-title">Implementasi Zakat dalam Perekonomian Digital</h3>
+                    <div class="publication-meta">Oleh: Ahmad Fauzi Rahman | 2024</div>
+                    <p class="publication-description">
+                        Kajian mendalam tentang bagaimana zakat dapat diintegrasikan dalam
+                        sistem ekonomi digital modern untuk meningkatkan kesejahteraan umat.
+                    </p>
+                    <a href="#" class="publication-link">Baca Selengkapnya →</a>
+                </div>
+
+                <div class="publication-card animate__animated animate__fadeInUp">
+                    <div class="publication-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="publication-title">Analisis Perbankan Syariah di Era Pandemi</h3>
+                    <div class="publication-meta">Oleh: Siti Nurhaliza | 2024</div>
+                    <p class="publication-description">
+                        Analisis komprehensif tentang resiliensi perbankan syariah selama
+                        masa pandemi COVID-19 dan strategi pemulihan yang efektif.
+                    </p>
+                    <a href="#" class="publication-link">Baca Selengkapnya →</a>
+                </div>
+
+                <div class="publication-card animate__animated animate__fadeInRight">
+                    <div class="publication-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="publication-title">Fintech Syariah: Inovasi atau Spekulasi?</h3>
+                    <div class="publication-meta">Oleh: Muhammad Rizki | 2024</div>
+                    <p class="publication-description">
+                        Kajian kritis tentang fenomena fintech syariah dan tantangan
+                        etika dalam pengembangan teknologi keuangan berbasis syariah.
+                    </p>
+                    <a href="#" class="publication-link">Baca Selengkapnya →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section id="tim" class="team-section">
+        <div class="team-container">
+            <div class="team-header">
+                <h2 class="team-title">Tim Kajian</h2>
+                <p class="team-subtitle">
+                    Tim ahli dan peneliti yang berkomitmen untuk mengembangkan kajian
+                    ekonomi syariah di HIMESY KHAS Al-Jaelani.
+                </p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card animate__animated animate__fadeInLeft">
+                    <div class="team-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Dr. Ahmad Fauzi Rahman</h3>
+                        <div class="team-role">Ketua Divisi Kajian</div>
+                        <p class="team-desc">
+                            Doktor Ilmu Ekonomi Syariah dengan spesialisasi di bidang
+                            perbankan syariah dan keuangan Islam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-card animate__animated animate__fadeInUp">
+                    <div class="team-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Siti Nurhaliza, M.Ec</h3>
+                        <div class="team-role">Koordinator Penelitian</div>
+                        <p class="team-desc">
+                            Master Ekonomi dengan fokus pada kajian mikroekonomi syariah
+                            dan pengembangan metodologi penelitian.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-card animate__animated animate__fadeInRight">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Muhammad Rizki</h3>
+                        <div class="team-role">Anggota Peneliti</div>
+                        <p class="team-desc">
+                            Mahasiswa aktif yang tertarik dengan kajian fintech syariah
+                            dan inovasi teknologi keuangan Islam.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-card animate__animated animate__fadeInLeft animate__delay-1s">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Maya Sari Dewi</h3>
+                        <div class="team-role">Anggota Peneliti</div>
+                        <p class="team-desc">
+                            Spesialis dalam kajian ekonomi kreatif dan pengembangan
+                            UMKM berbasis prinsip syariah.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Andi Pratama</h3>
+                        <div class="team-role">Anggota Peneliti</div>
+                        <p class="team-desc">
+                            Fokus pada kajian ekonomi digital dan implementasi
+                            teknologi blockchain dalam keuangan syariah.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="team-card animate__animated animate__fadeInRight animate__delay-1s">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Rina Amelia</h3>
+                        <div class="team-role">Anggota Peneliti</div>
+                        <p class="team-desc">
+                            Ahli dalam kajian sosial ekonomi dan dampak program
+                            zakat terhadap pemberdayaan masyarakat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>Divisi Kajian HIMESY</h3>
+                <p>
+                    Wadah pengembangan kajian dan penelitian di bidang ekonomi syariah
+                    untuk menghasilkan karya-karya ilmiah yang berkualitas dan bermanfaat.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="../index.html" class="footer-link">Beranda</a>
+                <a href="#tentang" class="footer-link">Tentang</a>
+                <a href="#program" class="footer-link">Program</a>
+                <a href="#publikasi" class="footer-link">Publikasi</a>
+                <a href="#tim" class="footer-link">Tim</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // PRELOADER
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').style.display = 'none';
+            }, 1000);
+        });
+
+        // SMOOTH SCROLLING
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ACTIVE NAV LINK
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // PUBLICATION LINKS (PLACEHOLDER)
+        document.querySelectorAll('.publication-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Fitur publikasi lengkap akan segera hadir!\n\nUntuk saat ini, silakan hubungi Divisi Kajian untuk mendapatkan akses ke publikasi.');
+            });
+        });
+    </script>
+</body>
+</html>

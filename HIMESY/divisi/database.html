@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Database Anggota HIMESY KHAS STIES KHAS Al-Jaelani Kempek Cirebon - Direktori lengkap anggota dengan fitur pencarian dan filter.">
+
+    <title>Database Anggota | HIMESY KHAS AL-JAELANI</title>
+
+    <!-- External CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-gold-glow: #f1c40f;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--himesy-navy-main);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        ::selection {
+            background: var(--himesy-gold-prime);
+            color: var(--himesy-navy-deep);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--himesy-navy-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--himesy-gold-prime);
+            border-radius: 5px;
+        }
+
+        /* PRELOADER */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--himesy-navy-deep);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--himesy-slate);
+            border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--himesy-gold-prime) !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand:hover {
+            color: var(--himesy-gold-glow) !important;
+        }
+
+        .nav-link {
+            color: var(--himesy-white) !important;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--himesy-gold-prime) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--himesy-gold-prime);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            background: linear-gradient(135deg, var(--himesy-navy-deep) 0%, var(--himesy-navy-main) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="10" height="10" fill="none"/><circle cx="5" cy="5" r="0.5" fill="rgba(212,175,55,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--himesy-gold-prime), var(--himesy-gold-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--himesy-slate);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            justify-items: center;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            width: 100%;
+            max-width: 230px;
+            box-sizing: border-box;
+        }
+
+        .stat-card:nth-child(4) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            max-width: 230px;
+            width: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--himesy-gold-prime);
+        }
+
+        .stat-card-icon {
+            font-size: 2.5rem;
+            color: var(--himesy-gold-prime);
+            margin-bottom: 15px;
+        }
+
+        .stat-card-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--himesy-white);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-card-label {
+            font-size: 0.9rem;
+            color: var(--himesy-slate);
+        }
+
+        @media (max-width: 575.98px) {
+            .hero-stats {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+            .stat-card, .stat-card:nth-child(4) {
+                max-width: 100%;
+                width: 100%;
+            }
+            .stat-card:nth-child(4) {
+                grid-column: auto;
+            }
+        }
+
+        /* DATABASE SECTION */
+        .database-section {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+
+        .database-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .database-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .database-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--himesy-navy-main);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .database-title::after {
+            content: '📊';
+            position: absolute;
+            top: -15px;
+            right: -60px;
+            font-size: 2rem;
+        }
+
+        .database-subtitle {
+            font-size: 1.2rem;
+            color: var(--himesy-slate);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* SEARCH & FILTER CONTROLS */
+        .database-controls {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow-premium);
+            margin-bottom: 40px;
+        }
+
+        .search-bar {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .search-bar input:focus {
+            border-color: var(--himesy-gold-prime);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .search-bar i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--himesy-slate);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--himesy-navy-main);
+            background: transparent;
+            color: var(--himesy-navy-main);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--himesy-navy-main);
+            color: white;
+        }
+
+        /* MEMBERS TABLE */
+        .members-table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-premium);
+        }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .members-table th {
+            background: var(--himesy-navy-main);
+            color: white;
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .members-table td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+
+        .members-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* MEMBER AVATAR */
+        .member-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--himesy-navy-main), var(--himesy-gold-prime));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 15px;
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: var(--himesy-navy-main);
+            margin-bottom: 3px;
+        }
+
+        .member-nim {
+            font-size: 12px;
+            color: var(--himesy-slate);
+        }
+
+        /* DIVISION BADGES */
+        .division-badge {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .division-badge.bph { background: #e3f2fd; color: #1976d2; }
+        .division-badge.kominfo { background: #f3e5f5; color: #7b1fa2; }
+        .division-badge.psdm { background: #e8f5e8; color: #388e3c; }
+        .division-badge.ekraf { background: #fff3e0; color: #f57c00; }
+        .division-badge.pti { background: #fce4ec; color: #c2185b; }
+        .division-badge.external { background: #f3e5f5; color: #ba68c8; }
+        .division-badge.kajian { background: #e0f2f1; color: #0097a7; }
+
+        /* STATUS INDICATORS */
+        .status-active {
+            color: #4caf50;
+            font-weight: 600;
+        }
+
+        .status-inactive {
+            color: #f44336;
+            font-weight: 600;
+        }
+
+        /* ACTION BUTTONS */
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-right: 5px;
+        }
+
+        .action-btn.primary {
+            background: var(--himesy-navy-main);
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            background: var(--himesy-navy-light);
+            transform: translateY(-2px);
+        }
+
+        .action-btn.secondary {
+            background: var(--himesy-gold-prime);
+            color: var(--himesy-navy-deep);
+        }
+
+        .action-btn.secondary:hover {
+            background: var(--himesy-gold-glow);
+            transform: translateY(-2px);
+        }
+
+        /* PAGINATION */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .pagination-info {
+            color: var(--himesy-slate);
+            font-size: 14px;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-btn {
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            color: var(--himesy-navy-main);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .page-btn:hover {
+            background: var(--himesy-navy-main);
+            color: white;
+            border-color: var(--himesy-navy-main);
+        }
+
+        .page-btn.active {
+            background: var(--himesy-navy-main);
+            color: white;
+            border-color: var(--himesy-navy-main);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--himesy-navy-deep);
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 30px;
+        }
+
+        .footer h3 {
+            color: var(--himesy-gold-prime);
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            color: var(--himesy-slate);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+        }
+
+        .footer-link {
+            color: var(--himesy-slate);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-link:hover {
+            color: var(--himesy-gold-prime);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 120px 20px 60px;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .database-controls {
+                padding: 20px;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .members-table-container {
+                overflow-x: auto;
+            }
+
+            .members-table {
+                min-width: 600px;
+            }
+
+            .member-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+
+            .pagination-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-link {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .members-table th,
+            .members-table td {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+
+            .database-title::after {
+                display: none;
+            }
+        }
+        /* NAME-CARD (Modal) Styles */
+        .namecard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+        }
+
+        .namecard-lanyard {
+            width: 44px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--himesy-gold-prime), var(--himesy-gold-glow));
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            margin-top: 6px;
+        }
+
+        .namecard-photo {
+            width: 220px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 4px solid rgba(10,25,47,0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+            background: #fff;
+        }
+
+        .namecard h5 { margin: 6px 0 0; font-size: 1.25rem; }
+        .namecard p { margin: 0; color: var(--himesy-slate); }
+
+        .modal-content { border-radius: 12px; overflow: hidden; }
+
+        @media (max-width: 576px) {
+            .namecard-photo { width: 160px; height: 220px; }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-users"></i> Database Anggota
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#anggota">Daftar Anggota</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#statistik">Statistik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Kembali</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title animate__animated animate__fadeInUp">
+                Database Anggota HIMESY
+            </h1>
+            <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                Direktori lengkap anggota Himpunan Mahasiswa Ekonomi Syariah KHAS Al-Jaelani
+                dengan fitur pencarian canggih dan filter berdasarkan divisi.
+            </p>
+
+            <div class="hero-stats">
+                <div class="stat-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <i class="stat-card-icon fas fa-users"></i>
+                    <div class="stat-card-number" id="totalMembers">0</div>
+                    <div class="stat-card-label">Total Anggota</div>
+                </div>
+
+                <div class="stat-card animate__animated animate__fadeInUp animate__delay-3s">
+                    <i class="stat-card-icon fas fa-building"></i>
+                    <div class="stat-card-number">8</div>
+                    <div class="stat-card-label">Divisi Aktif</div>
+                </div>
+
+                <div class="stat-card animate__animated animate__fadeInUp animate__delay-4s">
+                    <i class="stat-card-icon fas fa-calendar-alt"></i>
+                    <div class="stat-card-number">2024</div>
+                    <div class="stat-card-label">Periode Kepengurusan</div>
+                </div>
+
+                <div class="stat-card animate__animated animate__fadeInUp animate__delay-5s">
+                    <i class="stat-card-icon fas fa-trophy"></i>
+                    <div class="stat-card-number">50+</div>
+                    <div class="stat-card-label">Kegiatan Berhasil</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATABASE SECTION -->
+    <section id="anggota" class="database-section">
+        <div class="database-container">
+            <div class="database-header">
+                <h2 class="database-title">Daftar Anggota HIMESY</h2>
+                <p class="database-subtitle">
+                    Direktori lengkap anggota Himpunan Mahasiswa Ekonomi Syariah KHAS Al-Jaelani
+                    yang terorganisir berdasarkan divisi dan informasi terkini.
+                </p>
+            </div>
+
+            <!-- SEARCH & FILTER CONTROLS -->
+            <div class="database-controls">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Cari anggota berdasarkan nama atau NIM...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Semua Divisi</button>
+                    <button class="filter-btn" data-filter="bph">BPH</button>
+                    <button class="filter-btn" data-filter="kominfo">Kominfo</button>
+                    <button class="filter-btn" data-filter="psdm">PSDM</button>
+                    <button class="filter-btn" data-filter="ekraf">Ekraf</button>
+                    <button class="filter-btn" data-filter="pti">PTI</button>
+                    <button class="filter-btn" data-filter="external">External</button>
+                    <button class="filter-btn" data-filter="kajian">Kajian</button>
+                </div>
+            </div>
+
+            <!-- MEMBERS TABLE -->
+            <div class="members-table-container">
+                <table class="members-table">
+                    <thead>
+                        <tr>
+                            <th>Anggota</th>
+                            <th>NIM</th>
+                            <th>Divisi</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersTableBody">
+                        <!-- Members will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="pagination-container">
+                <div class="pagination-info" id="paginationInfo">
+                    Menampilkan 0-0 dari 0 anggota
+                </div>
+                <div class="pagination" id="pagination">
+                    <!-- Pagination buttons will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>Database Anggota HIMESY</h3>
+                <p>
+                    Direktori lengkap anggota Himpunan Mahasiswa Ekonomi Syariah KHAS Al-Jaelani
+                    untuk memudahkan koordinasi dan komunikasi antar anggota.
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="../index.html" class="footer-link">Beranda</a>
+                <a href="#anggota" class="footer-link">Daftar Anggota</a>
+                <a href="#home" class="footer-link">Statistik</a>
+            </div>
+        </div>
+    </footer>
+
+        <!-- MEMBER DETAIL MODAL -->
+        <div class="modal fade" id="memberModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detail Anggota</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="namecard">
+                            <div class="namecard-lanyard" aria-hidden="true"></div>
+                            <img id="modalPhoto" class="namecard-photo" src="" alt="Foto Anggota">
+                            <h5 id="modalName"></h5>
+                            <p id="modalNim" class="text-muted"></p>
+                            <p><span id="modalDivision" class="badge bg-secondary"></span> <span id="modalStatus" class="ms-2"></span></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="action-btn primary" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // PRELOADER
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').style.display = 'none';
+            }, 1000);
+        });
+
+        // SAMPLE MEMBER DATA (with photo)
+        const membersData = [
+            { name: "Ahmad Fauzi Rahman", nim: "2021001", division: "bph", status: "active", photo: "https://i.pravatar.cc/400?u=2021001" },
+            { name: "Siti Nurhaliza", nim: "2021002", division: "kominfo", status: "active", photo: "https://i.pravatar.cc/400?u=2021002" },
+            { name: "Muhammad Rizki", nim: "2021003", division: "psdm", status: "active", photo: "https://i.pravatar.cc/400?u=2021003" },
+            { name: "Maya Sari Dewi", nim: "2021004", division: "ekraf", status: "active", photo: "https://i.pravatar.cc/400?u=2021004" },
+            { name: "Andi Pratama", nim: "2021005", division: "pti", status: "active", photo: "https://i.pravatar.cc/400?u=2021005" },
+            { name: "Rina Amelia", nim: "2021006", division: "external", status: "active", photo: "https://i.pravatar.cc/400?u=2021006" },
+            { name: "Budi Santoso", nim: "2021007", division: "kajian", status: "active", photo: "https://i.pravatar.cc/400?u=2021007" },
+            { name: "Dewi Lestari", nim: "2021008", division: "bph", status: "inactive", photo: "https://i.pravatar.cc/400?u=2021008" },
+            { name: "Eko Prasetyo", nim: "2021009", division: "kominfo", status: "active", photo: "https://i.pravatar.cc/400?u=2021009" },
+            { name: "Fitriani Sari", nim: "2021010", division: "psdm", status: "active", photo: "https://i.pravatar.cc/400?u=2021010" },
+            { name: "Gilang Ramadhan", nim: "2021011", division: "ekraf", status: "active", photo: "https://i.pravatar.cc/400?u=2021011" },
+            { name: "Hani Fitria", nim: "2021012", division: "pti", status: "active", photo: "https://i.pravatar.cc/400?u=2021012" },
+            { name: "Irfan Hakim", nim: "2021013", division: "external", status: "inactive", photo: "https://i.pravatar.cc/400?u=2021013" },
+            { name: "Joko Widodo", nim: "2021014", division: "kajian", status: "active", photo: "https://i.pravatar.cc/400?u=2021014" },
+            { name: "Kartika Sari", nim: "2021015", division: "bph", status: "active", photo: "https://i.pravatar.cc/400?u=2021015" },
+            { name: "Lutfi Rahman", nim: "2021016", division: "kominfo", status: "active", photo: "https://i.pravatar.cc/400?u=2021016" },
+            { name: "Mega Putri", nim: "2021017", division: "psdm", status: "active", photo: "https://i.pravatar.cc/400?u=2021017" },
+            { name: "Nanda Saputra", nim: "2021018", division: "ekraf", status: "active", photo: "https://i.pravatar.cc/400?u=2021018" },
+            { name: "Oki Setiawan", nim: "2021019", division: "pti", status: "active", photo: "https://i.pravatar.cc/400?u=2021019" },
+            { name: "Putri Maharani", nim: "2021020", division: "external", status: "active", photo: "https://i.pravatar.cc/400?u=2021020" },
+            { name: "Rizky Aditya", nim: "2021021", division: "bph", status: "active", photo: "https://i.pravatar.cc/400?u=2021021" },
+            { name: "Sari Indah", nim: "2021022", division: "kominfo", status: "active", photo: "https://i.pravatar.cc/400?u=2021022" },
+            { name: "Taufik Hidayat", nim: "2021023", division: "psdm", status: "active", photo: "https://i.pravatar.cc/400?u=2021023" },
+            { name: "Umi Kalsum", nim: "2021024", division: "ekraf", status: "active", photo: "https://i.pravatar.cc/400?u=2021024" },
+            { name: "Vino Gading", nim: "2021025", division: "pti", status: "active", photo: "https://i.pravatar.cc/400?u=2021025" },
+            { name: "Wulan Sari", nim: "2021026", division: "external", status: "active", photo: "https://i.pravatar.cc/400?u=2021026" },
+            { name: "Xavier Nugroho", nim: "2021027", division: "kajian", status: "active", photo: "https://i.pravatar.cc/400?u=2021027" },
+            { name: "Yuniarti Dewi", nim: "2021028", division: "bph", status: "inactive", photo: "https://i.pravatar.cc/400?u=2021028" },
+            { name: "Zaki Rahman", nim: "2021029", division: "kominfo", status: "active", photo: "https://i.pravatar.cc/400?u=2021029" },
+            { name: "Aisyah Putri", nim: "2021030", division: "psdm", status: "active", photo: "https://i.pravatar.cc/400?u=2021030" }
+        ];
+
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let filteredData = [...membersData];
+        let currentFilter = 'all';
+
+        // DOM ELEMENTS
+        const searchInput = document.getElementById('searchInput');
+        const membersTableBody = document.getElementById('membersTableBody');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const pagination = document.getElementById('pagination');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const totalMembersElement = document.getElementById('totalMembers');
+
+        // INITIALIZE
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTotalMembers();
+            renderTable();
+            setupEventListeners();
+        });
+
+        // UPDATE TOTAL MEMBERS
+        function updateTotalMembers() {
+            totalMembersElement.textContent = membersData.length;
+        }
+
+        // SETUP EVENT LISTENERS
+        function setupEventListeners() {
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                filterMembers();
+            });
+
+            // Filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    setActiveFilter(filter);
+                    filterMembers();
+                });
+            });
+        }
+
+        // SET ACTIVE FILTER
+        function setActiveFilter(filter) {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+            currentFilter = filter;
+        }
+
+        // FILTER MEMBERS
+        function filterMembers() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            filteredData = membersData.filter(member => {
+                const matchesSearch = member.name.toLowerCase().includes(searchTerm) ||
+                                    member.nim.toLowerCase().includes(searchTerm);
+                const matchesFilter = currentFilter === 'all' || member.division === currentFilter;
+
+                return matchesSearch && matchesFilter;
+            });
+
+            currentPage = 1;
+            renderTable();
+        }
+
+        // RENDER TABLE
+        function renderTable() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedData = filteredData.slice(startIndex, endIndex);
+
+            membersTableBody.innerHTML = '';
+
+            paginatedData.forEach(member => {
+                const row = createMemberRow(member);
+                membersTableBody.appendChild(row);
+            });
+
+            updatePagination();
+        }
+
+        // CREATE MEMBER ROW
+        function createMemberRow(member) {
+            const row = document.createElement('tr');
+
+            // Get initials for avatar
+            const initials = member.name.split(' ').map(n => n[0]).join('').toUpperCase();
+
+            // Division display name
+            const divisionNames = {
+                bph: 'BPH',
+                kominfo: 'Kominfo',
+                psdm: 'PSDM',
+                ekraf: 'Ekraf',
+                pti: 'PTI',
+                external: 'External',
+                kajian: 'Kajian'
+            };
+
+            row.innerHTML = `
+                <td>
+                    <div class="member-info">
+                        <div class="member-avatar">${initials}</div>
+                        <div>
+                            <div class="member-name">${member.name}</div>
+                            <div class="member-nim">${member.nim}</div>
+                        </div>
+                    </div>
+                </td>
+                <td>${member.nim}</td>
+                <td><span class="division-badge ${member.division}">${divisionNames[member.division]}</span></td>
+                <td><span class="status-${member.status}">${member.status === 'active' ? 'Aktif' : 'Tidak Aktif'}</span></td>
+                <td>
+                    <button class="action-btn primary" onclick="viewMember('${member.nim}')">Lihat</button>
+                </td>
+            `;
+
+            return row;
+        }
+
+        // UPDATE PAGINATION
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+            // Update info
+            const startItem = (currentPage - 1) * itemsPerPage + 1;
+            const endItem = Math.min(currentPage * itemsPerPage, filteredData.length);
+            paginationInfo.textContent = `Menampilkan ${startItem}-${endItem} dari ${filteredData.length} anggota`;
+
+            // Update pagination buttons
+            pagination.innerHTML = '';
+
+            // Previous button
+            if (currentPage > 1) {
+                const prevBtn = createPageButton('‹', currentPage - 1);
+                pagination.appendChild(prevBtn);
+            }
+
+            // Page numbers
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = createPageButton(i, i);
+                if (i === currentPage) pageBtn.classList.add('active');
+                pagination.appendChild(pageBtn);
+            }
+
+            // Next button
+            if (currentPage < totalPages) {
+                const nextBtn = createPageButton('›', currentPage + 1);
+                pagination.appendChild(nextBtn);
+            }
+        }
+
+        // CREATE PAGE BUTTON
+        function createPageButton(text, page) {
+            const button = document.createElement('button');
+            button.className = 'page-btn';
+            button.textContent = text;
+            button.addEventListener('click', () => {
+                currentPage = page;
+                renderTable();
+            });
+            return button;
+        }
+
+        // VIEW MEMBER FUNCTION (SHOW MODAL)
+        function viewMember(nim) {
+            const member = membersData.find(m => m.nim === nim);
+            if (!member) return;
+            const divisionNames = {
+                bph: 'Badan Pengurus Harian',
+                kominfo: 'Komunikasi & Informasi',
+                psdm: 'Pengembangan Sumber Daya Mahasiswa',
+                ekraf: 'Ekonomi Kreatif',
+                pti: 'Pengembangan Teknologi Informasi',
+                external: 'External Relations',
+                kajian: 'Kajian & Penelitian'
+            };
+
+            // Populate modal fields
+            const nameEl = document.getElementById('modalName');
+            const nimEl = document.getElementById('modalNim');
+            const divEl = document.getElementById('modalDivision');
+            const statusEl = document.getElementById('modalStatus');
+
+            if (nameEl) nameEl.textContent = member.name;
+            if (nimEl) nimEl.textContent = member.nim;
+            if (divEl) {
+                divEl.textContent = divisionNames[member.division] || member.division;
+                // apply color badge per division
+                const badgeMap = {
+                    bph: 'bg-primary',
+                    kominfo: 'bg-info',
+                    psdm: 'bg-success',
+                    ekraf: 'bg-warning',
+                    pti: 'bg-danger',
+                    external: 'bg-secondary',
+                    kajian: 'bg-dark'
+                };
+                divEl.className = 'badge ' + (badgeMap[member.division] || 'bg-secondary');
+            }
+            if (statusEl) {
+                statusEl.textContent = member.status === 'active' ? 'Aktif' : 'Tidak Aktif';
+                statusEl.className = member.status === 'active' ? 'ms-2 text-success' : 'ms-2 text-danger';
+            }
+
+            // set photo (uses pravatar placeholder keyed by NIM)
+            const photoEl = document.getElementById('modalPhoto');
+            if (photoEl) {
+                photoEl.src = member.photo ? member.photo : `https://i.pravatar.cc/400?u=${member.nim}`;
+                photoEl.alt = member.name;
+            }
+
+            // Show Bootstrap modal
+            const modalEl = document.getElementById('memberModal');
+            if (modalEl && typeof bootstrap !== 'undefined') {
+                const bsModal = new bootstrap.Modal(modalEl);
+                bsModal.show();
+            } else {
+                // Fallback to alert if modal not found
+                alert(`${member.name} — ${member.nim} — ${divisionNames[member.division]}`);
+            }
+        }
+
+        // EDIT MEMBER FUNCTION (PLACEHOLDER)
+        function editMember(nim) {
+            const member = membersData.find(m => m.nim === nim);
+            if (member) {
+                alert(`Fitur edit untuk ${member.name} akan segera hadir!\n\nUntuk saat ini, silakan hubungi admin untuk perubahan data.`);
+            }
+        }
+
+        // SMOOTH SCROLLING
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ACTIVE NAV LINK
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

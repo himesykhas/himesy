@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Divisi PTI (Pengembangan Teknologi Informasi) HIMESY KHAS STIES KHAS Al-Jaelani Kempek Cirebon.">
+    <meta name="keywords" content="Divisi PTI HIMESY, STIES KHAS, Kempek, Ekonomi Syariah, Teknologi Informasi">
+
+    <title>Divisi PTI | HIMESY KHAS AL-JAELANI</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Arch Linux + Hyprland Remastered Theme */
+        :root {
+            --arch-black: #1e1e2e;
+            --arch-bg: #11111b;
+            --arch-surface: #313244;
+            --arch-surface-hover: #45475a;
+            --arch-text: #cdd6f4;
+            --arch-subtext: #bac2de;
+            --arch-green: #a6e3a1;
+            --arch-blue: #89b4fa;
+            --arch-yellow: #f9e2af;
+            --arch-red: #f38ba8;
+            --arch-purple: #cba6f7;
+            --arch-orange: #fab387;
+            --glass-bg: rgba(49, 50, 68, 0.9);
+            --glass-border: rgba(186, 194, 222, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--arch-bg);
+            color: var(--arch-text);
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        /* Video Background */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(17, 17, 27, 0.2); /* Kurangi dari 0.8 ke 0.5 untuk lebih terang */
+            z-index: -1;
+        }
+
+        /* --- MOBILE BLOCKER STYLE --- */
+        #mobile-blocker {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--arch-bg);
+            z-index: 99999; /* Pastikan di atas segalanya */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #mobile-blocker i {
+            font-size: 4rem;
+            color: var(--arch-red);
+            margin-bottom: 20px;
+        }
+
+        #mobile-blocker h1 {
+            color: var(--arch-text);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 10px;
+        }
+        
+        #mobile-blocker p {
+            color: var(--arch-subtext);
+        }
+        /* --------------------------- */
+
+        /* Hyprland Bar */
+        .hypr-bar {
+            position: fixed; top: 0; left: 0; right: 0; height: 40px;
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px; z-index: 10000; font-size: 14px;
+            box-shadow: var(--shadow);
+        }
+        .bar-left { display: flex; align-items: center; gap: 15px; }
+        .bar-center { flex: 1; text-align: center; }
+        .bar-right { display: flex; align-items: center; gap: 15px; }
+        .bar-item { color: var(--arch-subtext); }
+        .bar-workspaces { display: flex; gap: 5px; }
+        .workspace { width: 20px; height: 20px; border-radius: 50%; background: var(--arch-surface); cursor: pointer; transition: var(--transition); }
+        .workspace.active { background: var(--arch-green); box-shadow: 0 0 10px var(--arch-green); }
+        .workspace:hover { background: var(--arch-blue); }
+
+        /* Desktop Icons */
+        .desktop-icons {
+            position: absolute; top: 60px; left: 20px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+            width: 150px; /* Adjust width to fit 3 columns */
+            justify-items: center; align-items: start;
+        }
+        .desktop-icon {
+            display: flex; flex-direction: column; align-items: center;
+            cursor: pointer; transition: var(--transition);
+            padding: 10px; border-radius: 8px;
+        }
+        .desktop-icon:hover { background: var(--glass-bg); backdrop-filter: blur(10px); }
+        .icon-img { width: 48px; height: 48px; margin-bottom: 8px; }
+        .icon-label { font-size: 12px; color: var(--arch-text); }
+
+        /* Windows */
+        .window {
+            position: absolute;
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            z-index: 1000;
+            min-width: 300px;
+            min-height: 200px;
+        }
+        .window-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 12px; background: var(--arch-surface);
+            border-bottom: 1px solid var(--glass-border);
+            cursor: move;
+        }
+        .window-buttons { display: flex; gap: 8px; }
+        .window-btn { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; transition: var(--transition); }
+        .btn-close { background: var(--arch-red); }
+        .btn-minimize { background: var(--arch-yellow); }
+        .btn-maximize { background: var(--arch-green); }
+        .window-btn:hover { opacity: 0.8; }
+        .window-title { font-size: 14px; color: var(--arch-text); }
+        .window-content { padding: 20px; height: calc(100% - 40px); overflow-y: auto; }
+
+        /* Resize Handle */
+        .resize-handle {
+            position: absolute; bottom: 0; right: 0; width: 20px; height: 20px;
+            background: var(--arch-green); cursor: nw-resize; border-radius: 0 0 12px 0;
+            opacity: 0.7; transition: var(--transition);
+        }
+        .resize-handle:hover { opacity: 1; background: var(--arch-blue); }
+
+        /* Specific Windows */
+        .terminal-window { top: 100px; left: 200px; width: 600px; height: 400px; }
+        .notepad-window { top: 120px; left: 820px; width: 400px; height: 350px; }
+        .game-window { top: 100px; left: 450px; width: 450px; height: 500px; }
+        .projects-window { top: 150px; right: 50px; width: 500px; height: 500px; }
+        .team-window { bottom: 50px; left: 50px; width: 550px; height: 350px; }
+        .footer-window { bottom: 50px; right: 50px; width: 400px; height: 250px; }
+        .settings-window { top: 80px; right: 20px; width: 350px; height: 400px; }
+        .navigation-window { top: 120px; left: 50px; width: 350px; height: 450px; }
+
+        /* Terminal Content */
+        .terminal-content { font-family: 'JetBrains Mono', monospace; color: var(--arch-text); }
+        .terminal-line { margin: 5px 0; }
+        .terminal-prompt { color: var(--arch-green); }
+        .terminal-output { color: var(--arch-blue); }
+
+        /* Projects Grid */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .project-card {
+            background: var(--arch-surface); padding: 15px; border-radius: 8px;
+            border: 1px solid var(--glass-border); transition: var(--transition);
+        }
+        .project-card:hover { background: var(--arch-surface-hover); transform: translateY(-2px); }
+
+        /* Team Grid */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        .team-card {
+            background: var(--arch-surface); padding: 15px; border-radius: 8px;
+            text-align: center; border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+        .team-card:hover { background: var(--arch-surface-hover); transform: translateY(-2px); }
+        .team-avatar { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 10px; border: 2px solid var(--arch-green); }
+
+        /* Footer */
+        .footer-content { font-size: 12px; color: var(--arch-subtext); }
+
+        /* Navigation Menu */
+        .navigation-menu { display: flex; flex-direction: column; gap: 10px; }
+        .nav-link-item {
+            display: flex; align-items: center; padding: 10px 15px;
+            background: var(--arch-surface); border-radius: 8px;
+            border: 1px solid var(--glass-border); text-decoration: none;
+            color: var(--arch-text); transition: var(--transition);
+        }
+        .nav-link-item:hover { background: var(--arch-surface-hover); transform: translateX(5px); }
+        .nav-link-item.active { background: var(--arch-green); color: var(--arch-black); }
+        .nav-submenu { margin-left: 20px; margin-top: 10px; }
+        .nav-submenu-title { color: var(--arch-green); font-weight: 600; margin-bottom: 5px; }
+        .nav-link-item.sub { padding: 8px 12px; font-size: 14px; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .window { animation: fadeIn 0.5s ease-out; }
+
+        /* Calculator */
+        .calculator {
+            width: 300px; margin: 20px auto; background: var(--arch-surface);
+            border-radius: 12px; padding: 20px; box-shadow: var(--shadow);
+        }
+        .calc-display {
+            background: var(--arch-bg); color: var(--arch-text);
+            font-family: 'JetBrains Mono', monospace; font-size: 24px;
+            text-align: right; padding: 15px; border-radius: 8px;
+            margin-bottom: 15px; border: 1px solid var(--glass-border);
+            min-height: 40px; overflow: hidden;
+        }
+        .calc-buttons {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+        }
+        .calc-btn {
+            background: var(--arch-surface-hover); color: var(--arch-text);
+            border: 1px solid var(--glass-border); border-radius: 8px;
+            padding: 15px; font-size: 18px; cursor: pointer;
+            transition: var(--transition); font-family: 'JetBrains Mono', monospace;
+        }
+        .calc-btn:hover { background: var(--arch-blue); color: var(--arch-black); }
+        .calc-btn.operator { background: var(--arch-green); color: var(--arch-black); }
+        .calc-btn.operator:hover { background: var(--arch-yellow); }
+        .calc-btn.clear { background: var(--arch-red); color: var(--arch-text); }
+        .calc-btn.clear:hover { background: var(--arch-orange); }
+
+        /* Arch Linux Dock */
+        .arch-dock {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--arch-surface); border: 1px solid var(--glass-border);
+            border-radius: 8px; padding: 8px 15px; display: flex; gap: 10px;
+            align-items: center; box-shadow: var(--shadow); z-index: 10000;
+            transition: var(--transition);
+        }
+        .dock-item {
+            width: 45px; height: 45px; border-radius: 6px;
+            background: var(--arch-bg); display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: var(--transition); position: relative;
+            border: 1px solid var(--glass-border);
+        }
+        .dock-item:hover {
+            background: var(--arch-surface-hover); transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        .dock-item:active {
+            transform: translateY(0);
+        }
+        .dock-item i {
+            font-size: 20px; color: var(--arch-text);
+        }
+        .dock-tooltip {
+            position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%);
+            background: var(--arch-surface); color: var(--arch-text); padding: 4px 8px;
+            border-radius: 4px; font-size: 11px; opacity: 0; pointer-events: none;
+            transition: opacity 0.2s ease; white-space: nowrap;
+            border: 1px solid var(--glass-border);
+        }
+        .dock-item:hover .dock-tooltip {
+            opacity: 1;
+        }
+
+        /* Vinyl Record Animation */
+        .vinyl-playing {
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mobile-blocker">
+        <i class="fas fa-desktop"></i>
+        <h1>DESKTOP ACCESS ONLY</h1>
+        <p>Sistem ini dioptimalkan untuk pengalaman Desktop.</p>
+        <p>Silakan buka kembali menggunakan PC atau Laptop.</p>
+    </div>
+
+    <div class="hypr-bar">
+        <div class="bar-left">
+            <span class="bar-item"> Arch Linux</span>
+            <div class="bar-workspaces">
+                <div class="workspace active" onclick="switchWorkspace(1)"></div>
+                <div class="workspace" onclick="switchWorkspace(2)"></div>
+                <div class="workspace" onclick="switchWorkspace(3)"></div>
+            </div>
+        </div>
+        <div class="bar-center">
+            <span class="bar-item">PTI Division - HIMESY KHAS</span>
+        </div>
+        <div class="bar-right">
+            <span class="bar-item"> 14:30</span>
+            <span class="bar-item"> 85%</span>
+            <span class="bar-item"> 50%</span>
+        </div>
+    </div>
+
+    <div class="desktop-icons">
+        <div class="desktop-icon" onclick="openWindow('terminal')">
+            <img src="https://img.icons8.com/color/48/000000/console.png" alt="Terminal" class="icon-img">
+            <span class="icon-label">Terminal</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('notepad')">
+            <img src="https://img.icons8.com/color/48/000000/note.png" alt="Notepad" class="icon-img">
+            <span class="icon-label">Notepad</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('game')">
+            <img src="https://img.icons8.com/color/48/000000/calculator.png" alt="Calculator" class="icon-img">
+            <span class="icon-label">Calculator</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('projects')">
+            <img src="https://img.icons8.com/color/48/000000/folder-invoices.png" alt="Projects" class="icon-img">
+            <span class="icon-label">Projects</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('team')">
+            <img src="https://img.icons8.com/color/48/000000/conference.png" alt="Team" class="icon-img">
+            <span class="icon-label">Team</span>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('footer')">
+            <img src="https://img.icons8.com/color/48/000000/info.png" alt="About" class="icon-img">
+            <span class="icon-label">About</span>
+        </div>
+    </div>
+
+    <div class="window terminal-window" id="terminal-window">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('terminal')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('terminal')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('terminal')"></div>
+            </div>
+            <div class="window-title">pti@archlinux ~</div>
+            <div></div>
+        </div>
+        <div class="window-content">
+            <div class="terminal-content">
+                <div class="terminal-line"><span class="terminal-prompt">$</span> whoami</div>
+                <div class="terminal-line"><span class="terminal-output">pti</span></div>
+                <div class="terminal-line"><span class="terminal-prompt">$</span> echo "Welcome to PTI Division"</div>
+                <div class="terminal-line"><span class="terminal-output">Welcome to PTI Division</span></div>
+                <div class="terminal-line"><span class="terminal-prompt">$</span> cat /etc/pti/mission.txt</div>
+                <div class="terminal-line"><span class="terminal-output">"Mendorong Inovasi Digital untuk Ekonomi Syariah Modern."</span></div>
+                <div class="terminal-line"><span class="terminal-prompt">$</span> ls -la /pti/projects/</div>
+                <div class="terminal-line"><span class="terminal-output">drwxr-xr-x 2 pti pti 4096 Jan 22 14:30 website</span></div>
+                <div class="terminal-line"><span class="terminal-output">drwxr-xr-x 2 pti pti 4096 Jan 22 14:30 mobile-app</span></div>
+                <div class="terminal-line"><span class="terminal-output">drwxr-xr-x 2 pti pti 4096 Jan 22 14:30 database</span></div>
+                <div class="terminal-line"><span class="terminal-output">drwxr-xr-x 2 pti pti 4096 Jan 22 14:30 analytics</span></div>
+                <div class="terminal-line"><span class="terminal-output">drwxr-xr-x 2 pti pti 4096 Jan 22 14:30 ai-assistant</span></div>
+                <div class="terminal-line"><span class="terminal-output">drwxr-xr-x 2 pti pti 4096 Jan 22 14:30 cybersecurity</span></div>
+                <div class="terminal-line"><span class="terminal-prompt">$</span> _</div>
+            </div>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window notepad-window" id="notepad-window" style="display: none;">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('notepad')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('notepad')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('notepad')"></div>
+            </div>
+            <div class="window-title">Notepad - Untitled</div>
+            <div></div>
+        </div>
+        <div class="window-content">
+            <textarea id="notepad-textarea" placeholder="Start typing your notes here..." style="width: 100%; height: 100%; background: var(--arch-bg); color: var(--arch-text); border: none; outline: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; padding: 10px; resize: none;"></textarea>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window game-window" id="game-window" style="display: none;">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('game')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('game')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('game')"></div>
+            </div>
+            <div class="window-title">Calculator</div>
+            <div></div>
+        </div>
+        <div class="window-content">
+            <div class="calculator">
+                <div class="calc-display" id="calc-display">0</div>
+                <div class="calc-buttons">
+                    <button class="calc-btn clear" onclick="clearCalc()">C</button>
+                    <button class="calc-btn" onclick="appendCalc('(')">(</button>
+                    <button class="calc-btn" onclick="appendCalc(')')">)</button>
+                    <button class="calc-btn operator" onclick="appendCalc('/')">/</button>
+                    <button class="calc-btn" onclick="appendCalc('7')">7</button>
+                    <button class="calc-btn" onclick="appendCalc('8')">8</button>
+                    <button class="calc-btn" onclick="appendCalc('9')">9</button>
+                    <button class="calc-btn operator" onclick="appendCalc('*')">*</button>
+                    <button class="calc-btn" onclick="appendCalc('4')">4</button>
+                    <button class="calc-btn" onclick="appendCalc('5')">5</button>
+                    <button class="calc-btn" onclick="appendCalc('6')">6</button>
+                    <button class="calc-btn operator" onclick="appendCalc('-')">-</button>
+                    <button class="calc-btn" onclick="appendCalc('1')">1</button>
+                    <button class="calc-btn" onclick="appendCalc('2')">2</button>
+                    <button class="calc-btn" onclick="appendCalc('3')">3</button>
+                    <button class="calc-btn operator" onclick="appendCalc('+')">+</button>
+                    <button class="calc-btn" onclick="appendCalc('0')">0</button>
+                    <button class="calc-btn" onclick="appendCalc('.')">.</button>
+                    <button class="calc-btn operator" onclick="calculate()">=</button>
+                </div>
+            </div>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window projects-window" id="projects-window" style="display: none;">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('projects')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('projects')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('projects')"></div>
+            </div>
+            <div class="window-title">Projects - PTI Division</div>
+            <div></div>
+        </div>
+        <div class="window-content">
+            <h3 style="color: var(--arch-green); margin-bottom: 20px;">PROYEK UNGGULAN</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <i class="fas fa-globe" style="color: var(--arch-green); font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: var(--arch-yellow);">Website HIMESY</h4>
+                    <p>Pengembangan platform digital interaktif.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-mobile-alt" style="color: var(--arch-green); font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: var(--arch-yellow);">Aplikasi Mobile</h4>
+                    <p>Solusi mobile untuk manajemen kegiatan.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-database" style="color: var(--arch-green); font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: var(--arch-yellow);">Database Sistem</h4>
+                    <p>Pengelolaan data terintegrasi.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-chart-line" style="color: var(--arch-green); font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: var(--arch-yellow);">Analytics Dashboard</h4>
+                    <p>Sistem monitoring dan analisis.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-robot" style="color: var(--arch-green); font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: var(--arch-yellow);">AI Assistant</h4>
+                    <p>Asisten virtual berbasis AI.</p>
+                </div>
+                <div class="project-card">
+                    <i class="fas fa-shield-alt" style="color: var(--arch-green); font-size: 2rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: var(--arch-yellow);">Cyber Security</h4>
+                    <p>Proteksi digital dan edukasi.</p>
+                </div>
+            </div>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window team-window" id="team-window" style="display: none;">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('team')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('team')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('team')"></div>
+            </div>
+            <div class="window-title">Team - PTI Division</div>
+            <div></div>
+        </div>
+        <div class="window-content">
+            <h3 style="color: var(--arch-green); margin-bottom: 20px;">TIM PTI</h3>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1374&auto=format&fit=crop" class="team-avatar" alt="Koordinator">
+                    <h5 style="color: var(--arch-yellow);">Ahmad Rahman</h5>
+                    <p>Koordinator Divisi</p>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=1374&auto=format&fit=crop" class="team-avatar" alt="Developer">
+                    <h5 style="color: var(--arch-yellow);">Siti Nurhaliza</h5>
+                    <p>Full Stack Developer</p>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1470&auto=format&fit=crop" class="team-avatar" alt="Designer">
+                    <h5 style="color: var(--arch-yellow);">Budi Santoso</h5>
+                    <p>UI/UX Designer</p>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop" class="team-avatar" alt="Analyst">
+                    <h5 style="color: var(--arch-yellow);">Maya Sari</h5>
+                    <p>Data Analyst</p>
+                </div>
+            </div>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window footer-window" id="footer-window" style="display: none;">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('footer')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('footer')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('footer')"></div>
+            </div>
+            <div class="window-title">About - HIMESY KHAS</div>
+            <div></div>
+        </div>
+        <div class="window-content footer-content">
+            <h4 style="color: var(--arch-green);">HIMESY STIES KHAS AL JAELANI</h4>
+            <p>Rumah kolaborasi bagi mahasiswa ekonomi syariah untuk bertumbuh menjadi pemimpin masa depan.</p>
+            <p><strong>Alamat:</strong> Jl. Tunggal Pegagan-Kempek, Kempek, Gempol, Cirebon 45161</p>
+            <p><strong>Email:</strong> himesyaljaelani@gmail.com</p>
+            <p>© 2026 HIMESY KHAS. All Rights Reserved.</p>
+            <p>Developed with ❤️ by PTI Division</p>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window settings-window" id="settings-window" style="display: none;">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('settings')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('settings')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('settings')"></div>
+            </div>
+            <div class="window-title">Settings - Arch Lite</div>
+            <div></div>
+        </div>
+        <div class="window-content">
+            <h4 style="color: var(--arch-green); margin-bottom: 15px;">SYSTEM SETTINGS</h4>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div>
+                    <label style="color: var(--arch-yellow);">Wallpaper:</label>
+                    <select id="wallpaper-select" style="width: 100%; background: var(--arch-bg); color: var(--arch-text); border: 1px solid var(--glass-border); border-radius: 4px; padding: 5px; margin-top: 5px;">
+                        <option value="default">Default Arch Wallpaper</option>
+                        <option value="mountain">Mountain Landscape</option>
+                        <option value="ocean">girl eyes</option>
+                        <option value="forest">Samurai</option>
+                        <option value="city">City Skyline</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="color: var(--arch-yellow);">Font Size:</label>
+                    <input type="range" id="font-size-slider" min="12" max="20" value="14" style="width: 100%; margin-top: 5px;">
+                    <span id="font-size-value" style="color: var(--arch-subtext);">14px</span>
+                </div>
+                <div>
+                    <label style="color: var(--arch-yellow);">Transparency:</label>
+                    <input type="range" id="transparency-slider" min="0" max="1" step="0.1" value="0.8" style="width: 100%; margin-top: 5px;">
+                    <span id="transparency-value" style="color: var(--arch-subtext);">0.8</span>
+                </div>
+                <div>
+                    <label style="color: var(--arch-yellow);">Music:</label>
+                    <div style="display: flex; align-items: center; margin-top: 10px; background: var(--arch-surface); padding: 10px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                        <img id="vinyl-record" src="../images/vinyl.png" alt="Vinyl Record" style="width: 64px; height: 64px; margin-right: 15px; transition: transform 0.3s ease;">
+                        <div style="flex: 1;">
+                            <div class="track-title" style="color: var(--arch-green); font-weight: bold;">DJ Melody - American Dreams</div>
+                            <div class="track-artist" style="color: var(--arch-subtext); font-size: 12px;">Electronic • 3:45</div>
+                            <div style="margin-top: 5px;">
+                                <button id="prev-music" style="background: var(--arch-blue); color: var(--arch-text); border: none; padding: 5px 10px; border-radius: 20px; cursor: pointer; font-size: 12px;">⏮ Prev</button>
+                                <button id="play-music" style="background: var(--arch-green); color: var(--arch-black); border: none; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 12px;">▶ Play</button>
+                                <button id="pause-music" style="background: var(--arch-yellow); color: var(--arch-black); border: none; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; margin-left: 5px;">⏸ Pause</button>
+                                <button id="next-music" style="background: var(--arch-blue); color: var(--arch-text); border: none; padding: 5px 10px; border-radius: 20px; cursor: pointer; font-size: 12px; margin-left: 5px;">⏭ Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="resetSettings()" style="background: var(--arch-red); color: var(--arch-text); border: none; padding: 8px; border-radius: 4px; cursor: pointer; margin-top: 10px;">Reset to Default</button>
+            </div>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window navigation-window" id="navigation-window" style="display: none;">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="window-btn btn-close" onclick="closeWindow('navigation')"></div>
+                <div class="window-btn btn-minimize" onclick="minimizeWindow('navigation')"></div>
+                <div class="window-btn btn-maximize" onclick="maximizeWindow('navigation')"></div>
+            </div>
+            <div class="window-title">Navigation - HIMESY KHAS</div>
+            <div></div>
+        </div>
+        <div class="window-content">
+            <h3 style="color: var(--arch-green); margin-bottom: 20px;">NAVIGASI MENU</h3>
+            <div class="navigation-menu">
+                <a href="../index.html" class="nav-link-item">
+                    <i class="fas fa-home" style="color: var(--arch-blue); margin-right: 10px;"></i>
+                    Beranda
+                </a>
+                <div class="nav-submenu">
+                    <span class="nav-submenu-title">Profil Kami</span>
+                    <a href="sejarah.html" class="nav-link-item sub">
+                        <i class="fas fa-history" style="color: var(--arch-yellow); margin-right: 10px;"></i>
+                        Sejarah Singkat
+                    </a>
+                    <a href="visi.html" class="nav-link-item sub">
+                        <i class="fas fa-eye" style="color: var(--arch-purple); margin-right: 10px;"></i>
+                        Visi & Misi
+                    </a>
+                    <a href="pimpinan.html" class="nav-link-item sub">
+                        <i class="fas fa-user-tie" style="color: var(--arch-orange); margin-right: 10px;"></i>
+                        Pimpinan Kami
+                    </a>
+                </div>
+                <div class="nav-submenu">
+                    <span class="nav-submenu-title">Struktur</span>
+                    <a href="bph.html" class="nav-link-item sub">
+                        <i class="fas fa-users-cog" style="color: var(--arch-red); margin-right: 10px;"></i>
+                        BPH (Badan Pengurus Harian)
+                    </a>
+                    <a href="pti.html" class="nav-link-item sub active">
+                        <i class="fas fa-code" style="color: var(--arch-green); margin-right: 10px;"></i>
+                        Divisi PTI
+                    </a>
+                    <a href="#" class="nav-link-item sub">
+                        <i class="fas fa-users" style="color: var(--arch-blue); margin-right: 10px;"></i>
+                        Divisi PSDM
+                    </a>
+                    <a href="#" class="nav-link-item sub">
+                        <i class="fas fa-bullhorn" style="color: var(--arch-yellow); margin-right: 10px;"></i>
+                        Divisi KOMINFO
+                    </a>
+                    <a href="#" class="nav-link-item sub">
+                        <i class="fas fa-handshake" style="color: var(--arch-purple); margin-right: 10px;"></i>
+                        Divisi EXTERNAL
+                    </a>
+                    <a href="#" class="nav-link-item sub">
+                        <i class="fas fa-palette" style="color: var(--arch-orange); margin-right: 10px;"></i>
+                        Divisi EKRAF
+                    </a>
+                    <a href="#" class="nav-link-item sub">
+                        <i class="fas fa-book" style="color: var(--arch-red); margin-right: 10px;"></i>
+                        Divisi KAJIAN
+                    </a>
+                    <a href="#" class="nav-link-item sub">
+                        <i class="fas fa-database" style="color: var(--arch-green); margin-right: 10px;"></i>
+                        Database Anggota
+                    </a>
+                </div>
+                <a href="#" class="nav-link-item">
+                    <i class="fas fa-newspaper" style="color: var(--arch-blue); margin-right: 10px;"></i>
+                    Jurnal Digital
+                </a>
+                <a href="#" class="nav-link-item">
+                    <i class="fas fa-images" style="color: var(--arch-yellow); margin-right: 10px;"></i>
+                    Galeri Foto
+                </a>
+                <a href="#" class="nav-link-item">
+                    <i class="fas fa-envelope" style="color: var(--arch-purple); margin-right: 10px;"></i>
+                    Kontak
+                </a>
+            </div>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <!-- Arch Linux Dock -->
+    <div class="arch-dock">
+        <div class="dock-item" onclick="openWindow('navigation')">
+            <i class="fas fa-bars"></i>
+            <div class="dock-tooltip">Navigation</div>
+        </div>
+        <div class="dock-item" onclick="openWindow('terminal')">
+            <i class="fas fa-terminal"></i>
+            <div class="dock-tooltip">Terminal</div>
+        </div>
+        <div class="dock-item" onclick="openWindow('game')">
+            <i class="fas fa-calculator"></i>
+            <div class="dock-tooltip">Kalkulator</div>
+        </div>
+        <div class="dock-item" onclick="openWindow('settings')">
+            <i class="fas fa-cog"></i>
+            <div class="dock-tooltip">Settings</div>
+        </div>
+    </div>
+
+    <!-- Background Video -->
+    <video id="bg-video" autoplay muted loop style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;">
+        <source src="" type="video/mp4">
+    </video>
+
+    <!-- Background Music -->
+    <audio id="bg-music" autoplay loop preload="none" style="display: none;">
+        <source src="../images/lagu.mp3" type="audio/mpeg">
+    </audio>
+
+<script>
+        // --- DEVICE & RESIZE DETECTION LOGIC (REAL-TIME) ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const blocker = document.getElementById('mobile-blocker');
+
+            function checkAccess() {
+                // 1. Cek User Agent (Apakah HP/Tablet secara sistem)
+                const isMobileUA = /android|ipad|iphone|ipod|windows phone/i.test(navigator.userAgent || navigator.vendor || window.opera);
+                
+                // 2. Cek Ukuran Layar Real-time (Lebar kurang dari 768px)
+                const isSmallScreen = window.innerWidth < 768;
+
+                // LOGIKA: Jika terdeteksi HP ATAU Layarnya dikecilin paksa
+                if (isMobileUA || isSmallScreen) {
+                    blocker.style.display = 'flex'; // Munculkan Blocker
+                } else {
+                    blocker.style.display = 'none'; // Sembunyikan Blocker (Balik ke Desktop)
+                }
+            }
+
+            // Jalankan sekali saat pertama kali buka (Load)
+            checkAccess();
+
+            // Jalankan setiap kali layar diubah ukurannya (Real-time Resize)
+            window.addEventListener('resize', checkAccess);
+        });
+        // ----------------------------------------------------
+
+
+        // Window management functions
+        function openWindow(type) {
+            const windowEl = document.getElementById(type + '-window');
+            windowEl.style.display = 'block';
+            
+            // Animasi reset biar smooth saat dibuka ulang
+            windowEl.style.opacity = '0';
+            windowEl.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                windowEl.style.opacity = '1';
+                windowEl.style.transform = 'scale(1)';
+            }, 10);
+
+            windowEl.style.zIndex = Date.now(); // Bring to front
+        }
+
+        function closeWindow(type) {
+            const windowEl = document.getElementById(type + '-window');
+            windowEl.style.display = 'none';
+        }
+
+        function minimizeWindow(type) {
+            closeWindow(type);
+        }
+
+        function maximizeWindow(type) {
+            const windowEl = document.getElementById(type + '-window');
+            if (windowEl.classList.contains('maximized')) {
+                windowEl.classList.remove('maximized');
+                windowEl.style.width = '';
+                windowEl.style.height = '';
+                windowEl.style.top = '';
+                windowEl.style.left = '';
+            } else {
+                windowEl.classList.add('maximized');
+                windowEl.style.width = 'calc(100vw - 20px)';
+                windowEl.style.height = 'calc(100vh - 60px)';
+                windowEl.style.top = '50px';
+                windowEl.style.left = '10px';
+            }
+        }
+
+        function switchWorkspace(num) {
+            const workspaces = document.querySelectorAll('.workspace');
+            workspaces.forEach((ws, index) => {
+                if (index + 1 === num) {
+                    ws.classList.add('active');
+                } else {
+                    ws.classList.remove('active');
+                }
+            });
+        }
+
+        // Make windows draggable
+        document.querySelectorAll('.window').forEach(windowEl => {
+            const header = windowEl.querySelector('.window-header');
+            let isDragging = false;
+            let startX, startY, startLeft, startTop;
+
+            // Mouse events
+            header.addEventListener('mousedown', (e) => {
+                if (e.target.closest('.window-buttons')) return; // Jangan drag kalau klik tombol close/max
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                startLeft = windowEl.offsetLeft;
+                startTop = windowEl.offsetTop;
+                windowEl.style.zIndex = Date.now();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                windowEl.style.left = startLeft + dx + 'px';
+                windowEl.style.top = startTop + dy + 'px';
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Touch events (Hapus ini pun tidak apa-apa karena HP sudah di-block, 
+            // tapi dibiarkan untuk Tablet/Hybrid device yang lolos filter)
+            header.addEventListener('touchstart', (e) => {
+                if (e.target.closest('.window-btn')) return;
+                // e.preventDefault(); // Commented out to allow clicking buttons properly
+                isDragging = true;
+                const touch = e.touches[0];
+                startX = touch.clientX;
+                startY = touch.clientY;
+                startLeft = windowEl.offsetLeft;
+                startTop = windowEl.offsetTop;
+                windowEl.style.zIndex = Date.now();
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const touch = e.touches[0];
+                const dx = touch.clientX - startX;
+                const dy = touch.clientY - startY;
+                windowEl.style.left = startLeft + dx + 'px';
+                windowEl.style.top = startTop + dy + 'px';
+            });
+
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            // Resize functionality
+            const resizeHandle = windowEl.querySelector('.resize-handle');
+            let isResizing = false;
+            let resizeStartX, resizeStartY, resizeStartWidth, resizeStartHeight;
+
+            if(resizeHandle) {
+                resizeHandle.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    isResizing = true;
+                    resizeStartX = e.clientX;
+                    resizeStartY = e.clientY;
+                    resizeStartWidth = windowEl.offsetWidth;
+                    resizeStartHeight = windowEl.offsetHeight;
+                    windowEl.style.zIndex = Date.now();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isResizing) return;
+                    const dx = e.clientX - resizeStartX;
+                    const dy = e.clientY - resizeStartY;
+                    const newWidth = Math.max(300, resizeStartWidth + dx);
+                    const newHeight = Math.max(200, resizeStartHeight + dy);
+                    windowEl.style.width = newWidth + 'px';
+                    windowEl.style.height = newHeight + 'px';
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isResizing = false;
+                });
+            }
+        });
+
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            document.querySelector('.bar-right .bar-item:first-child').textContent = ' ' + timeString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Notepad functionality
+        const notepadTextarea = document.getElementById('notepad-textarea');
+        if (notepadTextarea) {
+            notepadTextarea.value = localStorage.getItem('pti-notepad') || '';
+            notepadTextarea.addEventListener('input', () => {
+                localStorage.setItem('pti-notepad', notepadTextarea.value);
+            });
+        }
+
+        // Calculator functionality
+        const calcDisplay = document.getElementById('calc-display');
+        if(calcDisplay) {
+            let currentInput = '0';
+            
+            window.appendCalc = function(value) {
+                if (currentInput === '0' && value !== '.') {
+                    currentInput = value;
+                } else {
+                    currentInput += value;
+                }
+                document.getElementById('calc-display').textContent = currentInput;
+            }
+
+            window.clearCalc = function() {
+                currentInput = '0';
+                document.getElementById('calc-display').textContent = currentInput;
+            }
+
+            window.calculate = function() {
+                try {
+                    currentInput = eval(currentInput).toString();
+                    document.getElementById('calc-display').textContent = currentInput;
+                } catch (e) {
+                    document.getElementById('calc-display').textContent = 'Error';
+                    setTimeout(() => window.clearCalc(), 1500);
+                }
+            }
+        }
+
+        // Settings functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const wallpapers = {
+                'default': { type: 'video', url: '../images/spider.mp4' },
+                'mountain': { type: 'image', url: 'https://images.unsplash.com/photo-1612539473441-dfc1cefd5e1e?q=80&w=1170&auto=format&fit=crop' },
+                'ocean': { type: 'video', url: '../images/anime.mp4' },
+                'forest': { type: 'video', url: '../images/samurai.mp4' },
+                'city': { type: 'image', url: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop' }
+            };
+
+            const bgVideo = document.getElementById('bg-video');
+
+            // Set default wallpaper on load
+            const defaultWallpaper = wallpapers['default'];
+            if (defaultWallpaper.type === 'video') {
+                bgVideo.src = defaultWallpaper.url;
+                bgVideo.style.display = 'block';
+                bgVideo.load();
+                bgVideo.play();
+            }
+
+            document.getElementById('wallpaper-select').addEventListener('change', function() {
+                const selected = this.value;
+                const wallpaper = wallpapers[selected];
+                if (wallpaper.type === 'video') {
+                    document.body.style.backgroundImage = 'none';
+                    bgVideo.src = wallpaper.url;
+                    bgVideo.style.display = 'block';
+                    bgVideo.load();
+                    bgVideo.play();
+                } else {
+                    bgVideo.style.display = 'none';
+                    bgVideo.pause();
+                    document.body.style.backgroundImage = `url('${wallpaper.url}')`;
+                }
+            });
+
+            document.getElementById('font-size-slider').addEventListener('input', function() {
+                const size = this.value;
+                document.documentElement.style.fontSize = size + 'px';
+                document.getElementById('font-size-value').textContent = size + 'px';
+            });
+
+            document.getElementById('transparency-slider').addEventListener('input', function() {
+                const transparency = this.value;
+                document.documentElement.style.setProperty('--glass-bg', `rgba(49, 50, 68, ${transparency})`);
+                document.getElementById('transparency-value').textContent = transparency;
+            });
+
+            const musicTracks = [
+                { title: 'DJ Melody - American Dreams', artist: 'Electronic', duration: '3:45', src: '../images/lagu.mp3' },
+                { title: 'Whisper | PUBG MOBILE Primewood Genesis Theme Song', artist: 'PUBG Mobile', duration: '3:15', src: '../images/lagu2.mp3' }
+            ];
+
+            const audio = document.getElementById('bg-music');
+            const vinyl = document.getElementById('vinyl-record');
+            let currentTrackIndex = 0;
+
+            function loadTrack(index) {
+                currentTrackIndex = index;
+                const track = musicTracks[index];
+                audio.src = track.src;
+                audio.load();
+                document.querySelector('.track-title').textContent = track.title;
+                document.querySelector('.track-artist').textContent = track.artist + ' • ' + track.duration;
+            }
+
+            // Set default track
+            loadTrack(0);
+
+            document.getElementById('play-music').addEventListener('click', function() {
+                audio.play();
+                vinyl.classList.add('vinyl-playing');
+                this.textContent = '⏸ Playing';
+                document.getElementById('pause-music').style.display = 'inline-block';
+                this.style.display = 'none';
+            });
+
+            document.getElementById('pause-music').addEventListener('click', function() {
+                audio.pause();
+                vinyl.classList.remove('vinyl-playing');
+                this.style.display = 'none';
+                document.getElementById('play-music').style.display = 'inline-block';
+                document.getElementById('play-music').textContent = '▶ Play';
+            });
+
+            document.getElementById('next-music').addEventListener('click', function() {
+                currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+                loadTrack(currentTrackIndex);
+                // If music was playing, continue playing
+                if (!audio.paused) {
+                    audio.play();
+                }
+            });
+
+            document.getElementById('prev-music').addEventListener('click', function() {
+                currentTrackIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
+                loadTrack(currentTrackIndex);
+                // If music was playing, continue playing
+                if (!audio.paused) {
+                    audio.play();
+                }
+            });
+
+            function resetSettings() {
+                document.getElementById('wallpaper-select').value = 'default';
+                document.getElementById('wallpaper-select').dispatchEvent(new Event('change'));
+                document.getElementById('font-size-slider').value = '14';
+                document.getElementById('font-size-slider').dispatchEvent(new Event('input'));
+                document.getElementById('transparency-slider').value = '0.8';
+                document.getElementById('transparency-slider').dispatchEvent(new Event('input'));
+                // Reset music
+                currentTrackIndex = 0;
+                loadTrack(0);
+                audio.pause();
+                vinyl.classList.remove('vinyl-playing');
+                document.getElementById('play-music').style.display = 'inline-block';
+                document.getElementById('pause-music').style.display = 'none';
+                document.getElementById('play-music').textContent = '▶ Play';
+            }
+
+            // Make functions global
+            window.resetSettings = resetSettings;
+
+            // Auto-play music on page load (may be blocked by browser)
+            let musicStarted = false;
+            function startMusic() {
+                if (musicStarted) return;
+                loadTrack(currentTrackIndex);
+                // Wait a bit for load
+                setTimeout(() => {
+                    audio.play().then(() => {
+                        musicStarted = true;
+                        if (vinyl) vinyl.classList.add('vinyl-playing');
+                        document.getElementById('play-music').textContent = '⏸ Playing';
+                        document.getElementById('pause-music').style.display = 'inline-block';
+                        document.getElementById('play-music').style.display = 'none';
+                    }).catch(e => {
+                        console.log('Autoplay blocked by browser:', e);
+                    });
+                }, 100);
+            }
+
+            // Try autoplay immediately
+            startMusic();
+
+            // Fallback: Play music on first user interaction
+            document.body.addEventListener('click', startMusic, { once: true });
+            document.body.addEventListener('keydown', startMusic, { once: true });
+            document.body.addEventListener('touchstart', startMusic, { once: true });
+
+            // Auto-play next track when current ends
+            audio.addEventListener('ended', function() {
+                currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+                loadTrack(currentTrackIndex);
+                audio.play().then(() => {
+                    if (vinyl) vinyl.classList.add('vinyl-playing');
+                    document.getElementById('play-music').textContent = '⏸ Playing';
+                    document.getElementById('pause-music').style.display = 'inline-block';
+                    document.getElementById('play-music').style.display = 'none';
+                }).catch(e => console.log('Auto-next play failed:', e));
+            });
+        });
+    </script>
+</body>
+</html>

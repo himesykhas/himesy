@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Divisi KOMINFO HIMESY KHAS - Komunikasi dan Informasi.">
+
+    <title>Divisi KOMINFO | HIMESY KHAS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: var(--himesy-navy-main); overflow-x: hidden; line-height: 1.7; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+
+        ::selection { background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--himesy-navy-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--gradient-primary); border-radius: 5px; }
+
+        /* Enhanced Preloader */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--gradient-primary); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 99999;
+        }
+        .preloader-wrap { position: relative; display: flex; align-items: center; justify-content: center; gap: 20px; }
+        .pre-text {
+            font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; color: var(--himesy-white);
+            letter-spacing: 10px; opacity: 0; text-transform: uppercase; position: relative; z-index: 2;
+            text-shadow: 0 0 15px rgba(0,0,0,0.5); animation: slideInLeft 0.8s forwards;
+        }
+        .pre-right { animation: slideInRight 0.8s forwards; }
+        .pre-logo-center {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            max-width: 350px; opacity: 0; animation: centerZoom 0.5s forwards 0.3s;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); z-index: 1;
+        }
+        @keyframes slideInLeft { from { transform: translateX(-150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes centerZoom { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        /* Modern Navbar */
+        .navbar { padding: 0px 0; transition: var(--transition-smooth); z-index: 10000; }
+        .navbar.scrolled {
+            background: rgba(5, 12, 24, 0.98) !important; padding: 15px 0;
+            backdrop-filter: blur(15px); border-bottom: 2px solid var(--himesy-gold-prime);
+        }
+        .navbar-brand img { height: 70px; transition: var(--transition-smooth); }
+        .navbar.scrolled .navbar-brand img { height: 50px; }
+        .nav-link {
+            color: var(--himesy-white) !important; font-weight: 600; font-size: 11px;
+            letter-spacing: 1px; text-transform: uppercase; margin-left: 15px; position: relative;
+            padding: 5px 0 !important; transform: translateY(-4px); transition: var(--transition-smooth);
+        }
+        .nav-link::before {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+            background: var(--himesy-gold-prime); transition: var(--transition-smooth);
+        }
+        .nav-link:hover::before, .nav-link.active::before { width: 100%; }
+
+        /* DROPDOWN */
+        .dropdown-menu {
+            background: var(--himesy-navy-light); border: none; border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 0 0 10px 10px; box-shadow: var(--shadow-premium); padding: 15px; margin-top: 15px;
+        }
+        .dropdown-item {
+            color: #ffffff; font-weight: 500; font-size: 14px;
+            padding: 10px 20px; border-radius: 5px; transition: 0.3s;
+        }
+        .dropdown-item:hover {
+            background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); transform: translateX(5px);
+        }
+        .navbar .dropdown-toggle::after { content: none !important; }
+        .dropdown-toggle i { margin-left: 5px; font-size: 10px; transition: 0.3s; }
+
+        /* Animasi Putar Icon Panah */
+        .dropdown-toggle[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        /* Creative Hero */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden; background: var(--gradient-primary);
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1000" height="1000" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+        .hero-content {
+            text-align: center; color: white; position: relative; z-index: 2;
+            max-width: 800px; padding: 0 20px;
+        }
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #d4af37); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem); opacity: 0.9; margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .hero-cta {
+            display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+        }
+        .btn-hero {
+            padding: 15px 30px; border-radius: 50px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; transition: var(--transition-smooth);
+            border: 2px solid transparent; position: relative; overflow: hidden;
+        }
+        .btn-hero::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-hero:hover::before { left: 100%; }
+        .btn-primary { background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); }
+        .btn-outline { border-color: white; color: white; }
+        .btn-outline:hover { background: white; color: var(--himesy-navy-main); }
+
+        /* Floating Elements */
+        .floating-shapes {
+            position: absolute; width: 100%; height: 100%; pointer-events: none;
+        }
+        .shape {
+            position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 60px; height: 60px; top: 20%; right: 15%; animation-delay: 2s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; bottom: 20%; left: 20%; animation-delay: 4s; }
+        .shape:nth-child(4) { width: 40px; height: 40px; bottom: 10%; right: 10%; animation-delay: 1s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 100px 0; background: white; position: relative;
+        }
+        .stats-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(212,175,55,0.1)"/></svg>');
+        }
+        .stat-card {
+            text-align: center; padding: 40px 20px; background: white;
+            border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin: 20px 0; transition: var(--transition-smooth);
+            border: 1px solid rgba(212,175,55,0.1);
+        }
+        .stat-card:hover {
+            transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border-color: var(--himesy-gold-prime);
+        }
+        .stat-number {
+            font-size: 3rem; font-weight: 900; color: var(--himesy-gold-prime);
+            margin-bottom: 10px; display: block;
+        }
+        .stat-label { font-size: 1.1rem; color: var(--himesy-navy-main); font-weight: 600; }
+
+        /* About Section */
+        .about-section {
+            padding: 120px 0; background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+            color: white; position: relative; overflow: hidden;
+        }
+        .about-section::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px; animation: move-bg 20s linear infinite;
+        }
+        @keyframes move-bg { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
+        .about-content {
+            position: relative; z-index: 2; max-width: 600px;
+        }
+        .about-title {
+            font-size: 3.5rem; font-weight: 900; margin-bottom: 30px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .about-text { font-size: 1.2rem; line-height: 1.8; opacity: 0.9; }
+
+        /* Programs Section */
+        .programs-section {
+            padding: 120px 0; background: white;
+        }
+        .program-card {
+            background: white; border-radius: 25px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); transition: var(--transition-smooth);
+            height: 100%; position: relative;
+        }
+        .program-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+            background: var(--gradient-primary); transform: scaleX(0); transition: transform 0.3s;
+        }
+        .program-card:hover::before { transform: scaleX(1); }
+        .program-card:hover {
+            transform: translateY(-15px); box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .program-icon {
+            width: 100px; height: 100px; background: var(--gradient-secondary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 30px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .program-icon i { font-size: 2.5rem; color: white; }
+        .program-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; }
+        .program-desc { color: #666; line-height: 1.6; }
+
+        /* Mission Section */
+        .mission-section {
+            padding: 120px 0; background: var(--gradient-accent); color: white;
+            position: relative;
+        }
+        .mission-container {
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border-radius: 30px; padding: 60px; border: 1px solid rgba(255,255,255,0.2);
+        }
+        .mission-title {
+            font-size: 3rem; text-align: center; margin-bottom: 50px;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        .mission-item {
+            background: rgba(255,255,255,0.1); border-radius: 20px; padding: 30px;
+            margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition-smooth);
+        }
+        .mission-item:hover {
+            background: rgba(255,255,255,0.2); transform: translateX(10px);
+        }
+        .mission-label {
+            font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;
+            color: var(--himesy-gold-prime);
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 120px 0; background: #f8f9fa;
+        }
+        .team-carousel {
+            position: relative; overflow: hidden;
+        }
+        .team-member {
+            background: white; border-radius: 25px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); transition: var(--transition-smooth);
+            text-align: center; padding: 30px 20px;
+        }
+        .team-member:hover {
+            transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .team-photo {
+            width: 120px; height: 120px; border-radius: 50%;
+            margin: 0 auto 20px; overflow: hidden; border: 5px solid var(--himesy-gold-prime);
+        }
+        .team-photo img {
+            width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth);
+        }
+        .team-member:hover .team-photo img { transform: scale(1.1); }
+        .team-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 5px; }
+        .team-role { color: var(--himesy-gold-prime); font-weight: 600; margin-bottom: 15px; }
+        .team-desc { color: #666; font-size: 0.9rem; line-height: 1.5; }
+
+        /* Departments Timeline */
+        .departments-section {
+            padding: 120px 0; background: white;
+        }
+        .timeline {
+            position: relative; max-width: 800px; margin: 0 auto;
+        }
+        .timeline::before {
+            content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+            width: 4px; background: var(--gradient-primary); transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative; margin-bottom: 50px; width: 50%; padding: 0 30px;
+        }
+        .timeline-item:nth-child(even) { left: 50%; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-content {
+            background: white; padding: 30px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid transparent;
+            transition: var(--transition-smooth);
+        }
+        .timeline-content:hover {
+            border-color: var(--himesy-gold-prime); transform: translateY(-5px);
+        }
+        .timeline-icon {
+            position: absolute; top: 30px; width: 50px; height: 50px;
+            background: var(--gradient-primary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem; z-index: 2;
+        }
+        .timeline-item:nth-child(even) .timeline-icon { right: -25px; }
+        .timeline-item:nth-child(odd) .timeline-icon { left: -25px; }
+
+        /* Footer */
+        footer {
+            background: var(--himesy-navy-deep); color: var(--himesy-slate);
+            padding: 80px 0 40px; position: relative;
+        }
+        footer::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+            background: var(--gradient-primary);
+        }
+        .footer-logo {
+            width: 120px; height: auto; display: block; margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));
+        }
+        .f-title {
+            color: #fff; margin-bottom: 25px; font-size: 1.2rem;
+            position: relative;
+        }
+        .f-title::after {
+            content: ''; position: absolute; bottom: -10px; left: 0; width: 50px; height: 3px;
+            background: var(--himesy-gold-prime); border-radius: 2px;
+        }
+        .f-link {
+            color: var(--himesy-slate); text-decoration: none; display: block;
+            margin-bottom: 12px; transition: var(--transition-smooth);
+            position: relative; padding-left: 20px;
+        }
+        .f-link::before {
+            content: '→'; position: absolute; left: 0; transition: var(--transition-smooth);
+            color: var(--himesy-gold-prime);
+        }
+        .f-link:hover {
+            color: var(--himesy-gold-prime); transform: translateX(10px);
+        }
+        .f-link:hover::before { transform: translateX(5px); }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero-title { font-size: 3rem; }
+            .about-title { font-size: 2.5rem; }
+            .timeline::before { left: 30px; }
+            .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 80px; }
+            .timeline-item:nth-child(even) .timeline-icon { left: 5px; }
+            .timeline-item:nth-child(odd) .timeline-icon { left: 5px; }
+        }
+    </style>
+</head>
+<body id="home">
+
+    <div id="preloader">
+        <div class="preloader-wrap">
+            <span class="pre-text pre-left">HIMESY</span>
+            <span class="pre-text pre-right">KHAS</span>
+            <img src="assets/images/logo.png" alt="Official Logo" class="pre-logo-center">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/logo.png" alt="Logo HIMESY KHAS" class="me-3">
+                <span class="fw-bold fs-4">HIMESY KHAS</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#himesyNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="himesyNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil Kami<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sejarah.html">Sejarah Singkat</a></li>
+                            <li><a class="dropdown-item" href="visi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="pimpinan.html">Pimpinan Kami</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Struktur<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><span class="dropdown-header text-warning fw-bold small">PIMPINAN</span></li>
+                            <li><a class="dropdown-item" href="bph.html">BPH (Badan Pengurus Harian)</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><span class="dropdown-header text-warning fw-bold small">DAFTAR DIVISI</span></li>
+                            <li><a class="dropdown-item" href="pti.html">Divisi PTI</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi PSDM</a></li>
+                            <li><a class="dropdown-item" href="kominfo.html">Divisi KOMINFO</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi EXTERNAL</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi EKRAF</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi KAJIAN</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><a class="dropdown-item" href="#">Database Anggota</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Jurnal Digital</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Galeri Foto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title animate__animated animate__zoomIn">KOMINFO</h1>
+            <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                Komunikasi & Informasi Digital yang Menginspirasi
+            </p>
+            <div class="hero-cta animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#about" class="btn btn-hero btn-primary">Jelajahi</a>
+                <a href="#contact" class="btn btn-hero btn-outline">Hubungi Kami</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">50K+</span>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">200+</span>
+                        <div class="stat-label">Konten Dibuat</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">95%</span>
+                        <div class="stat-label">Engagement Rate</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <span class="stat-number">24/7</span>
+                        <div class="stat-label">Monitoring</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h2 class="about-title">Tentang KOMINFO</h2>
+                        <p class="about-text">
+                            Divisi Komunikasi dan Informasi HIMESY KHAS adalah garda terdepan dalam
+                            mengelola narasi digital organisasi. Kami menciptakan konten yang menginspirasi,
+                            membangun jaringan yang kuat, dan memastikan informasi mengalir dengan lancar
+                            di era digital ini.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1470&auto=format&fit=crop" alt="Digital Communication" class="img-fluid rounded-4 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="programs-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold mb-4">Program Unggulan</h2>
+                <p class="lead opacity-75">Inisiatif inovatif untuk memperkuat ekosistem digital.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="program-card">
+                        <div class="program-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="program-title">Social Media Hub</h5>
+                            <p class="program-desc">
+                                Platform terintegrasi untuk mengelola semua kanal media sosial
+                                dengan strategi content yang tepat sasaran.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="program-card">
+                        <div class="program-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="program-title">Content Studio</h5>
+                            <p class="program-desc">
+                                Studio produksi konten multimedia dengan teknologi terkini
+                                untuk menghasilkan visual yang menakjubkan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="program-card">
+                        <div class="program-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="program-title">Digital Analytics</h5>
+                            <p class="program-desc">
+                                Sistem analitik canggih untuk memantau performa digital
+                                dan mengoptimalkan strategi komunikasi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-container">
+                <h2 class="mission-title">Visi & Misi KOMINFO</h2>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="mission-item">
+                            <div class="mission-label">Visi</div>
+                            <p>Menjadi pusat inovasi komunikasi digital terdepan yang menghubungkan HIMESY KHAS dengan dunia melalui teknologi dan kreativitas tanpa batas.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mission-item">
+                            <div class="mission-label">Misi</div>
+                            <ul class="mb-0">
+                                <li>Mengembangkan strategi komunikasi digital yang inovatif</li>
+                                <li>Menciptakan konten yang engaging dan bermakna</li>
+                                <li>Memanfaatkan teknologi untuk memperluas jangkauan</li>
+                                <li>Membangun komunitas digital yang solid</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Tim Kreatif KOMINFO</h2>
+                <p class="lead opacity-75">Para digital enthusiast yang siap membawa HIMESY ke era baru.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="assets/images/avatars/05.jpg" alt="Ketua">
+                        </div>
+                        <h5 class="team-name">Rina Sari</h5>
+                        <p class="team-role">Ketua Divisi</p>
+                        <p class="team-desc">Content strategist dengan passion di digital marketing dan brand storytelling.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="assets/images/avatars/06.jpg" alt="Wakil">
+                        </div>
+                        <h5 class="team-name">Ahmad Fauzi</h5>
+                        <p class="team-role">Wakil Ketua</p>
+                        <p class="team-desc">Graphic designer dan videographer yang ahli dalam visual communication.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="assets/images/avatars/07.jpg" alt="Sekretaris">
+                        </div>
+                        <h5 class="team-name">Maya Putri</h5>
+                        <p class="team-role">Social Media Manager</p>
+                        <p class="team-desc">Community manager yang jago mengelola engagement dan brand voice.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <div class="team-photo">
+                            <img src="assets/images/avatars/08.jpg" alt="Bendahara">
+                        </div>
+                        <h5 class="team-name">Dika Rahman</h5>
+                        <p class="team-role">IT Specialist</p>
+                        <p class="team-desc">Web developer dan digital enthusiast yang selalu update dengan teknologi terbaru.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="departments-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Bidang Kegiatan</h2>
+                <p class="lead opacity-75">Ekosistem digital yang terintegrasi untuk kemajuan organisasi.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>Media Sosial & Digital Marketing</h5>
+                        <p>Pengelolaan konten strategis di berbagai platform digital untuk meningkatkan brand awareness dan engagement.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>Content Creation & Multimedia</h5>
+                        <p>Produksi konten visual dan tulisan yang kreatif, mulai dari desain grafis hingga video production.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>IT & Sistem Informasi</h5>
+                        <p>Pengembangan website, database, dan sistem informasi untuk mendukung operasional HIMESY KHAS.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h5>Public Relations & Networking</h5>
+                        <p>Membangun hubungan dengan media dan stakeholder eksternal untuk memperluas jaringan organisasi.</p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <img src="assets/images/logo.png" alt="Footer Logo" class="footer-logo">
+                    <p class="fs-6 mt-3 pe-lg-5">HIMESY STIES KHAS AL JAELANI adalah rumah kolaborasi bagi mahasiswa ekonomi syariah untuk bertumbuh menjadi pemimpin masa depan.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="f-title">NAVIGASI</h5>
+                    <a href="index.html" class="f-link">Beranda</a>
+                    <a href="#" class="f-link">Profil Kami</a>
+                    <a href="#" class="f-link">Struktur</a>
+                    <a href="#" class="f-link">Jurnal Digital</a>
+                    <a href="#" class="f-link">Galeri</a>
+                    <a href="#" class="f-link">Kontak</a>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="f-title">RESOURCES</h5>
+                    <a href="#" class="f-link">Jurnal Ilmiah</a>
+                    <a href="#" class="f-link">Warta Berita</a>
+                    <a href="#" class="f-link">Dokumen</a>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="f-title">SEKRETARIAT</h5>
+                    <p class="small text-white-50 mb-3"><i class="fas fa-map-marker-alt me-2 text-gold"></i> Jl. Tunggal Pegagan-Kempek, Kempek, Gempol, Cirebon 45161</p>
+                    <p class="small text-white-50"><i class="fas fa-envelope me-2 text-gold"></i> himesyaljaelani@gmail.com</p>
+                </div>
+            </div>
+            <hr class="mt-5 border-secondary opacity-25">
+            <div class="row py-3">
+                <div class="col-md-6 text-center text-md-start"><p class="small mb-0">© 2026 HIMESY KHAS. All Rights Reserved.</p></div>
+                <div class="col-md-6 text-center text-md-end"><p class="small mb-0 text-white-50">Developed with <i class="fas fa-heart text-danger"></i> by PTI Division</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /** PRELOADER **/
+        window.addEventListener('load', () => {
+            const pre = document.getElementById('preloader');
+            if (pre) {
+                setTimeout(() => {
+                    pre.style.transition = 'all 1s cubic-bezier(0.7, 0, 0.3, 1)';
+                    pre.style.transform = 'translateY(-100vh)';
+                    pre.style.opacity = '0';
+                    setTimeout(() => { pre.style.display = 'none'; }, 1000);
+                }, 1000);
+            }
+        });
+
+        /* NAVBAR SCROLL */
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+        });
+
+        /* ANIMATIONS ON SCROLL */
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('animate__animated', 'animate__fadeInUp'); observer.unobserve(entry.target); } });
+        }, observerOptions);
+        document.querySelectorAll('.stat-card, .program-card, .team-member, .timeline-content').forEach(el => { el.style.opacity = "0"; observer.observe(el); });
+
+        /* COUNTERS */
+        const counterSection = document.querySelector('.stats-section');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { initCounters(); statsObserver.unobserve(entry.target); } });
+        }, { threshold: 0.6 });
+        if (counterSection) statsObserver.observe(counterSection);
+
+        function initCounters() {
+            const counterElements = document.querySelectorAll('.stat-number');
+            counterElements.forEach(el => {
+                const targetValue = parseInt(el.textContent.replace(/[^\d]/g, ''));
+                let currentValue = 0;
+                const duration = 2500;
+                const increment = targetValue / (duration / 30);
+                const countUpdate = () => {
+                    if (currentValue < targetValue) { currentValue += increment; el.innerText = Math.ceil(currentValue).toLocaleString() + (el.textContent.includes('+') ? '+' : ''); setTimeout(countUpdate, 30); }
+                    else el.innerText = targetValue.toLocaleString() + (el.textContent.includes('+') ? '+' : '');
+                };
+                countUpdate();
+            });
+        }
+
+        /* SMOOTH ANCHOR */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        console.log("kominfo.html ready - Creative Edition");
+    </script>
+</body>
+</html>

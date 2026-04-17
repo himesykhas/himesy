@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Divisi PSDM HIMESY KHAS - Pengembangan Sumber Daya Manusia.">
+
+    <title>Divisi PSDM | HIMESY KHAS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: #fcfcfc; color: var(--himesy-navy-main); overflow-x: hidden; line-height: 1.7; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+
+        ::selection { background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--himesy-navy-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--himesy-gold-prime); border-radius: 5px; }
+
+        /* preloader intentionally identical to index (kept here but hidden if removed) */
+        #preloader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--himesy-navy-deep); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; }
+        .preloader-wrap { position: relative; display: flex; align-items: center; justify-content: center; gap: 20px; }
+        .pre-text { font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; color: var(--himesy-gold-prime); letter-spacing: 10px; opacity: 0; text-transform: uppercase; position: relative; z-index: 2; text-shadow: 0 0 15px rgba(0,0,0,0.5); }
+        .pre-left { animation: slideInLeft 0.8s forwards; }
+        .pre-right { animation: slideInRight 0.8s forwards; }
+        .pre-logo-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); max-width: 350px; opacity: 0; animation: centerZoom 0.5s forwards 0.3s; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); z-index: 1; }
+        @keyframes slideInLeft { from { transform: translateX(-150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(150px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes centerZoom { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        .navbar { padding: 0px 0; transition: var(--transition-smooth); z-index: 10000; }
+        .navbar.scrolled { background: rgba(5, 12, 24, 0.98) !important; padding: 15px 0; backdrop-filter: blur(15px); border-bottom: 2px solid var(--himesy-gold-prime); }
+        .navbar-brand img { height: 70px; transition: var(--transition-smooth); }
+        .navbar.scrolled .navbar-brand img { height: 50px; }
+        .nav-link { color: var(--himesy-white) !important; font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-left: 15px; position: relative; padding: 5px 0 !important; transform: translateY(-4px); transition: var(--transition-smooth); }
+        .nav-link::before { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background: var(--himesy-gold-prime); transition: var(--transition-smooth); }
+        .nav-link:hover::before, .nav-link.active::before { width: 100%; }
+
+        /* DROPDOWN */
+        .dropdown-menu {
+            background: var(--himesy-navy-light); border: none; border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 0 0 10px 10px; box-shadow: var(--shadow-premium); padding: 15px; margin-top: 15px;
+        }
+        .dropdown-item {
+            color: var(--himesy-white); font-weight: 500; font-size: 14px;
+            padding: 10px 20px; border-radius: 5px; transition: 0.3s;
+        }
+        .dropdown-item:hover {
+            background: var(--himesy-gold-prime); color: var(--himesy-navy-deep); transform: translateX(5px);
+        }
+        .navbar .dropdown-toggle::after { content: none !important; }
+        .dropdown-toggle i { margin-left: 5px; font-size: 10px; transition: 0.3s; }
+
+        /* Animasi Putar Icon Panah */
+        .dropdown-toggle[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--himesy-white); position: relative; background: linear-gradient(rgba(5, 12, 24, 0.85), rgba(5, 12, 24, 0.8)), url('assets/images/bg.jpeg'); background-attachment: fixed; background-size: cover; background-position: center; }
+        .hero-h1 { font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .hero-h5 { color: var(--himesy-gold-prime); letter-spacing: 10px; font-weight: 700; margin-bottom: 20px; }
+
+        .identity-section { padding: 120px 0; background: var(--himesy-white); }
+        .pilar-box { background: #fff; padding: 30px; border-radius: 20px; border: 1px solid #eee; transition: var(--transition-smooth); }
+
+        .stats-section { padding: 80px 0; background: #f8f9fa; }
+        .stat-circle { width: 220px; height: 220px; margin: 0 auto; background: #fff; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: var(--shadow-premium); border-bottom: 8px solid var(--himesy-gold-prime); }
+
+        .leaders-section { padding: 20px 0; }
+        .member-card { border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .member-img-box { width: 100%; height: 250px; overflow: hidden; border-radius: 15px 15px 0 0; }
+        .member-img-box img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
+        .member-img-box img:hover { transform: scale(1.05); }
+
+        .dept-section { padding: 100px 0; background: #050c18; color: #fff; }
+        .dept-card { padding: 30px; border-radius: 15px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
+
+        .journal-unas-style { background-color: var(--himesy-navy-main); padding: 40px 0; }
+
+        .contact-section { padding: 60px 0; }
+
+        .scrolling-wrapper-flexbox { display: flex; overflow-x: auto; gap: 20px; padding: 20px 0; }
+        .card-unas { flex: 0 0 300px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .card-unas img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 15px; background: #fff; }
+        .card-content h5 { margin: 0; color: var(--himesy-navy-main); }
+
+        footer { background: var(--himesy-navy-deep); color: var(--himesy-slate); padding: 120px 0 40px; border-top: 5px solid var(--himesy-gold-prime); }
+        .f-title { color: #fff; margin-bottom: 35px; font-size: 1.5rem; }
+        .f-link { color: var(--himesy-slate); text-decoration: none; display: block; margin-bottom: 15px; transition: 0.3s; }
+        .f-link:hover { color: var(--himesy-gold-prime); transform: translateX(10px); }
+        .footer-logo { width: 150px; height: auto; display: block; margin-bottom: 20px; object-fit: contain; }
+        .text-gold { color: var(--himesy-gold-prime) !important; }
+
+        /* New Styles for Redesigned Layout */
+        .about-section { padding: 120px 0; background: #f8f9fa; }
+        .programs-section { padding: 120px 0; background: #fff; }
+        .icon-circle { width: 80px; height: 80px; background: var(--himesy-navy-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+        .mission-section { padding: 120px 0; background: #f8f9fa; }
+        .mission-box { margin-bottom: 20px; }
+        .team-section { padding: 120px 0; background: #fff; }
+        .team-card { padding: 20px; background: #f8f9fa; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .achievements-section { padding: 120px 0; background: var(--himesy-navy-main); color: #fff; }
+        .achievement-item { margin-bottom: 30px; }
+        .departments-section { padding: 120px 0; background: #fff; }
+        .accordion-button { background: var(--himesy-navy-light) !important; color: #fff !important; border: none; }
+        .accordion-button:not(.collapsed) { background: var(--himesy-gold-prime) !important; color: var(--himesy-navy-deep) !important; }
+        .accordion-body { background: #f8f9fa; }
+        .events-section { padding: 120px 0; background: #f8f9fa; }
+        .event-card img { height: 200px; object-fit: cover; }
+        .journal-section { padding: 120px 0; background: #fff; }
+        .journal-card img { height: 200px; object-fit: cover; }
+
+        @media (max-width: 991px) { .hero-h1 { font-size: 2.5rem; margin-top: 30px; } .navbar-brand img { height: 50px; } .pre-text { font-size: 3rem; } .pre-logo-center { max-width: 200px; } }
+    </style>
+</head>
+<body id="home">
+
+    <div id="preloader">
+        <div class="preloader-wrap">
+            <span class="pre-text pre-left">HIMESY</span>
+            <span class="pre-text pre-right">KHAS</span>
+            <img src="assets/images/logo.png" alt="Official Logo" class="pre-logo-center">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/logo.png" alt="Logo HIMESY KHAS" class="me-3">
+                <span class="fw-bold fs-4">HIMESY KHAS</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#himesyNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="himesyNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil Kami<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sejarah.html">Sejarah Singkat</a></li>
+                            <li><a class="dropdown-item" href="visi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="pimpinan.html">Pimpinan Kami</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Struktur<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><span class="dropdown-header text-warning fw-bold small">PIMPINAN</span></li>
+                            <li><a class="dropdown-item" href="#">BPH (Badan Pengurus Harian)</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><span class="dropdown-header text-warning fw-bold small">DAFTAR DIVISI</span></li>
+                            <li><a class="dropdown-item" href="pti.html">Divisi PTI</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi PSDM</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi KOMINFO</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi EXTERNAL</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi EKRAF</a></li>
+                            <li><a class="dropdown-item" href="#">Divisi KAJIAN</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><a class="dropdown-item" href="#">Database Anggota</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Jurnal Digital</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Galeri Foto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container z-index-3">
+            <p class="hero-h5 animate__animated animate__fadeInDown">DIVISI KHUSUS</p>
+            <h1 class="hero-h1 animate__animated animate__zoomIn">PENGEMBANGAN SDM (PSDM)</h1>
+            <div style="width: 100px; height: 5px; background: var(--himesy-gold-prime); margin: 30px auto;" class="animate__animated animate__fadeInUp"></div>
+            <p class="lead text-white-50 fs-5 animate__animated animate__fadeInUp animate__delay-1s">Membangun kapasitas anggota melalui kaderisasi, kepemimpinan, dan pelatihan kewirausahaan berbasis nilai pesantren.</p>
+        </div>
+    </header>
+
+    <!-- New Layout: Hero, About, Programs, Mission, Team, Achievements, Departments, Events, Journal, Contact -->
+    <section class="about-section py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="display-4 fw-bold mb-4">Tentang Divisi PSDM</h2>
+                    <p class="lead mb-4">Divisi Pengembangan Sumber Daya Manusia (PSDM) HIMESY KHAS bertanggung jawab atas pembinaan dan pengembangan potensi anggota melalui program-program strategis yang berbasis pada nilai-nilai pesantren dan kepemimpinan modern.</p>
+                    <p class="text-muted">Kami fokus pada kaderisasi, pelatihan kepemimpinan, dan pengembangan keterampilan untuk mencetak generasi muda yang siap berkontribusi pada masyarakat dan dunia usaha syariah.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1471&auto=format&fit=crop" alt="Teamwork" class="img-fluid rounded-4 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="programs-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Program Unggulan Kami</h2>
+                <p class="lead opacity-75">Inisiatif inovatif untuk membangun karakter dan kompetensi.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-circle mb-3">
+                                <i class="fas fa-users fa-3x text-gold"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Leadership Bootcamp</h5>
+                            <p class="card-text">Pelatihan intensif untuk mengasah kemampuan kepemimpinan dan manajemen tim.</p>
+                            <a href="#" class="btn btn-outline-primary rounded-pill">Pelajari Lebih</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-circle mb-3">
+                                <i class="fas fa-graduation-cap fa-3x text-gold"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Mentoring Akademik</h5>
+                            <p class="card-text">Pendampingan studi dan riset untuk meningkatkan performa akademik.</p>
+                            <a href="#" class="btn btn-outline-primary rounded-pill">Pelajari Lebih</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-circle mb-3">
+                                <i class="fas fa-briefcase fa-3x text-gold"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Workshop Kewirausahaan</h5>
+                            <p class="card-text">Pelatihan praktis bisnis syariah dan inkubasi startup mahasiswa.</p>
+                            <a href="#" class="btn btn-outline-primary rounded-pill">Pelajari Lebih</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-4 fw-bold mb-4">Misi & Visi PSDM</h2>
+                    <div class="mission-box p-4 bg-white rounded-4 shadow-sm mb-4">
+                        <h4 class="text-gold fw-bold">Visi</h4>
+                        <p>Menjadi pusat pengembangan sumber daya manusia unggul di bidang ekonomi syariah dengan integritas tinggi.</p>
+                    </div>
+                    <div class="mission-box p-4 bg-white rounded-4 shadow-sm">
+                        <h4 class="text-gold fw-bold">Misi</h4>
+                        <ul class="text-start">
+                            <li>Mengembangkan program kaderisasi berkelanjutan</li>
+                            <li>Meningkatkan kompetensi kepemimpinan anggota</li>
+                            <li>Mendorong inovasi dalam pengembangan kewirausahaan</li>
+                            <li>Menjalin kemitraan dengan stakeholder eksternal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Tim Inti PSDM</h2>
+                <p class="lead opacity-75">Para pemimpin yang berdedikasi membimbing generasi masa depan.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-3">
+                    <div class="team-card text-center">
+                        <img src="assets/images/avatars/01.jpg" alt="Ketua" class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
+                        <h5 class="fw-bold">Ahmad Rahman</h5>
+                        <p class="text-muted small">Ketua Divisi</p>
+                        <p class="small">Ahli dalam kepemimpinan dan motivasi tim.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-card text-center">
+                        <img src="assets/images/avatars/02.jpg" alt="Wakil" class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
+                        <h5 class="fw-bold">Siti Nurhaliza</h5>
+                        <p class="text-muted small">Wakil Ketua</p>
+                        <p class="small">Spesialis dalam pengembangan akademik.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-card text-center">
+                        <img src="assets/images/avatars/03.jpg" alt="Sekretaris" class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
+                        <h5 class="fw-bold">Budi Santoso</h5>
+                        <p class="text-muted small">Sekretaris</p>
+                        <p class="small">Koordinator program dan administrasi.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-card text-center">
+                        <img src="assets/images/avatars/04.jpg" alt="Bendahara" class="rounded-circle mb-3" style="width:120px;height:120px;object-fit:cover;">
+                        <h5 class="fw-bold">Maya Sari</h5>
+                        <p class="text-muted small">Bendahara</p>
+                        <p class="small">Pengelola keuangan dan sumber daya.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="departments-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Bidang Kegiatan</h2>
+                <p class="lead opacity-75">Fokus utama pengembangan sumber daya manusia.</p>
+            </div>
+            <div class="accordion" id="departmentsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            <i class="fas fa-book-open me-2 text-gold"></i>Pembinaan Akademik
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#departmentsAccordion">
+                        <div class="accordion-body">
+                            Mentoring studi, bimbingan riset, dan workshop akademik untuk meningkatkan performa mahasiswa.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <i class="fas fa-crown me-2 text-gold"></i>Kaderisasi & Pelatihan
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#departmentsAccordion">
+                        <div class="accordion-body">
+                            Bootcamp kepemimpinan, simulasi organisasi, dan pengembangan soft skills.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            <i class="fas fa-lightbulb me-2 text-gold"></i>Pengembangan Keterampilan
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#departmentsAccordion">
+                        <div class="accordion-body">
+                            Workshop kewirausahaan, digital literacy, dan literasi keuangan syariah.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold">Event Terdekat</h2>
+                <p class="lead opacity-75">Bergabunglah dalam kegiatan kami yang mendatang.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="event-card card border-0 shadow">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop" alt="Event 1" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Bootcamp Leadership 2026</h5>
+                            <p class="card-text small text-muted">15 Februari 2026 • Kampus Utama</p>
+                            <p class="card-text">Pelatihan intensif untuk calon pemimpin masa depan.</p>
+                            <a href="#" class="btn btn-primary rounded-pill">Daftar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="event-card card border-0 shadow">
+                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1470&auto=format&fit=crop" alt="Event 2" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Workshop Kewirausahaan</h5>
+                            <p class="card-text small text-muted">22 Maret 2026 • Online</p>
+                            <p class="card-text">Belajar membangun bisnis syariah dari nol.</p>
+                            <a href="#" class="btn btn-primary rounded-pill">Daftar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="event-card card border-0 shadow">
+                        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1470&auto=format&fit=crop" alt="Event 3" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Mentoring Session</h5>
+                            <p class="card-text small text-muted">10 April 2026 • Ruang Seminar</p>
+                            <p class="card-text">Sesi konsultasi akademik dengan mentor berpengalaman.</p>
+                            <a href="#" class="btn btn-primary rounded-pill">Daftar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <img src="assets/images/logo.png" alt="Footer Logo" class="footer-logo">
+                    <p class="fs-6 mt-3 pe-lg-5">HIMESY STIES KHAS AL JAELANI adalah rumah kolaborasi bagi mahasiswa ekonomi syariah untuk bertumbuh menjadi pemimpin masa depan.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="f-title">NAVIGASI</h5>
+                    <a href="index.html" class="f-link">Beranda</a>
+                    <a href="#" class="f-link">Profil Kami</a>
+                    <a href="#" class="f-link">Struktur</a>
+                    <a href="#" class="f-link">Jurnal Digital</a>
+                    <a href="#" class="f-link">Galeri</a>
+                    <a href="#" class="f-link">Kontak</a>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="f-title">RESOURCES</h5>
+                    <a href="#" class="f-link">Jurnal Ilmiah</a>
+                    <a href="#" class="f-link">Warta Berita</a>
+                    <a href="#" class="f-link">Dokumen</a>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="f-title">SEKRETARIAT</h5>
+                    <p class="small text-white-50 mb-3"><i class="fas fa-map-marker-alt me-2 text-gold"></i> Jl. Tunggal Pegagan-Kempek, Kempek, Gempol, Cirebon 45161</p>
+                    <p class="small text-white-50"><i class="fas fa-envelope me-2 text-gold"></i> himesyaljaelani@gmail.com</p>
+                </div>
+            </div>
+            <hr class="mt-5 border-secondary opacity-25">
+            <div class="row py-3">
+                <div class="col-md-6 text-center text-md-start"><p class="small mb-0">© 2026 HIMESY KHAS. All Rights Reserved.</p></div>
+                <div class="col-md-6 text-center text-md-end"><p class="small mb-0 text-white-50">Developed with <i class="fas fa-heart text-danger"></i> by PTI Division</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /** PRELOADER **/
+        window.addEventListener('load', () => {
+            const pre = document.getElementById('preloader');
+            if (pre) {
+                setTimeout(() => {
+                    pre.style.transition = 'all 1s cubic-bezier(0.7, 0, 0.3, 1)';
+                    pre.style.transform = 'translateY(-100vh)';
+                    pre.style.opacity = '0';
+                    setTimeout(() => { pre.style.display = 'none'; }, 1000);
+                }, 1000);
+            }
+        });
+
+        /* NAVBAR SCROLL */
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+        });
+
+        /* COUNTERS */
+        const counterSection = document.getElementById('counter-section');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { initCounters(); statsObserver.unobserve(entry.target); } });
+        }, { threshold: 0.6 });
+        if (counterSection) statsObserver.observe(counterSection);
+
+        function initCounters() {
+            const counterElements = document.querySelectorAll('.count-val');
+            counterElements.forEach(el => {
+                const targetValue = +el.getAttribute('data-target');
+                const suffix = el.getAttribute('data-suffix') || "";
+                let currentValue = 0;
+                const duration = 2500;
+                const increment = targetValue / (duration / 30);
+                const countUpdate = () => {
+                    if (currentValue < targetValue) { currentValue += increment; el.innerText = Math.ceil(currentValue) + suffix; setTimeout(countUpdate, 30); }
+                    else el.innerText = targetValue + suffix;
+                };
+                countUpdate();
+            });
+        }
+
+        /* SMOOTH ANCHOR */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        /* ANIMATIONS ON SCROLL */
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('animate__animated', 'animate__fadeInUp'); observer.unobserve(entry.target); } });
+        }, observerOptions);
+        document.querySelectorAll('.title-large, .pilar-box, .member-card, .dept-card, .pilar-box, .vision-box, .mission-box, .team-card, .event-card, .journal-card, .icon-circle').forEach(el => { el.style.opacity = "0"; observer.observe(el); });
+
+        console.log("psdm.html ready");
+    </script>
+</body>
+</html>
