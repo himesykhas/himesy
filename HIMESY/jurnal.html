@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Portal Resmi HIMESY KHAS - Jurnal dan Artikel Ilmiah.">
+    <meta name="keywords" content="HIMESY, Ekonomi Syariah, Jurnal, Artikel, STIES, KHAS, AL JAELANI">
+
+    <title>HIMESY KHAS | Jurnal Digital</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================================
+        [ I. CUSTOM CSS VARIABLES - THE CORE OF DESIGN ]
+        ================================================================
+        */
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-gold-glow: #f1c40f;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --himesy-light-slate: #ccd6f6;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        /* ================================================================
+        [ II. GENERAL STYLING & RESET ]
+        ================================================================
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fcfcfc;
+            color: var(--himesy-navy-main);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        ::selection {
+            background: var(--himesy-gold-prime);
+            color: var(--himesy-navy-deep);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--himesy-navy-deep);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--himesy-gold-prime);
+            border-radius: 5px;
+        }
+
+        /* ================================================================
+        [ III. CINEMATIC PRELOADER - CUSTOM ANIMATION ]
+        ================================================================
+        */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--himesy-navy-deep);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+
+        .preloader-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pre-text {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--himesy-gold-prime);
+            letter-spacing: 10px;
+            opacity: 0;
+            text-transform: uppercase;
+            position: relative; 
+            z-index: 2;
+            text-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .pre-left { animation: slideInLeft 0.8s forwards; }
+        .pre-right { animation: slideInRight 0.8s forwards; }
+
+        .pre-logo-center {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            max-width: 350px;
+            opacity: 0;
+            transform: scale(0);
+            animation: centerZoom 0.5s forwards 0.3s;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+            z-index: 1;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-150px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(150px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes centerZoom {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* ================================================================
+        [ IV. NAVIGATION ARCHITECTURE ]
+        ================================================================
+        */
+        .navbar {
+            padding: 0px 0;
+            transition: var(--transition-smooth);
+            z-index: 10000;
+        }
+
+        .navbar.scrolled {
+            background: rgba(5, 12, 24, 0.98) !important;
+            padding: 15px 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--himesy-gold-prime);
+        }
+
+        .navbar-brand img {
+            height: 70px;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar.scrolled .navbar-brand img {
+            height: 50px;
+        }
+
+        .nav-link {
+            color: var(--himesy-white) !important;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-left: 15px;
+            position: relative;
+            padding: 5px 0 !important;
+            transform: translateY(-4px);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--himesy-gold-prime);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::before, .nav-link.active::before {
+            width: 100%;
+        }
+
+        .dropdown-toggle i {
+            display: inline-block;
+            font-size: 10px;
+            margin-left: 5px;
+            vertical-align: middle;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Animasi Putar Icon Panah */
+        .dropdown-toggle[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            background: var(--himesy-navy-light);
+            border: none;
+            border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 0 0 10px 10px;
+            box-shadow: var(--shadow-premium);
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .dropdown-item {
+            color: var(--himesy-light-slate);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background: var(--himesy-gold-prime);
+            color: var(--himesy-navy-deep);
+            transform: translateX(5px);
+        }
+
+        /* ================================================================
+        [ V. HERO & PARALLAX ENGINE ]
+        ================================================================
+        */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--himesy-white);
+            position: relative;
+            background: linear-gradient(rgba(5, 12, 24, 0.85), rgba(5, 12, 24, 0.8)),
+            url('images/bg.jpeg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-h1 {
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-h5 {
+            color: var(--himesy-gold-prime);
+            letter-spacing: 10px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* ================================================================        
+        [ X. GLASS SOSMED - FIXED BG ]        
+         ================================================================       
+        */        
+        .sosmed-fixed {            
+            padding: 150px 0;            
+            background: linear-gradient(rgba(5, 12, 24, 0.9), rgba(5, 12, 24, 0.9));
+            background-attachment: fixed;
+            background-size: cover;           
+            color: #fff;       
+            }      
+            
+        .glass-btn {           
+            background: var(--glass-bg);            
+            backdrop-filter: blur(10px);            
+            border: 1px solid var(--glass-border);            
+            padding: 60px 40px;            
+            border-radius: 30px;            
+            text-decoration: none;            
+            color: #fff;            
+            display: block;            
+            transition: 0.4s;        
+        }        
+               
+        .glass-btn:hover {            
+            background: rgba(212, 175, 55, 0.2);            
+            border-color: var(--himesy-gold-prime);            
+            transform: translateY(-10px);            
+            color: var(--himesy-gold-prime);        
+        }      
+
+        /* ================================================================        
+        [ XI. ARTICLES & JOURNAL ]        
+         ================================================================        
+        */        
+        .journal-section { 
+            padding: 150px 0; background: #fff; 
+        }        
+
+.j-card {
+                display: flex;
+                flex-direction: column;
+                border: none;
+                border-radius: 20px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+                overflow: hidden;
+                transition: transform 0.35s ease, box-shadow 0.35s ease;
+                height: 100%;
+                background: #fff;
+            }
+
+            /* Ensure columns stretch so .j-card can fill height */
+            .page .row > [class*="col-"] { display: flex; align-items: stretch; }
+            .page .row > [class*="col-"] .j-card { flex: 1 1 auto; }
+
+            /* Hover effect: lift + subtle scale */
+            .page .j-card:hover {
+                transform: translateY(-8px) scale(1.01);
+                box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            }
+
+            .j-img {
+                height: 240px;
+                object-fit: cover;
+                width: 100%;
+                transition: transform 0.5s ease;
+                flex: 0 0 auto;
+            }
+            .page .j-card:hover .j-img { transform: scale(1.05); }
+
+            .j-card .p-4 {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; /* push the read button to bottom */
+                flex: 1 1 auto;
+                padding: 1rem 1rem 1.25rem; /* slightly more bottom padding */
+            }
+
+            .j-card .p-4 h5 { margin-bottom: 0.6rem; }
+            .j-card .p-4 p { margin-bottom: 0.75rem; color: #6c757d; }
+
+            .btn-read {
+                align-self: flex-start;
+                margin-top: 0; /* removed auto so bottom is controlled by justify-content */
+                display: inline-block;
+            }
+            /* Make sure layout spacing is tidy */
+            .page .row + .row { margin-top: 1rem; }
+
+            /* ================================================================
+            [ PAGINATION SLIDER - In-place carousel for jurnal ]
+            ================================================================ */
+            .journal-track-wrap {
+                overflow: hidden;
+                position: relative;
+                touch-action: pan-y; /* allow vertical scroll; we handle horizontal swipes */
+            }
+            .journal-track {
+                display: flex;
+                gap: 1.5rem;
+                transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+                will-change: transform;
+                user-select: none;
+                -webkit-user-drag: none;
+            }
+            .journal-track .col-lg-4, .journal-track .col-md-6 {
+                flex: 0 0 auto; /* width will be set by JS to adapt to viewport */
+            }
+            .pagination .page-link { cursor: pointer; user-select: none; }
+
+            /* Small helper for touch action & spacing */
+            .journal-track-wrap { touch-action: pan-y; }
+
+            /* Responsive tweaks for smoother slides */
+            @media (max-width: 991px) {
+                .journal-track { gap: 1rem; }
+            }
+
+            /* Responsive tweaks for smoother slides */
+            @media (max-width: 991px) {
+                .journal-track { gap: 1rem; }
+            }
+
+            /* ================================================================        
+            [ XII. FOOTER - MASSIVE STRUCTURE ]        
+            ================================================================        
+            */        
+             
+            footer {            
+                background: var(--himesy-navy-deep);            
+                color: var(--himesy-slate);            
+                padding: 120px 0 40px;            
+                border-top: 5px solid var(--himesy-gold-prime);        
+            }        
+            
+            .f-title { 
+                color: #fff; margin-bottom: 35px; font-size: 1.5rem; 
+            }        
+            
+            .f-link { 
+                color: var(--himesy-slate); 
+                text-decoration: none; 
+                display: block; 
+                margin-bottom: 15px; 
+                transition: 0.3s; 
+            }        
+            
+            .f-link:hover { 
+                color: var(--himesy-gold-prime); 
+                transform: translateX(10px); 
+            }        
+            
+            /* MANY CUSTOM UTILITY CLASSES TO BULK UP CSS */        
+            .text-gold { 
+                color: var(--himesy-gold-prime); 
+            }        
+            .bg-navy { 
+                background: var(--himesy-navy-main); 
+            }        
+            
+            .rounded-super { 
+                border-radius: 50px; 
+            }        
+            
+            .shadow-glow { 
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); 
+            }        
+            
+            /* MEDIA QUERIES FOR RESPONSIVENESS */        
+            @media (max-width: 991px) {            
+            .hero-h1 { font-size: 2.5rem; margin-top: 30px;}            
+            .navbar-brand img { height: 50px; }            
+            .pre-text { font-size: 3rem; }            
+            .pre-logo-center {        
+            max-width: 200px; 
+            /* Ukuran khusus untuk tampilan HP */}        
+            }        
+            
+            @media (max-width: 991px) {            
+            .navbar-collapse {                
+            background: var(--himesy-navy-deep);                 
+            margin-top: 15px;                
+            padding: 20px;                
+            border-radius: 20px;                
+            border: 1px solid rgba(212, 175, 55, 0.2);                
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);                
+            backdrop-filter: blur(10px);                
+            max-height: 60vh;                
+            overflow-y: auto;            
+            }                        
+            
+            .nav-link {                
+            margin-left: 0 !important;                
+            padding: 10px 15px !important;                
+            transform: translateY(0) !important; 
+            
+            /* Biar teks balik ke tengah di HP */            
+            }        }                
+            
+            /* Styling Icon Panah */        
+            .dropdown-toggle i {            
+            display: inline-block;            
+            font-size: 10px;            
+            margin-left: 5px;            
+            vertical-align: middle;            
+            
+            /* Ini kunci animasinya */            
+            transition: transform 0.3s ease-in-out;         
+            }        
+            
+            /* Animasi Putar pas Menu Terbuka */        
+            .dropdown-toggle[aria-expanded="true"] i {            
+            transform: rotate(180deg);        }        
+            
+            /* HAPUS PANAH BAWAAN BOOTSTRAP YANG BANDEL */        
+            .navbar .dropdown-toggle::after {            
+            content: none !important;            
+            display: none !important;            
+            border: none !important;            
+            margin: 0 !important;        
+            }                
+            
+            /* ================================================================        
+            STYLE BARU SOSIAL MEDIA (ALA HIMASI UNJA)        
+            ================================================================ 
+            */        
+            .social-media-unja {            
+            position: relative;            
+            
+            /* GANTI URL INI DENGAN FOTO PENGURUS HIMESY YANG RAME-RAME */            
+            background: url('images/bg.jpeg');             
+            background-size: cover;            
+            background-position: center;            
+            background-attachment: fixed; 
+            /* Efek Parallax biar keren */            
+            padding: 120px 0;        
+            }        
+            
+            /* Lapisan hitam transparan di atas foto */        
+            .overlay-dark {            
+            position: absolute;            
+            top: 0;            
+            left: 0;            
+            width: 100%;            
+            height: 100%;            
+            background: rgba(0, 0, 0, 0.6); /* Gelap 60% */        
+            }        
+            
+            /* Style Dasar Tombol */        
+            .social-btn {           
+             width: 80px;            
+             height: 80px;           
+              display: flex;            
+              align-items: center;            
+              justify-content: center;            
+              border-radius: 15px; /* Sudut tumpul */            
+              color: #fff;            
+              font-size: 2.5rem;            
+              text-decoration: none;            
+              transition: all 0.3s ease;            
+              box-shadow: 0 10px 20px rgba(0,0,0,0.3);        
+              }        .social-btn:hover {            
+              transform: translateY(-10px); /* Naik pas di-hover */            
+              color: #fff;        
+              }        
+              
+              /* Warna Spesifik Brand */        
+              .btn-yt {            
+              background-color: #ff0000; /* Merah YouTube */        
+              }        .btn-ig {           
+              
+              /* Gradasi Instagram */            
+              background: radial-gradient(circle at 30% 107%, 
+              #fdf497 0%, 
+              #fdf497 5%, 
+              #fd5949 45%, 
+              #d6249f 60%, 
+              #285AEB 90%);        
+              }        
+              
+              .btn-tt {            
+              background-color: #000000; /* Hitam TikTok */            
+              border: 1px solid rgba(255,255,255,0.2);        
+              }        
+              
+            /* ================================================================        
+            STYLE JURNAL LANDSCAPE (HEMAT RUANG & COMPACT)        
+            ================================================================ 
+            */        
+            .journal-unas-style {            
+            background-color: var(--himesy-navy-main);            
+            padding: 50px 0; /* Padding diperkecil biar gak boros tempat */            
+            border-top: 1px solid rgba(255,255,255,0.05);        
+            }        
+            
+            /* Judul Section diperkecil */        
+            .journal-unas-style h2.display-4 {            
+            font-size: 2rem; /* Ukuran font judul lebih sopan */            
+            margin-bottom: 2rem !important;        }        
+            /* Container Scroll */        
+            .scrolling-wrapper-flexbox {            
+            display: flex;            
+            flex-wrap: nowrap;            
+            overflow-x: auto;            
+            gap: 20px; /* Jarak antar kartu lebih rapat */            
+            padding: 10px 5%;             
+            -webkit-overflow-scrolling: touch;            
+            scrollbar-width: none;            
+            align-items: center; /* Pastikan kartu rata tengah */        
+            }        
+            .scrolling-wrapper-flexbox::-webkit-scrollbar {            
+            display: none;        
+            }        
+            /* KARTU LANDSCAPE (PERSEGI PANJANG) */        
+            .card-unas {            
+            flex: 0 0 auto;            
+            width: 320px;   /* Lebar pas */            
+            height: 200px;  /* Tinggi pendek (Landscape) */            
+            border-radius: 15px;            
+            position: relative;            
+            overflow: hidden;            
+            cursor: pointer;            
+            transition: transform 0.3s ease;            
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);        
+            }        
+            .card-unas:hover {            
+            transform: translateY(-5px); /* Efek naik dikit aja */        
+            }        
+            .card-unas img {            
+            width: 100%;            
+            height: 100%;            
+            object-fit: cover;            
+            transition: transform 0.5s ease;        
+            }        
+            .card-unas:hover img {            transform: scale(1.1);        }        /* Overlay Konten - Dibuat lebih ringkas */        .card-content {            position: absolute;            bottom: 0;            left: 0;            width: 100%;            padding: 15px; /* Padding lebih tipis */            background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6), transparent);            z-index: 2;        }        /* Teks di dalam kartu diperkecil */        .card-content h4 {            font-size: 1rem; /* Judul artikel lebih kecil */            line-height: 1.3;            margin-bottom: 5px;            text-overflow: ellipsis;            display: -webkit-box;            -webkit-line-clamp: 2; /* Batasi cuma 2 baris */            line-clamp: 2;            -webkit-box-orient: vertical;            overflow: hidden;        }        .card-content .badge {            font-size: 0.65rem;            padding: 4px 8px;        }        .card-content p.small {            font-size: 0.7rem;            margin-bottom: 0;            opacity: 0.8;        }        /* Indikator Geser */        .scroll-bar-indicator {            width: 60px; /* Lebih pendek */            height: 3px;            background: rgba(255,255,255,0.1);            border-radius: 2px;            margin-top: 5px;            position: relative;            overflow: hidden;        }        .scroll-bar-indicator::after {            content: '';            position: absolute;            left: 0;            top: 0;            height: 100%;            width: 30%;            background: var(--himesy-gold-prime);            animation: scrollIndikator 2s infinite ease-in-out;        }        /* Tombol Lihat Semua */        .btn-gold-solid {            font-size: 0.85rem; /* Tombol lebih kecil */            padding: 10px 30px !important;        }                /* Style Tombol "Lihat Semua" */        .btn-gold-solid {            display: inline-block;       /* Wajib biar bentuknya tombol utuh */            background-color: var(--himesy-gold-prime); /* Warna Emas */            color: var(--himesy-navy-deep) !important;  /* Teks Navy Gelap (PENTING biar kebaca) */            font-weight: 800;            /* Teks tebal */            padding: 12px 40px;          /* Ukuran tombol */            border-radius: 50px;         /* Sudut bulat */            text-decoration: none;       /* Hapus garis bawah link */            transition: all 0.3s ease;   /* Animasi halus */            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); /* Efek bayangan emas */            text-transform: uppercase;   /* Huruf kapital semua */            letter-spacing: 1px;        }        /* Efek pas Mouse Nempel (Hover) */        .btn-gold-solid:hover {            background-color: #ffffff;   /* Berubah jadi Putih */            color: var(--himesy-navy-deep) !important;            transform: translateY(-3px); /* Naik dikit */            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);        }                /* ================================================================        UPDATE CONTACT SECTION (BIAR LEBIH KECIL & RAPI)        ================================================================ */        .contact-section {            padding: 60px 0;         }        /* Membatasi lebar area kontak biar gak menuhin layar */        .contact-section .container {            max-width: 900px !important;         }        .contact-section h2 {            font-size: 1.8rem; /* Judul diperkecil */        }        /* Form Input dipercantik & diperkecil */        .contact-section .form-control {            padding: 10px 15px;            font-size: 0.9rem;        }        /* Peta diperkecil tingginya */        .contact-iframe-box {            height: 100%;            min-height: 350px; /* Tinggi peta dibatasi */            border-radius: 20px;            overflow: hidden;        }        /* Tombol Kirim */        .btn-send {            padding: 10px 0;            font-size: 0.9rem;        }                /* Tambahkan ini biar logo footer ukurannya pas & sopan */        .footer-logo {            width: 150px;       /* Batasi lebar maksimal 150px */            height: auto;       /* Tinggi menyesuaikan biar proporsional */            display: block;     /* Biar rapi */            margin-bottom: 20px;            object-fit: contain;        }    </style>
+</head>
+<body id="home">
+
+    <div id="preloader">
+        <div class="preloader-wrap">
+            <span class="pre-text pre-left">HIMESY</span>
+            <span class="pre-text pre-right">KHAS</span>
+            <img src="images/logo.png" alt="Official Logo" class="pre-logo-center">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="Logo HIMESY KHAS" class="me-3">
+                <span class="fw-bold fs-4">HIMESY KHAS</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#himesyNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="himesyNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil Kami<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profil/sejarah.html">Sejarah Singkat</a></li>
+                            <li><a class="dropdown-item" href="profil/visi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="profil/pimpinan.html">Pimpinan Kami</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Struktur<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><span class="dropdown-header text-warning fw-bold small">PIMPINAN</span></li>
+                            <li><a class="dropdown-item" href="divisi/bph.html">BPH (Badan Pengurus Harian)</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><span class="dropdown-header text-warning fw-bold small">DAFTAR DIVISI</span></li>
+                            <li><a class="dropdown-item" href="divisi/pti.html">Divisi PTI</a></li>
+                            <li><a class="dropdown-item" href="divisi/psdm.html">Divisi PSDM</a></li>
+                            <li><a class="dropdown-item" href="divisi/kominfo.html">Divisi KOMINFO</a></li>
+                            <li><a class="dropdown-item" href="divisi/external.html">Divisi EXTERNAL</a></li>
+                            <li><a class="dropdown-item" href="divisi/ekraf.html">Divisi EKRAF</a></li>
+                            <li><a class="dropdown-item" href="divisi/kajian.html">Divisi KAJIAN</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><a class="dropdown-item" href="divisi/database.html">Database Anggota</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="jurnal.html">Jurnal Digital</a></li>
+                    <li class="nav-item"><a class="nav-link" href="galeri.html">Galeri Foto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" style="height: 60vh;">
+        <div class="container z-index-3">
+            <h1 class="hero-h1 animate__animated animate__zoomIn">JURNAL DIGITAL</h1>
+            <p class="lead text-white-50 fs-4 animate__animated animate__fadeInUp animate__delay-1s">
+                "Wawasan Ekonomi Syariah Terkini dan Mendalam."
+            </p>
+        </div>
+    </header>
+
+    <section class="journal-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-gold fw-bold letter-spacing-5">KAJIAN TERBARU</h6>
+                <h2 class="display-4 fw-bold">Kumpulan Jurnal & Artikel</h2>
+                <div class="mx-auto mt-3 bg-gold" style="width: 80px; height: 5px; background: var(--himesy-gold-prime);"></div>
+            </div>
+
+            <div class="journal-track-wrap">
+                <div class="journal-track">
+                    <!-- Slides will be generated dynamically from .journal-source -->
+                </div>
+
+                <!-- Source list: maintainable list where new journals can be added easily -->
+                <div class="journal-source d-none" aria-hidden="true">
+                    <!-- 12 jurnal (add more by copying a single .j-item block) -->
+                    <div class="j-item" data-href="jurnal-detail-1.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 1">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Potensi Ekonomi Digital Islam</h5>
+                                <p class="small text-muted mb-3">Analisis peluang & tantangan ekonomi syariah digital.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-2.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 2">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Laporan Rakernas HIMESY</h5>
+                                <p class="small text-muted mb-3">Ringkasan hasil Rapat Kerja Nasional HIMESY KHAS.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-3.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 3">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Manfaat Menabung di Bank Syariah</h5>
+                                <p class="small text-muted mb-3">Panduan & prinsip menabung di lembaga keuangan syariah.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-4.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 4">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Tips Investasi Emas</h5>
+                                <p class="small text-muted mb-3">Strategi investasi emas sesuai prinsip syariah.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-5.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 5">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Peran Blockchain</h5>
+                                <p class="small text-muted mb-3">Potensi blockchain di industri keuangan Islam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-6.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 6">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Zakat Produktif</h5>
+                                <p class="small text-muted mb-3">Kajian zakat produktif dan pengentasan kemiskinan.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- duplicate to reach 12 -->
+                    <div class="j-item" data-href="jurnal-detail-7.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 7">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Model Keuangan Mikro Syariah</h5>
+                                <p class="small text-muted mb-3">Studi kasus model pembiayaan mikro berbasis syariah.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-8.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 8">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Literasi Keuangan Kampus</h5>
+                                <p class="small text-muted mb-3">Program edukasi literasi keuangan untuk mahasiswa.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-9.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 9">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">UMKM & Ekonomi Syariah</h5>
+                                <p class="small text-muted mb-3">Kolaborasi UMKM dan platform syariah digital.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-10.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 10">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Inovasi Pembiayaan</h5>
+                                <p class="small text-muted mb-3">Pendekatan inovatif untuk pembiayaan inklusif.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-11.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 11">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Etika Bisnis Syariah</h5>
+                                <p class="small text-muted mb-3">Prinsip dan praktik etika bisnis di lembaga syariah.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="j-item" data-href="jurnal-detail-12.html">
+                        <div class="j-card">
+                            <img src="images/coso.jpg" class="j-img" alt="Artikel Jurnal 12">
+                            <div class="p-4">
+                                <h5 class="fw-bold mb-2">Ekonomi Hijau & Syariah</h5>
+                                <p class="small text-muted mb-3">Sinergi ekonomi hijau dengan prinsip syariah.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- In-place Pagination (slider) -->
+            <nav aria-label="Page navigation for jurnal" class="mt-5">
+                <ul class="pagination justify-content-center" id="jurnalPagination" role="tablist">
+                    <!-- Pagination will be generated dynamically by JS -->
+                </ul>
+            </nav>
+
+        </div>
+    </section>
+
+    <section class="social-media-unja">
+        <div class="overlay-dark"></div>
+        
+        <div class="container position-relative z-2 text-center">
+            <h2 class="display-4 fw-bold text-white mb-5">Social Media</h2>
+            
+            <div class="d-flex justify-content-center gap-4">
+                <a href="https://www.youtube.com/@himesy_stieskhas" class="social-btn btn-yt">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                
+                <a href="https://www.instagram.com/himesy_stieskhasaljaelani" class="social-btn btn-ig">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                
+                <a href="#" class="social-btn btn-tt">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <img src="images/logo.png" alt="Footer Logo" class="footer-logo">
+                    <p class="fs-6 mt-3 pe-lg-5">
+                        HIMESY STIES KHAS AL JAELANI adalah rumah kolaborasi bagi mahasiswa ekonomi syariah untuk bertumbuh menjadi pemimpin masa depan.
+                    </p>
+                    <div class="d-flex mt-4">
+                        <a href="https://www.instagram.com/himesy_stieskhasaljaelani" class="text-white me-3 fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-4"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@himesy_stieskhas" class="text-white me-3 fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <h5 class="f-title">NAVIGASI</h5>
+                    <a href="index.html" class="f-link">Beranda</a>
+                    <a href="profil/sejarah.html" class="f-link">Profil Kami</a>
+                    <a href="divisi/bph.html" class="f-link">Struktur</a>
+                    <a href="jurnal.html" class="f-link">Jurnal Digital</a>
+                    <a href="galeri.html" class="f-link">Galeri</a>
+                    <a href="kontak.html" class="f-link">Kontak</a>
+                </div>
+
+                <div class="col-lg-2">
+                    <h5 class="f-title">RESOURCES</h5>
+                    <a href="#" class="f-link">Jurnal Ilmiah</a>
+                    <a href="#" class="f-link">Warta Berita</a>
+                    <a href="#" class="f-link">Dokumen</a>
+                </div>
+
+                <div class="col-lg-4">
+                    <h5 class="f-title">SEKRETARIAT</h5>
+                    <p class="small text-white-50 mb-3">
+                        <i class="fas fa-map-marker-alt me-2 text-gold"></i> 
+                        Jl. Tunggal Pegagan-Kempek, Kempek, Gempol, Cirebon 45161
+                    </p>
+                    <p class="small text-white-50">
+                        <i class="fas fa-envelope me-2 text-gold"></i> 
+                        himesyaljaelani@gmail.com
+                    </p>
+                    </div>
+            </div>
+
+            <hr class="mt-5 border-secondary opacity-25">
+            
+            <div class="row py-3">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">© 2026 HIMESY KHAS. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0 text-white-50">Developed with <i class="fas fa-heart text-danger"></i> by PTI Division</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * 1. PRELOADER CINEMATIC ENGINE
+         */
+        window.addEventListener('load', () => {
+            const pre = document.getElementById('preloader');
+            setTimeout(() => {
+                pre.style.transition = 'all 1s cubic-bezier(0.7, 0, 0.3, 1)';
+                pre.style.transform = 'translateY(-100vh)';
+                pre.style.opacity = '0';
+                setTimeout(() => { 
+                    pre.style.display = 'none'; 
+                    // Aktifkan animasi AOS atau WoW di sini jika ada
+                }, 1000);
+            }, 1000);
+        });
+
+        /**
+         * 2. SMART NAVBAR SCROLL CONTROLLER
+         */
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Removed counter section script as it's not relevant for jurnal.html but kept for consistency if user wants to add it later.
+        // const counterSection = document.getElementById('counter-section');
+        // const statsObserver = new IntersectionObserver((entries) => {
+        //     entries.forEach(entry => {
+        //         if (entry.isIntersecting) {
+        //             initCounters();
+        //             statsObserver.unobserve(entry.target);
+        //         }
+        //     });
+        // }, { threshold: 0.3 });
+
+        // statsObserver.observe(counterSection);
+
+        // function initCounters() {
+        //     const counterElements = document.querySelectorAll('.count-val');
+        //     counterElements.forEach(el => {
+        //         const targetValue = +el.getAttribute('data-target');
+        //         const suffix = el.getAttribute('data-suffix') || "";
+        //         let currentValue = 0;
+                
+        //         const duration = 2500; 
+        //         const increment = targetValue / (duration / 30);
+
+        //         const countUpdate = () => {
+        //             if (currentValue < targetValue) {
+        //                 currentValue += increment;
+        //                 el.innerText = Math.ceil(currentValue) + suffix;
+        //                 setTimeout(countUpdate, 30);
+        //             } else {
+        //                 el.innerText = targetValue + suffix;
+        //             }
+        //         };
+        //         countUpdate();
+        //     });
+        // }
+
+        /**
+         * 4. SMOOTH SCROLL ANCHORINGnjjjj
+         */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        console.log("HIMESY KHAS Ultimate Engine Loaded Successfully.");
+
+            /**
+     * Efek Animasi Muncul saat Scroll
+     */
+    const observerOptions = {
+        threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Nambahin kelas animasi dari animate.css
+                entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                observer.unobserve(entry.target); // Cukup sekali animasi
+            }
+        });
+    }, observerOptions);
+
+    // Pilih bagian mana aja yang mau dikasih animasi pas di-scroll
+    document.querySelectorAll('.title-large, .pilar-box, .member-card, .dept-card, .j-card').forEach(el => {
+        // Sembunyiin dulu sebelum di-scroll biar nggak kaget
+        el.style.opacity = "0"; 
+        observer.observe(el);
+    });
+
+    /* ------------------------------------------------------------------
+       JURNAL: In-place Pagination Slider (grid pages: 3 top, 2 bottom on desktop)
+       - Source items live in .journal-source for easy edits (add/remove items)
+       - JS builds slides (pages) dynamically and handles pagination + swipe
+       ------------------------------------------------------------------ */
+    document.addEventListener('DOMContentLoaded', () => {
+        const wrap = document.querySelector('.journal-track-wrap');
+        const track = document.querySelector('.journal-track');
+        const source = document.querySelector('.journal-source');
+        const pagination = document.getElementById('jurnalPagination');
+        const prevBtn = document.querySelector('.slider-prev');
+        const nextBtn = document.querySelector('.slider-next');
+
+        let currentPage = 0;
+        let pages = [];
+        let totalPages = 0;
+
+        function getPageSize() {
+            const w = window.innerWidth;
+            if (w >= 992) return 6; // desktop: 3x2 (3 top, 3 bottom)
+            if (w >= 768) return 4; // tablet: 2 + 2
+            if (w >= 576) return 2; // small: 2 in one column each
+            return 1; // phone: single
+        }
+
+        function buildPages() {
+            const items = Array.from(source ? source.querySelectorAll('.j-item') : []);
+            // Ensure each source item has a data-href and a read button for easy maintenance
+            items.forEach((item, idx) => {
+                if (!item.dataset.href) item.dataset.href = `contoh-halaman-jurnal.html`;
+                const p = item.querySelector('.j-card .p-4');
+                if (p && !p.querySelector('.btn-read')) {
+                    const a = document.createElement('a');
+                    a.className = 'btn btn-outline-dark btn-sm rounded-pill mt-3 px-3 btn-read';
+                    a.href = item.dataset.href;
+                    a.textContent = 'Baca Selengkapnya';
+                    p.appendChild(a);
+                }
+            });
+            const perPage = getPageSize();
+
+            // clear track
+            track.innerHTML = '';
+            pages = [];
+
+            for (let i = 0; i < items.length; i += perPage) {
+                const chunk = items.slice(i, i + perPage);
+                const page = document.createElement('div');
+                page.className = 'page';
+
+                if (perPage === 6) {
+                    const row1 = document.createElement('div'); row1.className = 'row g-4';
+                    const row2 = document.createElement('div'); row2.className = 'row g-4 mt-3';
+
+                    chunk.forEach((item, idx) => {
+                        const col = document.createElement('div');
+                        col.className = 'col-lg-4 col-md-6';
+                        col.appendChild(item.querySelector('.j-card').cloneNode(true));
+                        if (idx < 3) row1.appendChild(col); else row2.appendChild(col);
+                    });
+
+                    page.appendChild(row1);
+                    page.appendChild(row2);
+                } else if (perPage === 4) {
+                    const rowA = document.createElement('div'); rowA.className = 'row g-4';
+                    const rowB = document.createElement('div'); rowB.className = 'row g-4 mt-3';
+
+                    chunk.forEach((item, idx) => {
+                        const col = document.createElement('div');
+                        col.className = 'col-lg-6 col-md-6';
+                        col.appendChild(item.querySelector('.j-card').cloneNode(true));
+                        if (idx < 2) rowA.appendChild(col); else rowB.appendChild(col);
+                    });
+
+                    page.appendChild(rowA);
+                    page.appendChild(rowB);
+                } else {
+                    const row = document.createElement('div'); row.className = 'row g-4';
+                    chunk.forEach(item => {
+                        const col = document.createElement('div');
+                        col.className = perPage === 2 ? 'col-6' : 'col-12';
+                        col.appendChild(item.querySelector('.j-card').cloneNode(true));
+                        row.appendChild(col);
+                    });
+                    page.appendChild(row);
+                }
+
+                track.appendChild(page);
+                pages.push(page);
+            }
+
+            // set each page width
+            const wrapWidth = wrap.clientWidth;
+            pages.forEach(p => p.style.flex = `0 0 ${wrapWidth}px`);
+
+            totalPages = pages.length;
+
+            console.log('Jurnal.buildPages → items:', items.length, 'perPage:', perPage, 'pages:', totalPages);
+
+            if (totalPages === 0) {
+                // fallback message (visible) to help debugging / UX
+                track.innerHTML = '<div class="text-center w-100 py-5 text-muted">Belum ada jurnal untuk ditampilkan.</div>';
+                track.style.minHeight = '300px';
+            } else {
+                // ensure cloned cards are visible (originals may have inline opacity:0 from scroll observer)
+                track.style.minHeight = '';
+                track.querySelectorAll('.j-card').forEach(c => {
+                    c.style.opacity = '';
+                    c.classList.add('animate__animated', 'animate__fadeInUp');
+                });
+            }
+        }
+
+        function buildPagination() {
+            pagination.innerHTML = '';
+            const prevLi = document.createElement('li'); prevLi.className = 'page-item';
+            prevLi.innerHTML = `<a class="page-link" href="#" data-action="prev">Previous</a>`;
+            pagination.appendChild(prevLi);
+
+            for (let i = 0; i < totalPages; i++) {
+                const li = document.createElement('li');
+                li.className = 'page-item' + (i === currentPage ? ' active' : '');
+                li.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i + 1}</a>`;
+                pagination.appendChild(li);
+            }
+
+            const nextLi = document.createElement('li'); nextLi.className = 'page-item';
+            nextLi.innerHTML = `<a class="page-link" href="#" data-action="next">Next</a>`;
+            pagination.appendChild(nextLi);
+
+            // update disabled state
+            pagination.querySelector('[data-action="prev"]').parentElement.classList.toggle('disabled', currentPage === 0);
+            pagination.querySelector('[data-action="next"]').parentElement.classList.toggle('disabled', currentPage === totalPages - 1);
+            if (prevBtn) prevBtn.classList.toggle('disabled', currentPage === 0);
+            if (nextBtn) nextBtn.classList.toggle('disabled', currentPage === totalPages - 1);
+        }
+
+        function goToPage(page, animate = true) {
+            const wrapWidth = wrap.clientWidth;
+            const offset = -page * wrapWidth;
+            if (!animate) track.style.transition = 'none';
+            track.style.transform = `translateX(${offset}px)`;
+            if (!animate) requestAnimationFrame(() => { track.style.transition = ''; });
+
+            // update active
+            pagination.querySelectorAll('.page-item').forEach((li, idx) => {
+                li.classList.toggle('active', idx === page + 1);
+            });
+
+            // update disabled
+            pagination.querySelector('[data-action="prev"]').parentElement.classList.toggle('disabled', page === 0);
+            pagination.querySelector('[data-action="next"]').parentElement.classList.toggle('disabled', page === totalPages - 1);
+            if (prevBtn) prevBtn.classList.toggle('disabled', page === 0);
+            if (nextBtn) nextBtn.classList.toggle('disabled', page === totalPages - 1);
+
+            currentPage = page;
+        }
+
+        // Click handling for pagination
+        pagination.addEventListener('click', (e) => {
+            const a = e.target.closest('.page-link');
+            if (!a) return;
+            e.preventDefault();
+            const action = a.dataset.action;
+            if (action === 'prev' && currentPage > 0) return goToPage(currentPage - 1);
+            if (action === 'next' && currentPage < totalPages - 1) return goToPage(currentPage + 1);
+            if (typeof a.dataset.page !== 'undefined') return goToPage(Number(a.dataset.page));
+        });
+
+        // Arrow buttons
+        if (prevBtn) prevBtn.addEventListener('click', () => { if (currentPage > 0) goToPage(currentPage - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', () => { if (currentPage < totalPages - 1) goToPage(currentPage + 1); });
+
+        // Swipe / drag support (pointer events)
+        let dragging = false;
+        let startX = 0;
+        let startOffset = 0;
+
+        function onPointerDown(e) {
+            dragging = true;
+            startX = e.clientX;
+            startOffset = -currentPage * wrap.clientWidth;
+            track.style.transition = 'none';
+            try { wrap.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+        }
+
+        function onPointerMove(e) {
+            if (!dragging) return;
+            const dx = e.clientX - startX;
+            track.style.transform = `translateX(${startOffset + dx}px)`;
+        }
+
+        function endDrag(e) {
+            if (!dragging) return;
+            dragging = false;
+            const dx = (e.clientX || 0) - startX;
+            const threshold = wrap.clientWidth * 0.15; // swipe sensitivity
+            if (dx < -threshold && currentPage < totalPages - 1) {
+                goToPage(currentPage + 1);
+            } else if (dx > threshold && currentPage > 0) {
+                goToPage(currentPage - 1);
+            } else {
+                goToPage(currentPage);
+            }
+            try { wrap.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+        }
+
+        wrap.addEventListener('pointerdown', onPointerDown);
+        wrap.addEventListener('pointermove', onPointerMove);
+        wrap.addEventListener('pointerup', endDrag);
+        wrap.addEventListener('pointercancel', endDrag);
+        wrap.addEventListener('pointerleave', endDrag);
+
+        // Prevent images from interfering with drag
+        source.querySelectorAll('img').forEach(img => img.draggable = false);
+
+        // Rebuild on resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                buildPages();
+                if (currentPage >= pages.length) currentPage = Math.max(0, pages.length - 1);
+                buildPagination();
+                goToPage(currentPage, false);
+            }, 150);
+        });
+
+        // Initial build
+        buildPages();
+        buildPagination();
+        goToPage(0, false);
+    });
+    </script>
+</body>
+</html>

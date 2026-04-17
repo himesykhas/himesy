@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contoh Halaman Jurnal - HIMESY KHAS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --himesy-navy-deep: #050c18; --himesy-gold-prime: #d4af37; --himesy-navy-main: #0a192f; }
+        body { font-family: 'Poppins', sans-serif; background: #fff; color: var(--himesy-navy-main); }
+
+        /* Hero / Title (clean, no background per request) */
+        .hero-article { background: none; padding: 28px 0; color: var(--himesy-navy-main); border-bottom: 1px solid rgba(10,18,47,0.04); }
+        .article-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 0.35rem; }
+        .article-meta { display: flex; align-items: center; gap: 0.75rem; color: #6c757d; font-size: 0.95rem; flex-wrap: wrap; }
+        .article-meta .author { display: flex; align-items: center; gap: 0.6rem; }
+        .article-meta .author img { width:44px; height:44px; object-fit:cover; border-radius:50%; }
+        .article-meta .tags .badge { font-size: 0.75rem; }
+
+        /* Article presentation */
+        .lead { font-size: 1.08rem; color: #495057; }
+        .article-img { width:100%; height:360px; object-fit:cover; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+        .content { line-height:1.8; }
+        .content.box { background: #fff; padding: 1.1rem; border-radius: 8px; }
+
+        /* Share & read UI */
+        .share a { margin-right: 8px; color: var(--himesy-navy-main); text-decoration: none; }
+        .share a.btn { padding: .42rem .6rem; font-size: .85rem; }
+
+        /* Related & aside tweaks */
+        .related .card { border-radius: 10px; overflow:hidden; }
+
+        /* Back button style */
+        .back-btn { border-radius: 30px; }
+
+        @media (max-width: 576px) {
+            .article-meta { font-size: .9rem; }
+            .article-img { height:220px; }
+        }
+    </style>
+</head>
+<body>
+
+
+
+<header class="hero-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <nav aria-label="breadcrumb" class="mb-2">
+          <ol class="breadcrumb mb-0 bg-transparent p-0 small">
+            <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="jurnal.html">Jurnal</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Judul Contoh Jurnal</li>
+          </ol>
+        </nav>
+
+        <h1 class="article-title">Judul Contoh Jurnal / Artikel</h1>
+
+        <div class="article-meta mt-2">
+          <div class="author">
+            <img src="images/ketu.jpg" alt="Penulis">
+            <div>
+              <div><strong>Tim HIMESY</strong></div>
+              <div class="small text-muted">31 Januari 2026 • Ekonomi Digital</div>
+            </div>
+          </div>
+
+          <div class="tags">
+            <span class="badge bg-warning text-dark">Ekonomi Digital</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container my-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <article>
+        <img src="images/coso.jpg" alt="Banner" class="article-img mb-4">
+
+        <div class="content bg-white p-4 rounded-3 shadow-sm">
+          <p class="small text-muted">Lead paragraph: ringkasan singkat untuk membantu pembaca memahami inti artikel sebelum membaca keseluruhan.</p>
+
+          <h3>Sub-judul 1</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod, nisl eget consectetur sagittis, nunc urna pulvinar massa, vitae ultricies velit augue eget urna. Integer vitae neque sed massa aliquet dictum.</p>
+
+          <h4>Sub-judul 2</h4>
+          <p>Penjelasan lebih lanjut, kutipan, atau poin-poin penting dari kajian. Gunakan <strong>bold</strong> untuk menekankan bagian penting.</p>
+
+          <blockquote class="border-start ps-3 my-3">Kutipan penting yang relevan dengan penelitian atau artikel.</blockquote>
+
+          <h5>Kesimpulan & Rekomendasi</h5>
+          <p>Ringkasan akhir dan rekomendasi yang muncul dari kajian.</p>
+
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <div class="share">
+              <span class="text-muted me-2">Bagikan:</span>
+              <a href="#" title="Share Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" title="Share Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="#" title="Share WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <a href="jurnal.html" class="btn back-btn">← Kembali ke Jurnal</a>
+          </div>
+        </div>
+      </article>
+
+      <section class="mt-4">
+        <h6 class="fw-bold">Referensi</h6>
+        <ol>
+          <li>Referensi 1</li>
+          <li>Referensi 2</li>
+        </ol>
+      </section>
+    </div>
+
+    <aside class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Profil Penulis</h5>
+          <p class="small text-muted">Tim HIMESY adalah tim peneliti dan pengabdi yang fokus pada ekonomi syariah.</p>
+        </div>
+      </div>
+
+      <div class="related">
+        <h6 class="fw-bold mb-3">Baca Juga</h6>
+        <div class="list-unstyled">
+          <a href="jurnal.html" class="d-block mb-2 text-decoration-none">• Potensi Ekonomi Digital Islam</a>
+          <a href="jurnal.html" class="d-block mb-2 text-decoration-none">• Laporan Rakernas HIMESY</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="bg-dark text-white py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <img src="images/logo.png" height="60" alt="" class="mb-3">
+        <p class="small">HIMESY STIES KHAS AL JAELANI — Rumah kolaborasi mahasiswa Ekonomi Syariah.</p>
+      </div>
+      <div class="col-lg-6 text-lg-end text-muted">
+        <p class="small mb-0">© 2026 HIMESY KHAS. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

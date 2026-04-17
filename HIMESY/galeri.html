@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="HIMESY KHAS DEVELOPER">
+    <meta name="description" content="Portal Resmi HIMESY KHAS - Galeri Foto Kegiatan.">
+    <meta name="keywords" content="HIMESY, Ekonomi Syariah, Galeri, Foto, STIES, KHAS, AL JAELANI">
+
+    <title>HIMESY KHAS | Galeri Foto</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================================
+        [ I. CUSTOM CSS VARIABLES - THE CORE OF DESIGN ]
+        ================================================================
+        */
+        :root {
+            --himesy-navy-deep: #050c18;
+            --himesy-navy-main: #0a192f;
+            --himesy-navy-light: #112240;
+            --himesy-gold-prime: #d4af37;
+            --himesy-gold-glow: #f1c40f;
+            --himesy-accent-blue: #4d5af0;
+            --himesy-white: #ffffff;
+            --himesy-slate: #8892b0;
+            --himesy-light-slate: #ccd6f6;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow-premium: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        /* ================================================================
+        [ II. GENERAL STYLING & RESET ]
+        ================================================================
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--himesy-navy-deep);
+            color: var(--himesy-white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        ::selection {
+            background: var(--himesy-gold-prime);
+            color: var(--himesy-navy-deep);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--himesy-navy-deep);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--himesy-gold-prime);
+            border-radius: 5px;
+        }
+
+        /* ================================================================
+        [ III. CINEMATIC PRELOADER - CUSTOM ANIMATION ]
+        ================================================================
+        */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--himesy-navy-deep);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+
+        .preloader-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pre-text {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--himesy-gold-prime);
+            letter-spacing: 10px;
+            opacity: 0;
+            text-transform: uppercase;
+            position: relative; 
+            z-index: 2;
+            text-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .pre-left { animation: slideInLeft 0.8s forwards; }
+        .pre-right { animation: slideInRight 0.8s forwards; }
+
+        .pre-logo-center {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            max-width: 350px;
+            opacity: 0;
+            transform: scale(0);
+            animation: centerZoom 0.5s forwards 0.3s;
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+            z-index: 1;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-150px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(150px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes centerZoom {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* ================================================================
+        [ IV. NAVIGATION ARCHITECTURE ]
+        ================================================================
+        */
+        .navbar {
+            padding: 0px 0;
+            transition: var(--transition-smooth);
+            z-index: 10000;
+        }
+
+        .navbar.scrolled {
+            background: rgba(5, 12, 24, 0.98) !important;
+            padding: 15px 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--himesy-gold-prime);
+        }
+
+        .navbar-brand img {
+            height: 70px;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar.scrolled .navbar-brand img {
+            height: 50px;
+        }
+
+        .nav-link {
+            color: var(--himesy-white) !important;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-left: 15px;
+            position: relative;
+            padding: 5px 0 !important;
+            transform: translateY(-4px);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--himesy-gold-prime);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::before, .nav-link.active::before {
+            width: 100%;
+        }
+
+        .dropdown-toggle i {
+            display: inline-block;
+            font-size: 10px;
+            margin-left: 5px;
+            vertical-align: middle;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Animasi Putar Icon Panah */
+        .dropdown-toggle[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            background: var(--himesy-navy-light);
+            border: none;
+            border-top: 4px solid var(--himesy-gold-prime);
+            border-radius: 0 0 10px 10px;
+            box-shadow: var(--shadow-premium);
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .dropdown-item {
+            color: var(--himesy-light-slate);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background: var(--himesy-gold-prime);
+            color: var(--himesy-navy-deep);
+            transform: translateX(5px);
+        }
+
+        /* ================================================================
+        [ V. HERO & PARALLAX ENGINE ]
+        ================================================================
+        */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--himesy-white);
+            position: relative;
+        }
+
+        .hero-h1 {
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-h5 {
+            color: var(--himesy-gold-prime);
+            letter-spacing: 10px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* ================================================================        
+        [ X. GLASS SOSMED - FIXED BG ]        
+         ================================================================       
+        */        
+        .sosmed-fixed {            
+            padding: 150px 0;            
+            color: #fff;       
+            }      
+            
+        .glass-btn {           
+            background: var(--glass-bg);            
+            backdrop-filter: blur(10px);            
+            border: 1px solid var(--glass-border);            
+            padding: 60px 40px;            
+            border-radius: 30px;            
+            text-decoration: none;            
+            color: #fff;            
+            display: block;            
+            transition: 0.4s;        
+        }        
+               
+        .glass-btn:hover {            
+            background: rgba(212, 175, 55, 0.2);            
+            border-color: var(--himesy-gold-prime);            
+            transform: translateY(-10px);            
+            color: var(--himesy-gold-prime);        
+        }      
+
+        /* ================================================================        
+        [ XI. ARTICLES & JOURNAL ]        
+         ================================================================        
+        */        
+        .journal-section { 
+            padding: 150px 0; background: #fff; 
+        }        
+
+.j-card {
+                display: flex;
+                flex-direction: column;
+                border: none;
+                border-radius: 20px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+                overflow: hidden;
+                transition: transform 0.35s ease, box-shadow 0.35s ease;
+                height: 100%;
+                background: #fff;
+            }
+
+            /* Ensure columns stretch so .j-card can fill height */
+            .page .row > [class*="col-"] { display: flex; align-items: stretch; }
+            .page .row > [class*="col-"] .j-card { flex: 1 1 auto; }
+
+            /* Hover effect: lift + subtle scale */
+            .page .j-card:hover {
+                transform: translateY(-8px) scale(1.01);
+                box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            }
+
+            .j-img {
+                height: 240px;
+                object-fit: cover;
+                width: 100%;
+                transition: transform 0.5s ease;
+                flex: 0 0 auto;
+            }
+            .page .j-card:hover .j-img { transform: scale(1.05); }
+
+            .j-card .p-4 {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; /* push the read button to bottom */
+                flex: 1 1 auto;
+                padding: 1rem 1rem 1.25rem; /* slightly more bottom padding */
+            }
+
+            .j-card .p-4 h5 { margin-bottom: 0.6rem; }
+            .j-card .p-4 p { margin-bottom: 0.75rem; color: #6c757d; }
+
+            .btn-read {
+                align-self: flex-start;
+                margin-top: 0; /* removed auto so bottom is controlled by justify-content */
+                display: inline-block;
+            }
+            /* Make sure layout spacing is tidy */
+            .page .row + .row { margin-top: 1rem; }
+
+            /* ================================================================
+            [ PAGINATION SLIDER - In-place carousel for jurnal ]
+            ================================================================ */
+            .journal-track-wrap {
+                overflow: hidden;
+                position: relative;
+                touch-action: pan-y; /* allow vertical scroll; we handle horizontal swipes */
+            }
+            .journal-track {
+                display: flex;
+                gap: 1.5rem;
+                transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+                will-change: transform;
+                user-select: none;
+                -webkit-user-drag: none;
+            }
+            .journal-track .col-lg-4, .journal-track .col-md-6 {
+                flex: 0 0 auto; /* width will be set by JS to adapt to viewport */
+            }
+            .pagination .page-link { cursor: pointer; user-select: none; }
+
+            /* Small helper for touch action & spacing */
+            .journal-track-wrap { touch-action: pan-y; }
+
+            /* Responsive tweaks for smoother slides */
+            @media (max-width: 991px) {
+                .journal-track { gap: 1rem; }
+            }
+
+            /* Responsive tweaks for smoother slides */
+            @media (max-width: 991px) {
+                .journal-track { gap: 1rem; }
+            }
+
+            /* ================================================================        
+            [ XII. FOOTER - MASSIVE STRUCTURE ]        
+            ================================================================        
+            */        
+             
+            footer {            
+                background: var(--himesy-navy-deep);            
+                color: var(--himesy-slate);            
+                padding: 120px 0 40px;            
+                border-top: 5px solid var(--himesy-gold-prime);        
+            }        
+            
+            .f-title { 
+                color: #fff; margin-bottom: 35px; font-size: 1.5rem; 
+            }        
+            
+            .f-link { 
+                color: var(--himesy-slate); 
+                text-decoration: none; 
+                display: block; 
+                margin-bottom: 15px; 
+                transition: 0.3s; 
+            }        
+            
+            .f-link:hover { 
+                color: var(--himesy-gold-prime); 
+                transform: translateX(10px); 
+            }        
+            
+            /* MANY CUSTOM UTILITY CLASSES TO BULK UP CSS */        
+            .text-gold { 
+                color: var(--himesy-gold-prime); 
+            }        
+            .bg-navy { 
+                background: var(--himesy-navy-main); 
+            }        
+            
+            .rounded-super { 
+                border-radius: 50px; 
+            }        
+            
+            .shadow-glow { 
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); 
+            }        
+            
+            /* MEDIA QUERIES FOR RESPONSIVENESS */        
+            @media (max-width: 991px) {            
+            .hero-h1 { font-size: 2.5rem; margin-top: 30px;}            
+            .navbar-brand img { height: 50px; }            
+            .pre-text { font-size: 3rem; }            
+            .pre-logo-center {        
+            max-width: 200px; 
+            /* Ukuran khusus untuk tampilan HP */}        
+            }        
+            
+            @media (max-width: 991px) {            
+            .navbar-collapse {                
+            background: var(--himesy-navy-deep);                 
+            margin-top: 15px;                
+            padding: 20px;                
+            border-radius: 20px;                
+            border: 1px solid rgba(212, 175, 55, 0.2);                
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);                
+            backdrop-filter: blur(10px);                
+            max-height: 60vh;                
+            overflow-y: auto;            
+            }                        
+            
+            .nav-link {                
+            margin-left: 0 !important;                
+            padding: 10px 15px !important;                
+            transform: translateY(0) !important; 
+            
+            /* Biar teks balik ke tengah di HP */            
+            }        }                
+            
+            /* Styling Icon Panah */        
+            .dropdown-toggle i {            
+            display: inline-block;            
+            font-size: 10px;            
+            margin-left: 5px;            
+            vertical-align: middle;            
+            
+            /* Ini kunci animasinya */            
+            transition: transform 0.3s ease-in-out;         
+            }        
+            
+            /* Animasi Putar pas Menu Terbuka */        
+            .dropdown-toggle[aria-expanded="true"] i {            
+            transform: rotate(180deg);        }        
+            
+            /* HAPUS PANAH BAWAAN BOOTSTRAP YANG BANDEL */        
+            .navbar .dropdown-toggle::after {            
+            content: none !important;            
+            display: none !important;            
+            border: none !important;            
+            margin: 0 !important;        
+            }                
+            
+            /* ================================================================        
+            STYLE BARU SOSIAL MEDIA (ALA HIMASI UNJA)        
+            ================================================================ 
+            */        
+            .social-media-unja {            
+            position: relative;            
+            
+            /* GANTI URL INI DENGAN FOTO PENGURUS HIMESY YANG RAME-RAME */            
+            background: url('images/bg.jpeg');             
+            background-size: cover;            
+            background-position: center;            
+            background-attachment: fixed; 
+            /* Efek Parallax biar keren */            
+            padding: 120px 0;        
+            }        
+            
+            /* Lapisan hitam transparan di atas foto */        
+            .overlay-dark {            
+            position: absolute;            
+            top: 0;            
+            left: 0;            
+            width: 100%;            
+            height: 100%;            
+            background: rgba(0, 0, 0, 0.6); /* Gelap 60% */        
+            }        
+            
+            /* Style Dasar Tombol */        
+            .social-btn {           
+             width: 80px;            
+             height: 80px;           
+              display: flex;            
+              align-items: center;            
+              justify-content: center;            
+              border-radius: 15px; /* Sudut tumpul */            
+              color: #fff;            
+              font-size: 2.5rem;            
+              text-decoration: none;            
+              transition: all 0.3s ease;            
+              box-shadow: 0 10px 20px rgba(0,0,0,0.3);        
+              }        .social-btn:hover {            
+              transform: translateY(-10px); /* Naik pas di-hover */            
+              color: #fff;        
+              }        
+              
+              /* Warna Spesifik Brand */        
+              .btn-yt {            
+              background-color: #ff0000; /* Merah YouTube */        
+              }        .btn-ig {           
+              
+              /* Gradasi Instagram */            
+              background: radial-gradient(circle at 30% 107%, 
+              #fdf497 0%, 
+              #fdf497 5%, 
+              #fd5949 45%, 
+              #d6249f 60%, 
+              #285AEB 90%);        
+              }        
+              
+              .btn-tt {            
+              background-color: #000000; /* Hitam TikTok */            
+              border: 1px solid rgba(255,255,255,0.2);        
+              }        
+              
+            /* ================================================================        
+            STYLE JURNAL LANDSCAPE (HEMAT RUANG & COMPACT)        
+            ================================================================ 
+            */        
+            .journal-unas-style {            
+            background-color: var(--himesy-navy-main);            
+            padding: 50px 0; /* Padding diperkecil biar gak boros tempat */            
+            border-top: 1px solid rgba(255,255,255,0.05);        
+            }        
+            
+            /* Judul Section diperkecil */        
+            .journal-unas-style h2.display-4 {            
+            font-size: 2rem; /* Ukuran font judul lebih sopan */            
+            margin-bottom: 2rem !important;        }        
+            /* Container Scroll */        
+            .scrolling-wrapper-flexbox {            
+            display: flex;            
+            flex-wrap: nowrap;            
+            overflow-x: auto;            
+            gap: 20px; /* Jarak antar kartu lebih rapat */            
+            padding: 10px 5%;             
+            -webkit-overflow-scrolling: touch;            
+            scrollbar-width: none;            
+            align-items: center; /* Pastikan kartu rata tengah */        
+            }        
+            .scrolling-wrapper-flexbox::-webkit-scrollbar {            
+            display: none;        
+            }        
+            /* KARTU LANDSCAPE (PERSEGI PANJANG) */        
+            .card-unas {            
+            flex: 0 0 auto;            
+            width: 320px;   /* Lebar pas */            
+            height: 200px;  /* Tinggi pendek (Landscape) */            
+            border-radius: 15px;            
+            position: relative;            
+            overflow: hidden;            
+            cursor: pointer;            
+            transition: transform 0.3s ease;            
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);        
+            }        
+            .card-unas:hover {            
+            transform: translateY(-5px); /* Efek naik dikit aja */        
+            }        
+            .card-unas img {            
+            width: 100%;            
+            height: 100%;            
+            object-fit: cover;            
+            transition: transform 0.5s ease;        
+            }        
+            .card-unas:hover img {            transform: scale(1.1);        }        /* Overlay Konten - Dibuat lebih ringkas */        .card-content {            position: absolute;            bottom: 0;            left: 0;            width: 100%;            padding: 15px; /* Padding lebih tipis */            background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6), transparent);            z-index: 2;        }        /* Teks di dalam kartu diperkecil */        .card-content h4 {            font-size: 1rem; /* Judul artikel lebih kecil */            line-height: 1.3;            margin-bottom: 5px;            text-overflow: ellipsis;            display: -webkit-box;            -webkit-line-clamp: 2; /* Batasi cuma 2 baris */            line-clamp: 2;            -webkit-box-orient: vertical;            overflow: hidden;        }        .card-content .badge {            font-size: 0.65rem;            padding: 4px 8px;        }        .card-content p.small {            font-size: 0.7rem;            margin-bottom: 0;            opacity: 0.8;        }        /* Indikator Geser */        .scroll-bar-indicator {            width: 60px; /* Lebih pendek */            height: 3px;            background: rgba(255,255,255,0.1);            border-radius: 2px;            margin-top: 5px;            position: relative;            overflow: hidden;        }        .scroll-bar-indicator::after {            content: '';            position: absolute;            left: 0;            top: 0;            height: 100%;            width: 30%;            background: var(--himesy-gold-prime);            animation: scrollIndikator 2s infinite ease-in-out;        }        /* Tombol Lihat Semua */        .btn-gold-solid {            font-size: 0.85rem; /* Tombol lebih kecil */            padding: 10px 30px !important;        }                /* Style Tombol "Lihat Semua" */        .btn-gold-solid {            display: inline-block;       /* Wajib biar bentuknya tombol utuh */            background-color: var(--himesy-gold-prime); /* Warna Emas */            color: var(--himesy-navy-deep) !important;  /* Teks Navy Gelap (PENTING biar kebaca) */            font-weight: 800;            /* Teks tebal */            padding: 12px 40px;          /* Ukuran tombol */            border-radius: 50px;         /* Sudut bulat */            text-decoration: none;       /* Hapus garis bawah link */            transition: all 0.3s ease;   /* Animasi halus */            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); /* Efek bayangan emas */            text-transform: uppercase;   /* Huruf kapital semua */            letter-spacing: 1px;        }        /* Efek pas Mouse Nempel (Hover) */        .btn-gold-solid:hover {            background-color: #ffffff;   /* Berubah jadi Putih */            color: var(--himesy-navy-deep) !important;            transform: translateY(-3px); /* Naik dikit */            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);        }                /* ================================================================        UPDATE CONTACT SECTION (BIAR LEBIH KECIL & RAPI)        ================================================================ */        .contact-section {            padding: 60px 0;         }        /* Membatasi lebar area kontak biar gak menuhin layar */        .contact-section .container {            max-width: 900px !important;         }        .contact-section h2 {            font-size: 1.8rem; /* Judul diperkecil */        }        /* Form Input dipercantik & diperkecil */        .contact-section .form-control {            padding: 10px 15px;            font-size: 0.9rem;        }        /* Peta diperkecil tingginya */        .contact-iframe-box {            height: 100%;            min-height: 350px; /* Tinggi peta dibatasi */            border-radius: 20px;            overflow: hidden;        }        /* Tombol Kirim */        .btn-send {            padding: 10px 0;            font-size: 0.9rem;        }                /* Tambahkan ini biar logo footer ukurannya pas & sopan */        .footer-logo {            width: 150px;       /* Batasi lebar maksimal 150px */            height: auto;       /* Tinggi menyesuaikan biar proporsional */            display: block;     /* Biar rapi */            margin-bottom: 20px;            object-fit: contain;        }    </style>
+</head>
+<body id="home">
+
+    <div id="preloader">
+        <div class="preloader-wrap">
+            <span class="pre-text pre-left">HIMESY</span>
+            <span class="pre-text pre-right">KHAS</span>
+            <img src="images/logo.png" alt="Official Logo" class="pre-logo-center">
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="Logo HIMESY KHAS" class="me-3">
+                <span class="fw-bold fs-4">HIMESY KHAS</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#himesyNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="himesyNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil Kami<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profil/sejarah.html">Sejarah Singkat</a></li>
+                            <li><a class="dropdown-item" href="profil/visi.html">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="profil/pimpinan.html">Pimpinan Kami</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Struktur<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><span class="dropdown-header text-warning fw-bold small">PIMPINAN</span></li>
+                            <li><a class="dropdown-item" href="divisi/bph.html">BPH (Badan Pengurus Harian)</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><span class="dropdown-header text-warning fw-bold small">DAFTAR DIVISI</span></li>
+                            <li><a class="dropdown-item" href="divisi/pti.html">Divisi PTI</a></li>
+                            <li><a class="dropdown-item" href="divisi/psdm.html">Divisi PSDM</a></li>
+                            <li><a class="dropdown-item" href="divisi/kominfo.html">Divisi KOMINFO</a></li>
+                            <li><a class="dropdown-item" href="divisi/external.html">Divisi EXTERNAL</a></li>
+                            <li><a class="dropdown-item" href="divisi/ekraf.html">Divisi EKRAF</a></li>
+                            <li><a class="dropdown-item" href="divisi/kajian.html">Divisi KAJIAN</a></li>
+                            <li><hr class="dropdown-divider bg-white opacity-25"></li>
+                            <li><a class="dropdown-item" href="divisi/database.html">Database Anggota</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="jurnal.html">Jurnal Digital</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="galeri.html">Galeri Foto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" style="height: 60vh;">
+        <div class="container z-index-3 h-100 d-flex flex-column justify-content-center">
+            <div class="text-center">
+                <h6 class="text-gold fw-bold letter-spacing-5 mb-3 animate__animated animate__fadeInDown" style="font-size: 0.9rem; letter-spacing: 3px;">JELAJAHI MOMEN BERHARGA</h6>
+                <h1 class="hero-h1 animate__animated animate__zoomIn mb-4">GALERI FOTO</h1>
+                <p class="lead text-white-50 fs-4 animate__animated animate__fadeInUp animate__delay-1s mb-5">
+                    "Dokumentasi Kegiatan, Workshop, dan Acara Sosial HIMESY KHAS."
+                </p>
+                
+                <!-- Decorative Icons/Elements -->
+                <div class="d-flex justify-content-center gap-5 mb-4 animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="text-center">
+                        <i class="fas fa-images" style="font-size: 2.5rem; color: var(--himesy-gold-prime);"></i>
+                        <p class="small mt-2" style="color: var(--himesy-light-slate);">Dokumentasi</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-video" style="font-size: 2.5rem; color: var(--himesy-gold-prime);"></i>
+                        <p class="small mt-2" style="color: var(--himesy-light-slate);">Momen</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-star" style="font-size: 2.5rem; color: var(--himesy-gold-prime);"></i>
+                        <p class="small mt-2" style="color: var(--himesy-light-slate);">Memorable</p>
+                    </div>
+                </div>
+                
+                <!-- Gold Divider Line -->
+                <div class="mx-auto" style="width: 100px; height: 4px; background: var(--himesy-gold-prime); border-radius: 2px;"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="gallery-section py-5">
+        <div class="container">
+            <!-- Filter Controls -->
+            <div class="text-center mb-5">
+                <div class="filter-buttons d-flex gap-3 justify-content-center flex-wrap">
+                    <button class="filter-btn active" data-filter="all" style="background: rgba(77, 90, 240, 0.15); border: 2px solid var(--himesy-accent-blue); color: var(--himesy-light-slate); padding: 12px 28px; border-radius: 50px; cursor: pointer; transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);">
+                        <i class="fas fa-images me-2"></i>Semua
+                    </button>
+                    <button class="filter-btn" data-filter="kegiatan" style="background: rgba(77, 90, 240, 0.15); border: 2px solid var(--himesy-accent-blue); color: var(--himesy-light-slate); padding: 12px 28px; border-radius: 50px; cursor: pointer; transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);">
+                        <i class="fas fa-calendar me-2"></i>Kegiatan
+                    </button>
+                    <button class="filter-btn" data-filter="sosial" style="background: rgba(77, 90, 240, 0.15); border: 2px solid var(--himesy-accent-blue); color: var(--himesy-light-slate); padding: 12px 28px; border-radius: 50px; cursor: pointer; transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);">
+                        <i class="fas fa-handshake me-2"></i>Sosial
+                    </button>
+                    <button class="filter-btn" data-filter="workshop" style="background: rgba(77, 90, 240, 0.15); border: 2px solid var(--himesy-accent-blue); color: var(--himesy-light-slate); padding: 12px 28px; border-radius: 50px; cursor: pointer; transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);">
+                        <i class="fas fa-chalkboard me-2"></i>Workshop
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; padding: 40px 0;"></div>
+        </div>
+    </section>
+
+    <!-- MODAL LIGHTBOX -->
+    <div id="imgModal" class="modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(5, 12, 24, 0.95); backdrop-filter: blur(5px); justify-content: center; align-items: center; padding: 20px;">
+        <div class="modal-content-wrapper" style="position: relative; max-width: 95%; max-height: 90vh;">
+            <span class="close-btn" style="position: absolute; top: -50px; right: 0; color: var(--himesy-gold-prime); font-size: 40px; font-weight: bold; cursor: pointer; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--himesy-gold-prime); border-radius: 50%;">&times;</span>
+            <img class="modal-img" id="modalImage" style="width: auto; max-width: 100%; max-height: 80vh; display: block; border-radius: 15px; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); border: 2px solid var(--himesy-gold-prime);">
+            <div class="modal-caption" id="modalCaption" style="text-align: center; color: var(--himesy-white); padding: 30px 0; font-size: 1.3rem; font-weight: 600;"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * 1. PRELOADER CINEMATIC ENGINE
+         */
+        window.addEventListener('load', () => {
+            const pre = document.getElementById('preloader');
+            setTimeout(() => {
+                pre.style.transition = 'all 1s cubic-bezier(0.7, 0, 0.3, 1)';
+                pre.style.transform = 'translateY(-100vh)';
+                pre.style.opacity = '0';
+                setTimeout(() => { 
+                    pre.style.display = 'none'; 
+                    // Aktifkan animasi AOS atau WoW di sini jika ada
+                }, 1000);
+            }, 1000);
+        });
+
+        /**
+         * 2. SMART NAVBAR SCROLL CONTROLLER
+         */
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Removed counter section script as it's not relevant for jurnal.html but kept for consistency if user wants to add it later.
+        // const counterSection = document.getElementById('counter-section');
+        // const statsObserver = new IntersectionObserver((entries) => {
+        //     entries.forEach(entry => {
+        //         if (entry.isIntersecting) {
+        //             initCounters();
+        //             statsObserver.unobserve(entry.target);
+        //         }
+        //     });
+        // }, { threshold: 0.3 });
+
+        // statsObserver.observe(counterSection);
+
+        // function initCounters() {
+        //     const counterElements = document.querySelectorAll('.count-val');
+        //     counterElements.forEach(el => {
+        //         const targetValue = +el.getAttribute('data-target');
+        //         const suffix = el.getAttribute('data-suffix') || "";
+        //         let currentValue = 0;
+                
+        //         const duration = 2500; 
+        //         const increment = targetValue / (duration / 30);
+
+        //         const countUpdate = () => {
+        //             if (currentValue < targetValue) {
+        //                 currentValue += increment;
+        //                 el.innerText = Math.ceil(currentValue) + suffix;
+        //                 setTimeout(countUpdate, 30);
+        //             } else {
+        //                 el.innerText = targetValue + suffix;
+        //             }
+        //         };
+        //         countUpdate();
+        //     });
+        // }
+
+        /**
+         * 4. SMOOTH SCROLL ANCHORINGnjjjj
+         */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        console.log("HIMESY KHAS Ultimate Engine Loaded Successfully.");
+
+            /**
+     * Efek Animasi Muncul saat Scroll
+     */
+    const observerOptions = {
+        threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Nambahin kelas animasi dari animate.css
+                entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                observer.unobserve(entry.target); // Cukup sekali animasi
+            }
+        });
+    }, observerOptions);
+
+    // Gallery functionality
+    const galleryData = [
+        { id: 1, category: 'kegiatan', title: 'Rapat Kerja Tahunan', src: 'https://picsum.photos/id/1015/600/400' },
+        { id: 2, category: 'workshop', title: 'Workshop Linux Dasar', src: 'https://picsum.photos/id/1025/600/400' },
+        { id: 3, category: 'sosial', title: 'Bakti Sosial Desa', src: 'https://picsum.photos/id/1011/600/400' },
+        { id: 4, category: 'kegiatan', title: 'Pelantikan Pengurus', src: 'https://picsum.photos/id/1005/600/400' },
+        { id: 5, category: 'workshop', title: 'Bootcamp Web Dev', src: 'https://picsum.photos/id/1/600/400' },
+        { id: 6, category: 'sosial', title: 'Makrab Anggota Baru', src: 'https://picsum.photos/id/1050/600/400' },
+        { id: 7, category: 'kegiatan', title: 'Kunjungan Industri', src: 'https://picsum.photos/id/1060/600/400' },
+        { id: 8, category: 'workshop', title: 'Seminar Cyber Security', src: 'https://picsum.photos/id/1075/600/400' },
+    ];
+
+    const galleryContainer = document.getElementById('galleryContainer');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeBtn = document.querySelector('.close-btn');
+
+    function renderGallery(items) {
+        galleryContainer.innerHTML = '';
+        items.forEach(item => {
+            const itemHTML = `
+                <div class="gallery-item" data-category="${item.category}" style="position: relative; overflow: hidden; border-radius: 15px; cursor: pointer; aspect-ratio: 4/3; border: none; transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); background: linear-gradient(135deg, var(--himesy-navy-light), var(--himesy-navy-main));">
+                    <img src="${item.src}" alt="${item.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);">
+                    <div class="item-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; top: 0; background: linear-gradient(to top, rgba(5, 12, 24, 0.95) 0%, rgba(5, 12, 24, 0.7) 40%, transparent); padding: 30px; display: flex; flex-direction: column; justify-content: flex-end; transform: translateY(30px); opacity: 0; transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);">
+                        <div class="item-cat" style="color: var(--himesy-gold-prime); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 700;">${item.category}</div>
+                        <div class="item-title" style="color: var(--himesy-white); font-weight: 700; font-size: 1.2rem; margin-bottom: 5px;">${item.title}</div>
+                    </div>
+                </div>
+            `;
+            galleryContainer.innerHTML += itemHTML;
+        });
+        attachModalEvents();
+    }
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.style.background = 'rgba(77, 90, 240, 0.15)');
+            btn.style.background = 'var(--himesy-gold-prime)';
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+            
+            if(filterValue === 'all') {
+                renderGallery(galleryData);
+            } else {
+                const filteredData = galleryData.filter(item => item.category === filterValue);
+                renderGallery(filteredData);
+            }
+        });
+    });
+
+    function attachModalEvents() {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSource = item.querySelector('img').src;
+                const title = item.querySelector('.item-title').textContent;
+                
+                modal.style.display = "flex";
+                modalImg.src = imgSource;
+                modalCaption.textContent = title;
+            });
+            
+            item.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 20px 60px rgba(212, 175, 55, 0.3)';
+                this.style.transform = 'translateY(-8px)';
+                this.querySelector('img').style.transform = 'scale(1.08) rotate(1deg)';
+                this.querySelector('img').style.filter = 'brightness(0.85)';
+                this.querySelector('.item-overlay').style.transform = 'translateY(0)';
+                this.querySelector('.item-overlay').style.opacity = '1';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+                this.style.transform = 'translateY(0)';
+                this.querySelector('img').style.transform = 'scale(1) rotate(0deg)';
+                this.querySelector('img').style.filter = 'brightness(1)';
+                this.querySelector('.item-overlay').style.transform = 'translateY(30px)';
+                this.querySelector('.item-overlay').style.opacity = '0';
+            });
+        });
+    }
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+    document.addEventListener('keydown', function(event) {
+        if(event.key === "Escape") {
+             modal.style.display = "none";
+        }
+    });
+
+    renderGallery(galleryData);
+    </script>
+</body>
+</html>
